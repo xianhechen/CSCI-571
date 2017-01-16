@@ -155,26 +155,31 @@ div.button {
     letter-spacing: 0.3em;
     margin-right: -0.3em;
     top: 660px;
-    left: 470px;
+    left: 460px;
     width: 320px;
-    height: 65px;
+    height: 36px;
     word-wrap: break-word;
     margin: 0 auto;
     font-size: 1.3em;
     text-align: center;
-    padding: 12px 20px 12px 20px;
+    padding: 20px 10px 0px 10px;
     background-color: #ffffff;
     text-align: center;
     display: inline-block;
     font-size: 14px;
     cursor: pointer;
     border: medium solid black;
+    color: black;
 }
 
 .touch:hover {
     color:white;
     background-color: #191919;
     transition-duration: 0.3s;
+}
+
+.touch, .touch:active , .touch:hover, .touch:visited {
+    text-decoration: none;
 }
 
 footer {
@@ -210,7 +215,7 @@ div.articles {
     padding: 0px 0px 0px 0px;
 }
 
-div.articles > button {
+div.articles > form > button {
     margin-top: 80px;
     background-color: #191919;
     border: none;
@@ -226,7 +231,7 @@ div.articles > button {
     margin-right: -0.3em;
 }
 
-div.articles > button:hover {
+div.articles > form > button:hover {
     text-decoration: underline;
     transition-duration: 0.2s;
 }
@@ -252,12 +257,11 @@ div.signup  {
 }
 .email {
     width: 360px;
-    height: 62px;
+    height: 56px;
     display: inline-block;
-    margin-top: 2px;
-    padding: 14px 7px 14px 7px;
-    vertical-align: center;
-    color: #E7E7E7;
+    margin-top: 6px;
+    padding: 12px 7px 14px 7px;
+    color: black;
     font-size: 1.3em;
     text-align: left;
     box-sizing: border-box;
@@ -267,15 +271,15 @@ div.signup  {
     border: none;
     width: 340px;
     height: 50px;
-    margin: 5px 10px 5px 10px;
+    margin: 6px 10px 6px 10px;
     vertical-align: center;
     transition-duration: 0.2s;
-    color: #E7E7E7;
 }
 
 .submit {
     background-color: #191919;
     color: #E7E7E7;
+    height: 60px;
     padding: 20px 80px;
     text-align: center;
     display: inline-block;
@@ -402,4 +406,8 @@ div.signup  {
 .emailadd, .emailadd:hover, .emailadd:active, .emailadd:visited {
     text-decoration: underline;
     color: #E7E7E7;
+}
+
+p#Home {
+    height: 100px;
 }
