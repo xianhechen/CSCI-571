@@ -23,8 +23,8 @@ header {
 
 div.favourites {
     font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
     text-align: center;
     padding-top: 80px;
     margin-right: auto;
@@ -67,7 +67,7 @@ div.thirteen, div.thirteen:hover, div.thirteen:active, div.thirteen:visited  {
     font-family: "Montserrat", sans-serif;
     text-align: left;
     line-height: 0.9em;
-    font-size: 7em;
+    font-size: 8em;
     color: white;
 }
 
@@ -94,8 +94,8 @@ div.interested > p{
     position: absolute;
     width: 440px;
     font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
     top: 523px;
     left: 423px;
     margin: 0 auto;
@@ -130,8 +130,8 @@ div.button {
 .touch {
     position: absolute;
     font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
     top: 660px;
     left: 460px;
     width: 320px;
@@ -185,8 +185,8 @@ div.articles {
     vertical-align: top;
     display: inline-block;
     font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
     text-align: center;
     color: white;
     border-right: thin solid #3B3B3B;
@@ -202,11 +202,11 @@ div.articles > form > button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size:14px;
+    font-size:13px;
     cursor: pointer;
     font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
 }
 
 div.articles > form > button:hover {
@@ -221,9 +221,9 @@ div.signup  {
     margin-top: 40px;
     margin-left: 80px;
     font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
-    font-size: 14px;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
+    font-size: 13px;
     text-align: left;
     color: #907C43;
 }
@@ -266,8 +266,8 @@ div.signup  {
     cursor: pointer;
     border: medium solid white;
     font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
 }
 
 .submit:hover {
@@ -297,8 +297,8 @@ div.signup  {
     margin-top: 30px;
     margin-bottom: 20px;
     font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
     font-size: 16px;
 }
 
@@ -306,8 +306,8 @@ div.signup  {
     margin-top: 20px;
     margin-bottom: 20px;
     font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
 }
 
 .hqnumber {
@@ -332,7 +332,7 @@ div.signup  {
     color: #E7E7E7;
     margin-left: 0px;
     margin-right: 40px;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .row3 {
@@ -360,8 +360,8 @@ div.signup  {
     cursor: pointer;
     border: medium solid white;
     font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
 }
 
 .contactus:hover {
