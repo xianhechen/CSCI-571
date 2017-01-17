@@ -1,31 +1,9 @@
-html, body, header, footer, nav, article, section, figure,
-figcaption, h1, h2, h3, ul, li, body, div, p, img {
+html, body, header, footer, figure,
+h1, h2, h3, ul, li, body, div, p, img {
     margin: 0;
     padding: 0;
-    font-size: 100%;
     vertical-align: baseline;
     border: 0;
-}
-
-body {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-header > nav > p > a:link {
-
-}
-
-header > nav > p > a:visited {
-
-}
-
-header > h1 {
-    font-size: 3em;
-    text-align: center;
-    padding-top: 0.5em;
-    padding-bottom: 0.3em;
 }
 
 header {
@@ -408,6 +386,19 @@ div.signup  {
     color: #E7E7E7;
 }
 
-p#Home {
-    height: 100px;
+
+
+/* target.html */
+
+p#hello, p#touch, p#signup, p#article, p#contact, p#no13 {
+    padding-top: 20px;
+    padding-left: 5px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.explain {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5px;
 }
