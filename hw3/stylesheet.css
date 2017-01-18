@@ -93,11 +93,12 @@ div.interested {
 div.interested > p{
     position: absolute;
     width: 440px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Arial", sans-serif;
     letter-spacing: 0.4em;
     margin-right: -0.4em;
     top: 523px;
     left: 423px;
+    font-size: 14px;
     margin: 0 auto;
     color: #C5B177;
 }
@@ -138,7 +139,6 @@ div.button {
     height: 36px;
     word-wrap: break-word;
     margin: 0 auto;
-    font-size: 1.3em;
     text-align: center;
     padding: 20px 10px 0px 10px;
     background-color: #ffffff;
