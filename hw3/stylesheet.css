@@ -22,7 +22,7 @@ header {
 }
 
 div.favourites {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     letter-spacing: 0.4em;
     margin-right: -0.4em;
     text-align: center;
@@ -36,7 +36,7 @@ div.favourites {
     margin: 10px 40px 15px 40px;
 }
 div.number13 {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     margin-right: auto;
     margin-left: auto;
 }
@@ -47,7 +47,7 @@ div.number, div.number:hover, div.number:active, div.number:visited {
     display: inline-block;
     margin-right: auto;
     margin-left: 120px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     font-size: 4em;
     text-align: right;
     border-bottom: thick solid white;
@@ -64,7 +64,7 @@ div.thirteen, div.thirteen:hover, div.thirteen:active, div.thirteen:visited  {
     display: inline-block;
     vertical-align: top;
     margin-top: 0px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     text-align: left;
     line-height: 0.9em;
     font-size: 8em;
@@ -130,7 +130,7 @@ div.button {
 
 .touch {
     position: absolute;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     letter-spacing: 0.4em;
     margin-right: -0.4em;
     top: 660px;
@@ -184,7 +184,7 @@ div.articles {
     height:220px;
     vertical-align: top;
     display: inline-block;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     letter-spacing: 0.4em;
     margin-right: -0.4em;
     text-align: center;
@@ -204,7 +204,7 @@ div.articles > form > button {
     display: inline-block;
     font-size:13px;
     cursor: pointer;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     letter-spacing: 0.4em;
     margin-right: -0.4em;
 }
@@ -220,7 +220,7 @@ div.signup  {
     display: inline-block;
     margin-top: 40px;
     margin-left: 80px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     letter-spacing: 0.4em;
     margin-right: -0.4em;
     font-size: 13px;
@@ -265,7 +265,7 @@ div.signup  {
     margin: 6px 2px;
     cursor: pointer;
     border: medium solid white;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     letter-spacing: 0.4em;
     margin-right: -0.4em;
 }
@@ -296,7 +296,7 @@ div.signup  {
     color: #907C43;
     margin-top: 30px;
     margin-bottom: 20px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     letter-spacing: 0.4em;
     margin-right: -0.4em;
     font-size: 16px;
@@ -305,7 +305,7 @@ div.signup  {
 .edb {
     margin-top: 20px;
     margin-bottom: 20px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     letter-spacing: 0.4em;
     margin-right: -0.4em;
 }
@@ -359,7 +359,7 @@ div.signup  {
     margin: 4px 2px;
     cursor: pointer;
     border: medium solid white;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     letter-spacing: 0.4em;
     margin-right: -0.4em;
 }
