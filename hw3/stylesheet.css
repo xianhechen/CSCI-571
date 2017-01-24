@@ -156,12 +156,9 @@ div.button {
     transition-duration: 0.3s;
 }
 
-<<<<<<< HEAD
-=======
 .touch, .touch:active , .touch:hover, .touch:visited {
     text-decoration: none;
 }
->>>>>>> origin/master
 
 footer {
     position: absolute;
