@@ -27,31 +27,104 @@
         <h4>Enter URL for Airlines List XML File</h4>
         <form id="gettingURL">
 
-            <input type="text" name="url"><br><br>
+            <input type="text" name="url" value="http://cs-server.usc.edu:45678/hw/hw4/airlinelist.xml"><br><br>
 
             <!-- <input type="submit" value="Submit" onclick="clicked()"> -->
 
         </form>
-        <button onclick="clicked()">Submit Query</button>
-        <p id="demo"></p>
+        <button onclick="loadXML('airlinelist.xml')">Submit Query</button>
+        <table id="demo"></table>
     </div>
 
+    <script type="text/javascript">
+        var url = "";
+        var xmlDoc;
+        function clicked() {
+            var x = document.getElementById("gettingURL");
+            url = x.elements[0].value + "<br>";
+        }
+
+
+        function loadXML(url) {
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else {
+                // code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.open("GET", url, false); //open, send, responseXML are
+            xmlhttp.send(); //properties of XMLHTTPRequest
+            xmlDoc=xmlhttp.responseXML;
+
+            txt = "";
+
+            airlines = xmlDoc.getElementsByTagName("Airline");
+            for (i = 0; i<airlines.length; i++) {
+                airline = airlines[i];
+                airlineName = airline.childNodes[0];
+                airlineValue = airlineName.nodeValue;
+                //txt += airlineValue + "<br>";
+
+                var tr = document.createElement("tr");
+                var td = document.createElement("td");
+                var textNode = document.createTextNode(airlineValue);
+                td.appendChild(textNode);
+                tr.appendChild(td);
+                document.getElementById("demo").appendChild(tr);
+            }
 
 
 
 
 
+            /*
+            footb = xmlDoc.documentElement.childNodes;
+
+            for (i = 0; i<footb.length; i++) {
+                var footbNodeList = footb.item(i).childNodes;
+                for (j = 0; j<footbNodeList.length; j++) {
+                    //txt += footbNodeList.item(j).nodeName + " ";
+                    var row = footbNodeList.item(j).childNodes;
+                    for (k = 0; k<row.length; k++) {
+                        if (row.item(k).nodeType  == 1) {
+                            if (row.item(k).nodeName  == "Data") {
+                                txt += row.item(k).text;
+                            }
+                            else {
+                                txt += row.item(k).nodeName;
+                            }
+                        }
+
+
+                    }
+                    //airline = row.getElementsByTagName('Airline');
+                    //txt += row.nodeType + " ";
+                    //if (row.nodeName == "Row") {
+                    //    txt += row.nodeName + " ";
+                    //}
+                }
+            }
+
+
+
+            */
+
+            //return xmlDoc;
 
 
 
 
-    <script>
-    var url = "";
-    function clicked() {
-        var x = document.getElementById("gettingURL");
-        url = x.elements[0].value + "<br>";
-        document.getElementById("demo").innerHTML = url;
-    }
+
+            //document.getElementById("demo").innerHTML = txt;
+         }
+
+
+
+
+
+        // ....... processing the document goes here
     </script>
 
 
