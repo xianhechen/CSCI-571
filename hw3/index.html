@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
     <title>Filming Locations | Location Scout | LS Productions</title>
     <link href="stylesheet.css" type="text/css" rel="stylesheet" />
 </head>
@@ -15,9 +16,9 @@
 
         <div class="number13">
             <div class="number">
-                <a class="numberlink" href="http://google.com"><p>No.</p></a>
+                <a class="numberlink" href="target.html#no13"><p>No.</p></a>
             </div>
-            <a href="http://google.com">
+            <a href="target.html#no13">
                 <div class="thirteen">
                     <p>13</p>
                 </div>
@@ -27,8 +28,11 @@
 </header>
 
 <div class="hello">
+    <a href="target.html#hello">
     <figure>
-        <img src="pictures/sayhello.png" alt="hello">
+
+            <img src="pictures/sayhello.png" alt="hello">
+
     </figure>
     <div class="interested">
         <p>INTERESTED IN WORKING WITH US?</p>
@@ -39,20 +43,22 @@
         line here and we'll get back to you.</p>
     </div>
     <div class="button">
-        <button class="touch">GET IN TOUCH</button>
+        <a class="touch" href="target.html#touch">GET IN TOUCH</a>
     </div>
+    </a>
 </div>
-
 
 <footer>
     <div class="row1">
         <div class="articles">
-            <button class="read">READ OUR LATEST ARTICLES</button>
+            <form action="target.html#article">
+                <button type="submit" class="read">READ OUR LATEST ARTICLES</button>
+            </form>
         </div>
         <div class="signup">
             <p class="news">SIGN UP TO OUR NEWSLETTER</p>
-            <form class="news">
-                <input class="email" type="text" name="email" placeholder="Enter your email address">
+            <form class="news" action="target.html#signup">
+                <input type="text" class="email" placeholder="Enter your email address">
                 <button class="submit">SIGN UP</button>
             </form>
         </div>
@@ -100,7 +106,9 @@
     </div>
     <div class="row3">
         <div class="contact">
-            <button class="contactus">CONTACT US</button>
+            <form action="target.html#contact">
+                <button type="submit" class="contactus">CONTACT US</button>
+            </form>
         </div>
         <div class="adds">
             <div class="office">
@@ -128,5 +136,6 @@
         </div>
     </div>
 </footer>
+<noscript>
 </body>
 </html>

@@ -1,31 +1,9 @@
-html, body, header, footer, nav, article, section, figure,
-figcaption, h1, h2, h3, ul, li, body, div, p, img {
+html, body, header, footer, figure,
+h1, h2, h3, ul, li, body, div, p, img {
     margin: 0;
     padding: 0;
-    font-size: 100%;
     vertical-align: baseline;
     border: 0;
-}
-
-body {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-header > nav > p > a:link {
-
-}
-
-header > nav > p > a:visited {
-
-}
-
-header > h1 {
-    font-size: 3em;
-    text-align: center;
-    padding-top: 0.5em;
-    padding-bottom: 0.3em;
 }
 
 header {
@@ -44,9 +22,9 @@ header {
 }
 
 div.favourites {
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    font-family: "Helvetica", sans-serif;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
     text-align: center;
     padding-top: 80px;
     margin-right: auto;
@@ -58,7 +36,7 @@ div.favourites {
     margin: 10px 40px 15px 40px;
 }
 div.number13 {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     margin-right: auto;
     margin-left: auto;
 }
@@ -69,7 +47,7 @@ div.number, div.number:hover, div.number:active, div.number:visited {
     display: inline-block;
     margin-right: auto;
     margin-left: 120px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     font-size: 4em;
     text-align: right;
     border-bottom: thick solid white;
@@ -86,10 +64,10 @@ div.thirteen, div.thirteen:hover, div.thirteen:active, div.thirteen:visited  {
     display: inline-block;
     vertical-align: top;
     margin-top: 0px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Helvetica", sans-serif;
     text-align: left;
     line-height: 0.9em;
-    font-size: 7em;
+    font-size: 8em;
     color: white;
 }
 
@@ -115,11 +93,12 @@ div.interested {
 div.interested > p{
     position: absolute;
     width: 440px;
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    font-family: "Arial", sans-serif;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
     top: 523px;
     left: 423px;
+    font-size: 14px;
     margin: 0 auto;
     color: #C5B177;
 }
@@ -151,24 +130,24 @@ div.button {
 
 .touch {
     position: absolute;
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    font-family: "Helvetica", sans-serif;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
     top: 660px;
-    left: 470px;
+    left: 460px;
     width: 320px;
-    height: 65px;
+    height: 36px;
     word-wrap: break-word;
     margin: 0 auto;
-    font-size: 1.3em;
     text-align: center;
-    padding: 12px 20px 12px 20px;
+    padding: 20px 10px 0px 10px;
     background-color: #ffffff;
     text-align: center;
     display: inline-block;
     font-size: 14px;
     cursor: pointer;
     border: medium solid black;
+    color: black;
 }
 
 .touch:hover {
@@ -177,6 +156,12 @@ div.button {
     transition-duration: 0.3s;
 }
 
+<<<<<<< HEAD
+=======
+.touch, .touch:active , .touch:hover, .touch:visited {
+    text-decoration: none;
+}
+>>>>>>> origin/master
 
 footer {
     position: absolute;
@@ -202,16 +187,16 @@ div.articles {
     height:220px;
     vertical-align: top;
     display: inline-block;
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    font-family: "Helvetica", sans-serif;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
     text-align: center;
     color: white;
     border-right: thin solid #3B3B3B;
     padding: 0px 0px 0px 0px;
 }
 
-div.articles > button {
+div.articles > form > button {
     margin-top: 80px;
     background-color: #191919;
     border: none;
@@ -220,14 +205,14 @@ div.articles > button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size:14px;
+    font-size:13px;
     cursor: pointer;
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    font-family: "Helvetica", sans-serif;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
 }
 
-div.articles > button:hover {
+div.articles > form > button:hover {
     text-decoration: underline;
     transition-duration: 0.2s;
 }
@@ -238,10 +223,10 @@ div.signup  {
     display: inline-block;
     margin-top: 40px;
     margin-left: 80px;
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
-    font-size: 14px;
+    font-family: "Helvetica", sans-serif;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
+    font-size: 13px;
     text-align: left;
     color: #907C43;
 }
@@ -253,12 +238,11 @@ div.signup  {
 }
 .email {
     width: 360px;
-    height: 62px;
+    height: 56px;
     display: inline-block;
-    margin-top: 2px;
-    padding: 14px 7px 14px 7px;
-    vertical-align: center;
-    color: #E7E7E7;
+    margin-top: 6px;
+    padding: 12px 7px 14px 7px;
+    color: black;
     font-size: 1.3em;
     text-align: left;
     box-sizing: border-box;
@@ -268,15 +252,15 @@ div.signup  {
     border: none;
     width: 340px;
     height: 50px;
-    margin: 5px 10px 5px 10px;
+    margin: 6px 10px 6px 10px;
     vertical-align: center;
     transition-duration: 0.2s;
-    color: #E7E7E7;
 }
 
 .submit {
     background-color: #191919;
     color: #E7E7E7;
+    height: 60px;
     padding: 20px 80px;
     text-align: center;
     display: inline-block;
@@ -284,9 +268,9 @@ div.signup  {
     margin: 6px 2px;
     cursor: pointer;
     border: medium solid white;
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    font-family: "Helvetica", sans-serif;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
 }
 
 .submit:hover {
@@ -315,18 +299,18 @@ div.signup  {
     color: #907C43;
     margin-top: 30px;
     margin-bottom: 20px;
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    font-family: "Helvetica", sans-serif;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
     font-size: 16px;
 }
 
 .edb {
     margin-top: 20px;
     margin-bottom: 20px;
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    font-family: "Helvetica", sans-serif;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
 }
 
 .hqnumber {
@@ -351,7 +335,7 @@ div.signup  {
     color: #E7E7E7;
     margin-left: 0px;
     margin-right: 40px;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .row3 {
@@ -378,9 +362,9 @@ div.signup  {
     margin: 4px 2px;
     cursor: pointer;
     border: medium solid white;
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    font-family: "Helvetica", sans-serif;
+    letter-spacing: 0.4em;
+    margin-right: -0.4em;
 }
 
 .contactus:hover {
@@ -403,4 +387,21 @@ div.signup  {
 .emailadd, .emailadd:hover, .emailadd:active, .emailadd:visited {
     text-decoration: underline;
     color: #E7E7E7;
+}
+
+
+
+/* target.html */
+
+p#hello, p#touch, p#signup, p#article, p#contact, p#no13 {
+    padding-top: 20px;
+    padding-left: 5px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.explain {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 5px;
 }
