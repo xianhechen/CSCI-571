@@ -59,7 +59,7 @@
             xmlDoc=xmlhttp.responseXML;
 
             txt = "";
-
+            /*
             airlines = xmlDoc.getElementsByTagName("Airline");
             for (i = 0; i<airlines.length; i++) {
                 airline = airlines[i];
@@ -76,10 +76,10 @@
             }
 
 
+                */
 
 
 
-            /*
             footb = xmlDoc.documentElement.childNodes;
 
             for (i = 0; i<footb.length; i++) {
@@ -90,10 +90,10 @@
                     for (k = 0; k<row.length; k++) {
                         if (row.item(k).nodeType  == 1) {
                             if (row.item(k).nodeName  == "Data") {
-                                txt += row.item(k).text;
+                                txt += row.item(k).innerHTML;
                             }
                             else {
-                                txt += row.item(k).nodeName;
+                                txt += row.item(k).innerHTML;
                             }
                         }
 
@@ -109,7 +109,7 @@
 
 
 
-            */
+
 
             //return xmlDoc;
 
@@ -117,7 +117,7 @@
 
 
 
-            //document.getElementById("demo").innerHTML = txt;
+            document.getElementById("demo").innerHTML = txt;
          }
 
 
