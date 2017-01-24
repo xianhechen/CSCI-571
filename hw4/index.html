@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <title>Homework 4</title>
+    <style>
+        html, body, header, footer, figure,
+        h1, h2, h3, ul, li, body, div, p, img {
+            margin: 0;
+            padding: 0;
+            vertical-align: baseline;
+            border: 0;
+        }
+
+        #main {
+            width = 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id = "main">
+        <h4>Enter URL for Airlines List XML File</h4>
+        <form id="gettingURL">
+
+            <input type="text" name="url"><br><br>
+
+            <!-- <input type="submit" value="Submit" onclick="clicked()"> -->
+
+        </form>
+        <button onclick="clicked()">Submit Query</button>
+        <p id="demo"></p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script>
+    var url = "";
+    function clicked() {
+        var x = document.getElementById("gettingURL");
+        url = x.elements[0].value + "<br>";
+        document.getElementById("demo").innerHTML = url;
+    }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
