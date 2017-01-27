@@ -19,6 +19,11 @@
             margin-right: auto;
             text-align: center;
         }
+        
+        table, th, td {
+            border: 1px solid black;
+        }
+
     </style>
 </head>
 
@@ -90,11 +95,43 @@
                     for (k = 0; k<row.length; k++) {
                         if (row.item(k).nodeType  == 1) {
                             if (row.item(k).nodeName  == "Data") {
-                                txt += row.item(k).innerHTML;
+                                txt += row.item(k).innerHTML + " DATA </br>";
                             }
+
+                            else if (row.item(k).nodeName == "Airline") {
+                                txt += row.item(k).innerHTML + " Airline </br>";
+                            }
+                            else if (row.item(k).nodeName == "IATA") {
+                                txt += row.item(k).innerHTML + " IATA </br>";
+                            }
+
+                            else if (row.item(k).nodeName == "Hubs") {
+                                var hubs = row.item(k).childNodes;
+                                for ( l=0; l<hubs.length; l++) {
+                                    if (hubs.item(l).nodeName == "Hub") {
+                                        txt += hubs.item(l).innerHTML + " </br> ";
+                                    }
+
+                                }
+
+                            }
+                            else if (row.item(k).nodeName == "Notes") {
+                                txt += row.item(k).innerHTML + " </br> ";
+
+                            }
+                            else if (row.item(k).nodeName == "HomePage") {
+                                txt += row.item(k).innerHTML + " </br> ";
+                            }
+                            else if (row.item(k).nodeName == "Plane") {
+                                txt += row.item(k).innerHTML + " </br> ";
+                                txt += "</br>";
+                                txt += "</br>";
+                            }
+
                             else {
-                                txt += row.item(k).innerHTML;
+                                txt += "<h1>" + row.item(k).nodeName + "</h1>";
                             }
+
                         }
 
 
