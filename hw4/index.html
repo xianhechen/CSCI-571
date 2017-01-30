@@ -19,9 +19,13 @@
             margin-right: auto;
             text-align: center;
         }
-        
+
         table, th, td {
             border: 1px solid black;
+        }
+
+        img {
+            height: 200px;
         }
 
     </style>
@@ -86,45 +90,49 @@
 
 
             footb = xmlDoc.documentElement.childNodes;
-
+            txt += "<tr><th>Airline</th><th>IATA</th><th>Hubs</th><th>Notes</th><th>HomePage</th><th>Plane</th></tr>";
             for (i = 0; i<footb.length; i++) {
                 var footbNodeList = footb.item(i).childNodes;
                 for (j = 0; j<footbNodeList.length; j++) {
                     //txt += footbNodeList.item(j).nodeName + " ";
                     var row = footbNodeList.item(j).childNodes;
+                    txt += "<tr>";
                     for (k = 0; k<row.length; k++) {
                         if (row.item(k).nodeType  == 1) {
+
                             if (row.item(k).nodeName  == "Data") {
-                                txt += row.item(k).innerHTML + " DATA </br>";
+                                //txt += row.item(k).innerHTML + " DATA </br>";
                             }
 
                             else if (row.item(k).nodeName == "Airline") {
-                                txt += row.item(k).innerHTML + " Airline </br>";
+                                txt += "<td>" + row.item(k).innerHTML + " Airline </td>";
                             }
                             else if (row.item(k).nodeName == "IATA") {
-                                txt += row.item(k).innerHTML + " IATA </br>";
+                                txt += "<td>" + row.item(k).innerHTML + " IATA </td>";
                             }
 
                             else if (row.item(k).nodeName == "Hubs") {
                                 var hubs = row.item(k).childNodes;
+                                txt += "<td>";
                                 for ( l=0; l<hubs.length; l++) {
                                     if (hubs.item(l).nodeName == "Hub") {
-                                        txt += hubs.item(l).innerHTML + " </br> ";
+                                        txt +=  hubs.item(l).innerHTML + " </br> ";
                                     }
 
                                 }
+                                txt += "</td>";
 
                             }
                             else if (row.item(k).nodeName == "Notes") {
-                                txt += row.item(k).innerHTML + " </br> ";
+                                txt += "<td>" + row.item(k).innerHTML + " </td> ";
 
                             }
                             else if (row.item(k).nodeName == "HomePage") {
-                                txt += row.item(k).innerHTML + " </br> ";
+                                txt += "<td>" + row.item(k).innerHTML + " </td> ";
                             }
                             else if (row.item(k).nodeName == "Plane") {
-                                txt += row.item(k).innerHTML + " </br> ";
-                                txt += "</br>";
+                                txt += "<td><img src='" + row.item(k).innerHTML + "' alt = 'plane'></td>"
+                                txt += "</tr>";
                                 txt += "</br>";
                             }
 
