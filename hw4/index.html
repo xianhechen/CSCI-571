@@ -29,7 +29,7 @@
             <input name="url" value="http://cs-server.usc.edu:45678/hw/hw4/airlinelist.xml" type="text"><br><br>
             <!-- <input type="submit" value="Submit" onclick="clicked()"> -->
         </form>
-        <button onclick="loadXML('airlinelist.xml')">Submit Query</button>
+        <button onclick="loadXML('http://www-scf.usc.edu/~xianhech/hw4444/invalidd.xml')">Submit Query</button>
 
     </div>
 
@@ -38,7 +38,7 @@
         var xmlDoc;
         function clicked() {
             var x = document.getElementById("gettingURL");
-            url = x.elements[0].value + "<br>";
+            url = x.elements[0].value;
         }
 
 
@@ -51,19 +51,22 @@
                 // code for IE6, IE5
                 xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
             }
-            try {
-                xmlhttp.open("GET", url, false); //open, send, responseXML are
-            } catch (e) {
-                alert(e);
-            }
 
+            xmlhttp.open("GET", url, false); //open, send, responseXML are
+            xmlhttp.send(); //properties of XMLHTTPRequest
 
-            try {
-                xmlhttp.send(); //properties of XMLHTTPRequest
-            } catch (e) {
-                alert(e);
-            }
-            xmlDoc=xmlhttp.responseXML;
+            if(xmlhttp.readyState == 4){
+				if(xmlhttp.status == 200){
+					xmlDoc = xmlhttp.responseXML;
+				}else if(xmlhttp.status == 404){
+					alert("File not found");
+                    return;
+				}else{
+					alert("Error");
+                    return;
+				}
+			}
+
 
             txt = "";
             /*
@@ -91,6 +94,7 @@
                 footb = xmlDoc.documentElement.childNodes;
             } catch(e) {
                 alert("Error in XML file");
+                return;
             }
             var th = "<th style='border-collapse: collapse; border: 1px solid black;'>"
             //txt += "<tr>"+th+"Airline</th>"+th+"IATA</th>"+th+"Hubs</th>"+th+"Notes</th>"+th+"HomePage</th>"+th+"Plane</th></tr>";
@@ -161,44 +165,6 @@
         // ....... processing the document goes here
     </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body></html>
+    <noscript>
+    </body>
+</html>
