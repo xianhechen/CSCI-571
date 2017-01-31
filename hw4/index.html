@@ -94,7 +94,7 @@
                 alert("Error in XML file");
             }
             var th = "<th style='border-collapse: collapse; border: 1px solid black;'>"
-            txt += "<tr>"+th+"Airline</th>"+th+"IATA</th>"+th+"Hubs</th>"+th+"Notes</th>"+th+"HomePage</th>"+th+"Plane</th></tr>";
+            //txt += "<tr>"+th+"Airline</th>"+th+"IATA</th>"+th+"Hubs</th>"+th+"Notes</th>"+th+"HomePage</th>"+th+"Plane</th></tr>";
             for (i = 0; i<footb.length; i++) {
                 var footbNodeList = footb.item(i).childNodes;
                 for (j = 0; j<footbNodeList.length; j++) {
@@ -104,18 +104,15 @@
                     var td = "<td style='border-collapse: collapse; border: 1px solid black;'>"
                     for (k = 0; k<row.length; k++) {
                         if (row.item(k).nodeType  == 1) {
-
                             if (row.item(k).nodeName  == "Data") {
-                                //txt += row.item(k).innerHTML + " DATA </br>";
+                                txt += th + row.item(k).innerHTML + "</th>";
                             }
-
                             else if (row.item(k).nodeName == "Airline") {
                                 txt += td + "<p>" + row.item(k).innerHTML + " </p></td>";
                             }
                             else if (row.item(k).nodeName == "IATA") {
                                 txt += td + "<p>" + row.item(k).innerHTML + " </p></td>";
                             }
-
                             else if (row.item(k).nodeName == "Hubs") {
                                 var hubs = row.item(k).childNodes;
                                 txt += td + "<ul>";
@@ -123,10 +120,8 @@
                                     if (hubs.item(l).nodeName == "Hub") {
                                         txt +=  "<li id='item"+l+"'><p word-wrap='break-word'>" + hubs.item(l).innerHTML + " </p></li> ";
                                     }
-
                                 }
                                 txt += "</ul></td>";
-
                             }
                             else if (row.item(k).nodeName == "Notes") {
                                 txt += td + "<p>" + row.item(k).innerHTML + " </p></td> ";
@@ -139,7 +134,6 @@
                                 txt += td + "<img src='" + row.item(k).innerHTML + "' alt = 'plane' width='200px'></td>"
                                 txt += "</tr>";
                             }
-
                             else {
                                 txt += "<h1>" + row.item(k).nodeName + "</h1>";
                             }
