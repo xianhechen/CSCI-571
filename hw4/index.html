@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no">
     <title>Homework 4</title>
@@ -14,35 +14,23 @@
         }
 
         #main {
-            width = 700px;
+            width: 700px;
             margin-left: auto;
             margin-right: auto;
             text-align: center;
         }
-
-        table, th, td {
-            border: 1px solid black;
-        }
-
-        img {
-            height: 200px;
-        }
-
     </style>
 </head>
 
 <body>
-    <div id = "main">
+    <div id="main">
         <h4>Enter URL for Airlines List XML File</h4>
         <form id="gettingURL">
-
-            <input type="text" name="url" value="http://cs-server.usc.edu:45678/hw/hw4/airlinelist.xml"><br><br>
-
+            <input name="url" value="http://cs-server.usc.edu:45678/hw/hw4/airlinelist.xml" type="text"><br><br>
             <!-- <input type="submit" value="Submit" onclick="clicked()"> -->
-
         </form>
         <button onclick="loadXML('airlinelist.xml')">Submit Query</button>
-        <table id="demo"></table>
+
     </div>
 
     <script type="text/javascript">
@@ -63,8 +51,19 @@
                 // code for IE6, IE5
                 xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
             }
-            xmlhttp.open("GET", url, false); //open, send, responseXML are
-            xmlhttp.send(); //properties of XMLHTTPRequest
+
+            try {
+                xmlhttp.open("GET", url, false); //open, send, responseXML are
+            } catch (e) {
+                alert(e);
+            }
+
+
+            try {
+                xmlhttp.send(); //properties of XMLHTTPRequest
+            } catch (e) {
+                alert(e);
+            }
             xmlDoc=xmlhttp.responseXML;
 
             txt = "";
@@ -89,14 +88,20 @@
 
 
 
-            footb = xmlDoc.documentElement.childNodes;
-            txt += "<tr><th>Airline</th><th>IATA</th><th>Hubs</th><th>Notes</th><th>HomePage</th><th>Plane</th></tr>";
+            try {
+                footb = xmlDoc.documentElement.childNodes;
+            } catch(e) {
+                alert("Error in XML file");
+            }
+            var th = "<th style='border-collapse: collapse; border: 1px solid black;'>"
+            txt += "<tr>"+th+"Airline</th>"+th+"IATA</th>"+th+"Hubs</th>"+th+"Notes</th>"+th+"HomePage</th>"+th+"Plane</th></tr>";
             for (i = 0; i<footb.length; i++) {
                 var footbNodeList = footb.item(i).childNodes;
                 for (j = 0; j<footbNodeList.length; j++) {
                     //txt += footbNodeList.item(j).nodeName + " ";
                     var row = footbNodeList.item(j).childNodes;
                     txt += "<tr>";
+                    var td = "<td style='border-collapse: collapse; border: 1px solid black;'>"
                     for (k = 0; k<row.length; k++) {
                         if (row.item(k).nodeType  == 1) {
 
@@ -105,35 +110,34 @@
                             }
 
                             else if (row.item(k).nodeName == "Airline") {
-                                txt += "<td>" + row.item(k).innerHTML + " Airline </td>";
+                                txt += td + "<p>" + row.item(k).innerHTML + " </p></td>";
                             }
                             else if (row.item(k).nodeName == "IATA") {
-                                txt += "<td>" + row.item(k).innerHTML + " IATA </td>";
+                                txt += td + "<p>" + row.item(k).innerHTML + " </p></td>";
                             }
 
                             else if (row.item(k).nodeName == "Hubs") {
                                 var hubs = row.item(k).childNodes;
-                                txt += "<td>";
+                                txt += td + "<ul>";
                                 for ( l=0; l<hubs.length; l++) {
                                     if (hubs.item(l).nodeName == "Hub") {
-                                        txt +=  hubs.item(l).innerHTML + " </br> ";
+                                        txt +=  "<li id='item"+l+"'><p word-wrap='break-word'>" + hubs.item(l).innerHTML + " </p></li> ";
                                     }
 
                                 }
-                                txt += "</td>";
+                                txt += "</ul></td>";
 
                             }
                             else if (row.item(k).nodeName == "Notes") {
-                                txt += "<td>" + row.item(k).innerHTML + " </td> ";
+                                txt += td + "<p>" + row.item(k).innerHTML + " </p></td> ";
 
                             }
                             else if (row.item(k).nodeName == "HomePage") {
-                                txt += "<td>" + row.item(k).innerHTML + " </td> ";
+                                txt += td + "<a href =" + row.item(k).innerHTML + ">" + row.item(k).innerHTML + " </a></td> ";
                             }
                             else if (row.item(k).nodeName == "Plane") {
-                                txt += "<td><img src='" + row.item(k).innerHTML + "' alt = 'plane'></td>"
+                                txt += td + "<img src='" + row.item(k).innerHTML + "' alt = 'plane' width='200px'></td>"
                                 txt += "</tr>";
-                                txt += "</br>";
                             }
 
                             else {
@@ -152,22 +156,14 @@
                 }
             }
 
-
-
-
-
             //return xmlDoc;
+            var newWindow = window.open("", "MsgWindow", "width=1000,height=800");
+            //newWindow.document.write();
+            newWindow.document.write("<!DOCTYPE html><html lang='en'><style>#item1 {font-weight: bold;} ul, li, p, img {margin: 0;}</style>");
+            newWindow.document.write("<table id='demo' style='border-collapse: collapse; border: 1px solid black;'>" + txt + "</table></html>");
 
-
-
-
-
-            document.getElementById("demo").innerHTML = txt;
+            //document.getElementById("demo").innerHTML = txt;
          }
-
-
-
-
 
         // ....... processing the document goes here
     </script>
@@ -210,5 +206,6 @@
 
 
 
-</body>
-</html>
+
+
+</body></html>
