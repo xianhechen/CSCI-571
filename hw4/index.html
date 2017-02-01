@@ -29,7 +29,7 @@
             <input name="url" value="http://cs-server.usc.edu:45678/hw/hw4/airlinelist.xml" type="text"><br><br>
             <!-- <input type="submit" value="Submit" onclick="clicked()"> -->
         </form>
-        <button onclick="loadXML('http://www-scf.usc.edu/~xianhech/hw4444/invalidd.xml')">Submit Query</button>
+        <button onclick="loadXML('http://www-scf.usc.edu/~xianhech/hw4444/test.xml')">Submit Query</button>
 
     </div>
 
@@ -43,6 +43,7 @@
 
 
         function loadXML(url) {
+            var airlineExist = false;
             if (window.XMLHttpRequest) {
                 // code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp=new XMLHttpRequest();
@@ -66,7 +67,6 @@
                     return;
 				}
 			}
-
 
             txt = "";
             /*
@@ -105,13 +105,18 @@
                     var row = footbNodeList.item(j).childNodes;
                     txt += "<tr>";
                     var td = "<td style='border-collapse: collapse; border: 1px solid black;'>"
+
+
                     for (k = 0; k<row.length; k++) {
                         if (row.item(k).nodeType  == 1) {
                             if (row.item(k).nodeName  == "Data") {
                                 txt += th + row.item(k).innerHTML + "</th>";
                             }
                             else if (row.item(k).nodeName == "Airline") {
-                                txt += td + "<p>" + row.item(k).innerHTML + " </p></td>";
+                                if (row.item(k).innerHTML.length!=0) {
+                                    airlineExist = true;
+                                    txt += td + "<p>" + row.item(k).innerHTML + " </p></td>";
+                                }
                             }
                             else if (row.item(k).nodeName == "IATA") {
                                 txt += td + "<p>" + row.item(k).innerHTML + " </p></td>";
@@ -153,6 +158,10 @@
                 }
             }
 
+            if (airlineExist == false) {
+                alert("No airline");
+                return;
+            }
             //return xmlDoc;
             var newWindow = window.open("", "MsgWindow", "width=1000,height=800");
             //newWindow.document.write();
