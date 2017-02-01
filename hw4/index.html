@@ -29,7 +29,7 @@
             <input name="url" value="http://cs-server.usc.edu:45678/hw/hw4/airlinelist.xml" type="text"><br><br>
             <!-- <input type="submit" value="Submit" onclick="clicked()"> -->
         </form>
-        <button onclick="loadXML('http://www-scf.usc.edu/~xianhech/hw4444/test.xml')">Submit Query</button>
+        <button onclick="loadXML('airlinelist.xml')">Submit Query</button>
 
     </div>
 
@@ -69,6 +69,8 @@
 			}
 
             txt = "";
+
+
             /*
             airlines = xmlDoc.getElementsByTagName("Airline");
             for (i = 0; i<airlines.length; i++) {
@@ -97,16 +99,12 @@
                 return;
             }
             var th = "<th style='border-collapse: collapse; border: 1px solid black;'>"
-            //txt += "<tr>"+th+"Airline</th>"+th+"IATA</th>"+th+"Hubs</th>"+th+"Notes</th>"+th+"HomePage</th>"+th+"Plane</th></tr>";
             for (i = 0; i<footb.length; i++) {
                 var footbNodeList = footb.item(i).childNodes;
                 for (j = 0; j<footbNodeList.length; j++) {
-                    //txt += footbNodeList.item(j).nodeName + " ";
                     var row = footbNodeList.item(j).childNodes;
                     txt += "<tr>";
                     var td = "<td style='border-collapse: collapse; border: 1px solid black;'>"
-
-
                     for (k = 0; k<row.length; k++) {
                         if (row.item(k).nodeType  == 1) {
                             if (row.item(k).nodeName  == "Data") {
@@ -133,28 +131,19 @@
                             }
                             else if (row.item(k).nodeName == "Notes") {
                                 txt += td + "<p>" + row.item(k).innerHTML + " </p></td> ";
-
                             }
                             else if (row.item(k).nodeName == "HomePage") {
                                 txt += td + "<a href =" + row.item(k).innerHTML + ">" + row.item(k).innerHTML + " </a></td> ";
                             }
                             else if (row.item(k).nodeName == "Plane") {
-                                txt += td + "<img src='" + row.item(k).innerHTML + "' alt = 'plane' width='200px'></td>"
+                                txt += td + "<img src='" + row.item(k).innerHTML + "' alt = 'plane' height='200px'></td>"
                                 txt += "</tr>";
                             }
                             else {
                                 txt += "<h1>" + row.item(k).nodeName + "</h1>";
                             }
-
                         }
-
-
                     }
-                    //airline = row.getElementsByTagName('Airline');
-                    //txt += row.nodeType + " ";
-                    //if (row.nodeName == "Row") {
-                    //    txt += row.nodeName + " ";
-                    //}
                 }
             }
 
@@ -164,6 +153,7 @@
             }
             //return xmlDoc;
             var newWindow = window.open("", "MsgWindow", "width=1000,height=800");
+
             //newWindow.document.write();
             newWindow.document.write("<!DOCTYPE html><html lang='en'><style>#item1 {font-weight: bold;} ul, li, p, img {margin: 0;}</style>");
             newWindow.document.write("<table id='demo' style='border-collapse: collapse; border: 1px solid black;'>" + txt + "</table></html>");
