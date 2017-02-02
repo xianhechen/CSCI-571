@@ -26,10 +26,10 @@
     <div id="main">
         <h4>Enter URL for Airlines List XML File</h4>
         <form id="gettingURL">
-            <input name="url" value="http://cs-server.usc.edu:45678/hw/hw4/airlinelist.xml" type="text"><br><br>
+            <input name="url" type="text"><br><br>
             <!-- <input type="submit" value="Submit" onclick="clicked()"> -->
         </form>
-        <button onclick="loadXML('airlinelist.xml')">Submit Query</button>
+        <button onclick="clicked()">Submit Query</button>
 
     </div>
 
@@ -39,6 +39,19 @@
         function clicked() {
             var x = document.getElementById("gettingURL");
             url = x.elements[0].value;
+            loadXML(url);
+        }
+
+        function is_all_ws(nod){
+          return !(/[^\t\n\r ]/.test(nod.textContent));
+        }
+
+        function is_ignorable(nod){
+          return (nod.nodeType == 8) || ((nod.nodeType == 3) && is_all_ws(nod));
+        }
+
+        function replaceSpace (x) {
+            return x.replace(/^\s+|\s+$/gm,'');
         }
 
 
@@ -54,6 +67,7 @@
             }
 
             xmlhttp.open("GET", url, false); //open, send, responseXML are
+
             xmlhttp.send(); //properties of XMLHTTPRequest
 
             if(xmlhttp.readyState == 4){
@@ -85,55 +99,58 @@
                     var td = "<td style='border-collapse: collapse; border: 1px solid black;'>"
                     for (k = 0; k<row.length; k++) {
                         if (row.item(k).nodeType  == 1) {
-                            if (row.item(k).nodeName  == "Data") {
-                                txt += th + row.item(k).innerHTML + "</th>";
+                            if (row.item(k).nodeName  == "Data" && !is_ignorable(row.item(k))) {
+                                txt += th + replaceSpace(row.item(k).innerHTML) + "</th>";
                             }
-                            else if (row.item(k).nodeName == "Airline") {
-                                if (row.item(k).innerHTML.length!=0) {
+                            else if (row.item(k).nodeName == "Airline" && !is_ignorable(row.item(k))) {
+                                if (row.item(k).innerHTML.length !=0) {
                                     airlineExist = true;
-                                    txt += td + "<p>" + row.item(k).innerHTML + " </p></td>";
+                                    txt += td + "<p>" + replaceSpace(row.item(k).innerHTML) + " </p></td>";
                                 }
                             }
-                            else if (row.item(k).nodeName == "IATA") {
-                                txt += td + "<p>" + row.item(k).innerHTML + " </p></td>";
+                            else if (row.item(k).nodeName == "IATA" && !is_ignorable(row.item(k))) {
+                                txt += td + "<p>" + replaceSpace(row.item(k).innerHTML) + " </p></td>";
                             }
-                            else if (row.item(k).nodeName == "Hubs") {
+                            else if (row.item(k).nodeName == "Hubs" && !is_ignorable(row.item(k))) {
                                 var hubs = row.item(k).childNodes;
                                 txt += td + "<ul>";
                                 for ( l=0; l<hubs.length; l++) {
-                                    if (hubs.item(l).nodeName == "Hub") {
-                                        txt +=  "<li id='item"+l+"'><p word-wrap='break-word'>" + hubs.item(l).innerHTML + " </p></li> ";
+                                    if (hubs.item(l).nodeName == "Hub" && !is_ignorable(hubs.item(l))) {
+                                        txt +=  "<li id='item"+l+"'><p word-wrap='break-word'>" + replaceSpace(hubs.item(l).innerHTML) + " </p></li> ";
                                     }
                                 }
                                 txt += "</ul></td>";
                             }
-                            else if (row.item(k).nodeName == "Notes") {
-                                txt += td + "<p>" + row.item(k).innerHTML + " </p></td> ";
+                            else if (row.item(k).nodeName == "Notes" && !is_ignorable(row.item(k))) {
+                                txt += td + "<p>" + replaceSpace(row.item(k).innerHTML) + " </p></td> ";
                             }
-                            else if (row.item(k).nodeName == "HomePage") {
-                                txt += td + "<a href =" + row.item(k).innerHTML + ">" + row.item(k).innerHTML + " </a></td> ";
+                            else if (row.item(k).nodeName == "HomePage" && !is_ignorable(row.item(k))) {
+                                txt += td + "<a href =" + replaceSpace(row.item(k).innerHTML) + ">" + replaceSpace(row.item(k).innerHTML) + " </a></td> ";
                             }
-                            else if (row.item(k).nodeName == "Plane") {
-                                txt += td + "<img src='" + row.item(k).innerHTML + "' alt = 'plane' height='200px'></td>"
+                            else if (row.item(k).nodeName == "Plane" && !is_ignorable(row.item(k))) {
+                                txt += td + "<img src='" + replaceSpace(row.item(k).innerHTML) + "' alt = 'plane' height='200px'></td>"
                                 txt += "</tr>";
                             }
                             else {
-                                txt += "<h1>" + row.item(k).nodeName + "</h1>";
+                                if(!is_ignorable(row.item(k))) {
+                                    alert("unknown tag used");
+                                    return;
+                                }
                             }
                         }
                     }
                 }
             }
-
             if (airlineExist == false) {
                 alert("No airline");
                 return;
             }
             //return xmlDoc;
-            var newWindow = window.open("", "MsgWindow", "width=1000,height=800");
+            var newWindow = window.open("", "_blank", "width=1000,height=800");
             newWindow.document.write("<!DOCTYPE html><html lang='en'><style>#item1 {font-weight: bold;} ul, li, p, img {margin: 0;}</style>");
             newWindow.document.write("<table id='demo' style='border-collapse: collapse; border: 1px solid black;'>" + txt + "</table></html>");
-         }
+
+        }
 
         // ....... processing the document goes here
     </script>
