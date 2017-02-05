@@ -116,7 +116,12 @@
                                 txt += td + "<ul>";
                                 for ( l=0; l<hubs.length; l++) {
                                     if (hubs.item(l).nodeName == "Hub" && !is_ignorable(hubs.item(l))) {
-                                        txt +=  "<li id='item"+l+"'><p word-wrap='break-word'>" + replaceSpace(hubs.item(l).innerHTML) + " </p></li> ";
+                                        if (replaceSpace(hubs.item(l).innerHTML).length > 1) {
+                                            txt +=  "<li id='item"+l+"'><p word-wrap='break-word'>" + replaceSpace(hubs.item(l).innerHTML) + " </p></li> ";
+                                        }
+                                        else {
+                                            l++;
+                                        }
                                     }
                                 }
                                 txt += "</ul></td>";
