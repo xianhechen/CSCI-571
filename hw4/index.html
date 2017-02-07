@@ -26,10 +26,10 @@
     <div id="main">
         <h4>Enter URL for Airlines List XML File</h4>
         <form id="gettingURL">
-            <input name="url" type="text" placeholder="Enter Filename Here" value="airlinelist.xml"><br><br>
-            <!-- <input type="submit" value="Submit" onclick="clicked()"> -->
+            <input name="url" type="text" placeholder="Enter Filename Here"><br><br>
+            <input type="submit" value="Submit Query" onclick="clicked()">
         </form>
-        <button onclick="clicked()">Submit Query</button>
+        <!-- <button onclick="clicked()">Submit Query</button> -->
 
     </div>
 
@@ -51,7 +51,7 @@
         }
 
         function replaceSpace (x) {
-            return x.replace(/^\s+|\s+$/gm,'');
+            return x.replace(/^\s+|\s+$/gm,' ');
         }
 
 
@@ -116,12 +116,7 @@
                                 txt += td + "<ul>";
                                 for ( l=0; l<hubs.length; l++) {
                                     if (hubs.item(l).nodeName == "Hub" && !is_ignorable(hubs.item(l))) {
-                                        if (replaceSpace(hubs.item(l).innerHTML).length > 1) {
-                                            txt +=  "<li id='item"+l+"'><p word-wrap='break-word'>" + replaceSpace(hubs.item(l).innerHTML) + " </p></li> ";
-                                        }
-                                        else {
-                                            l++;
-                                        }
+                                            txt +=  "<li id='item"+l+"'>" + replaceSpace(hubs.item(l).innerHTML) + "</li> ";
                                     }
                                 }
                                 txt += "</ul></td>";
@@ -130,7 +125,7 @@
                                 txt += td + "<p>" + replaceSpace(row.item(k).innerHTML) + " </p></td> ";
                             }
                             else if (row.item(k).nodeName == "HomePage" && !is_ignorable(row.item(k))) {
-                                txt += td + "<a href =" + replaceSpace(row.item(k).innerHTML) + ">" + replaceSpace(row.item(k).innerHTML) + " </a></td> ";
+                                txt += td + "<a href =" + replaceSpace(row.item(k).innerHTML) + ">" + replaceSpace(row.item(k).innerHTML) + "</a></td> ";
                             }
                             else if (row.item(k).nodeName == "Plane" && !is_ignorable(row.item(k))) {
                                 txt += td + "<img src='" + replaceSpace(row.item(k).innerHTML) + "' alt = 'plane' height='200px'></td>"
@@ -152,7 +147,7 @@
             }
             //return xmlDoc;
             var newWindow = window.open("", "_blank", "width=1000,height=800");
-            newWindow.document.write("<!DOCTYPE html><html lang='en'><style>#item1 {font-weight: bold;} ul, li, p, img {margin: 0;}</style>");
+            newWindow.document.write("<!DOCTYPE html><html lang='en'><style>#item1 {font-weight: bold;} p, img {margin: 0;}</style>");
             newWindow.document.write("<table id='demo' style='border-collapse: collapse; border: 1px solid black;'>" + txt + "</table></html>");
 
         }
