@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Mainline>
   <Table>
+
    <Header>
     <Data>Airline</Data>
     <Data>IATA</Data>
@@ -9,6 +10,16 @@
     <Data>HomePage</Data>
     <Data>Plane</Data>
    </Header>
+
+      <Header>
+      <Data>US Airline</Data>
+      <Data>IATA</Data>
+      <Data>main Hubs</Data>
+      <Data></Data>
+      <Data>Home Page</Data>
+      <Data>Plane with Logo</Data>
+      </Header>
+
 
    <Row>
     <Airline>Alaska Airlines</Airline>
