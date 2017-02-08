@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
-    <meta name="format-detection" content="telephone=no">
     <title>Homework 4</title>
     <style>
         html, body, header, footer, figure,
@@ -25,8 +25,8 @@
 <body>
     <div id="main">
         <h4>Enter URL for Airlines List XML File</h4>
-        <form id="gettingURL">
-            <input name="url" type="text" placeholder="Enter Filename Here"><br><br>
+        <form id="gettingURL" enctype="text/plain">
+            <input id="url" type="text" placeholder="Enter Filename Here"><br><br>
             <input type="submit" value="Submit Query" onclick="clicked()">
         </form>
         <!-- <button onclick="clicked()">Submit Query</button> -->
@@ -39,7 +39,13 @@
         function clicked() {
             var x = document.getElementById("gettingURL");
             url = x.elements[0].value;
-            loadXML(url);
+            if (url.length > 4) {
+                loadXML(url.trim());
+            } else if (url.length == 0){
+                alert("Please enter filename");
+                return;
+            }
+
         }
 
         function is_all_ws(nod){
@@ -51,7 +57,7 @@
         }
 
         function replaceSpace (x) {
-            return x.replace(/^\s+|\s+$/gm,' ');
+            return x.replace(/^\s+|\s+$/gm,'');
         }
 
 
