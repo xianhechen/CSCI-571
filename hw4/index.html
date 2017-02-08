@@ -21,46 +21,43 @@
         }
     </style>
 </head>
-
 <body>
     <div id="main">
         <h4>Enter URL for Airlines List XML File</h4>
-        <form id="gettingURL" enctype="text/plain">
+        <form id="gettingURL" onsubmit="return false">
             <input id="url" type="text" placeholder="Enter Filename Here"><br><br>
-            <input type="submit" value="Submit Query" onclick="clicked()">
+            <!-- <input type="submit" value="Submit Query" onclick="clicked()"> -->
+            <button onclick="clicked()">Submit Query</button>
         </form>
         <!-- <button onclick="clicked()">Submit Query</button> -->
-
     </div>
-
     <script type="text/javascript">
+
+        $( "gettingURL" ).click(function( event ) {
+            event.preventDefault();
+        });
+
         var url = "";
         var xmlDoc;
         function clicked() {
             var x = document.getElementById("gettingURL");
-            url = x.elements[0].value;
+            url = x.elements[0].value.trim();
             if (url.length > 4) {
                 loadXML(url.trim());
-            } else if (url.length == 0){
-                alert("Please enter filename");
+            } else if (url.length == 0 || url.length < 5){
+                alert("Please enter valid filename");
                 return;
             }
-
         }
-
         function is_all_ws(nod){
           return !(/[^\t\n\r ]/.test(nod.textContent));
         }
-
         function is_ignorable(nod){
           return (nod.nodeType == 8) || ((nod.nodeType == 3) && is_all_ws(nod));
         }
-
         function replaceSpace (x) {
             return x.replace(/^\s+|\s+$/gm,'');
         }
-
-
         function loadXML(url) {
             var airlineExist = false;
             if (window.XMLHttpRequest) {
@@ -71,11 +68,8 @@
                 // code for IE6, IE5
                 xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
             }
-
             xmlhttp.open("GET", url, false); //open, send, responseXML are
-
             xmlhttp.send(); //properties of XMLHTTPRequest
-
             if(xmlhttp.readyState == 4){
 				if(xmlhttp.status == 200){
 					xmlDoc = xmlhttp.responseXML;
@@ -87,9 +81,7 @@
                     return;
 				}
 			}
-
             txt = "";
-
             try {
                 footb = xmlDoc.documentElement.childNodes;
             } catch(e) {
@@ -151,16 +143,11 @@
                 alert("No airline");
                 return;
             }
-            //return xmlDoc;
             var newWindow = window.open("", "_blank", "width=1000,height=800");
             newWindow.document.write("<!DOCTYPE html><html lang='en'><style>#item1 {font-weight: bold;} p, img {margin: 0;}</style>");
             newWindow.document.write("<table id='demo' style='border-collapse: collapse; border: 1px solid black;'>" + txt + "</table></html>");
-
         }
-
-        // ....... processing the document goes here
     </script>
-
     <noscript>
     </body>
 </html>
