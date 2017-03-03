@@ -10,13 +10,11 @@
         html, body {
             width: 100%;
         }
-
         fieldset {
             margin: 0 auto;
             width: 50%;
             margin-bottom: 50px;
         }
-
         #usersTable, th, td {
             border-collapse: collapse;
             border: 1px solid black;
@@ -24,13 +22,11 @@
             width: 60%;
             text-align: left;
         }
-
         #albumsButton, #postsButton {
             margin: 0 auto;
             width: 60%;
             text-align: center;
         }
-
         #albumsTable {
             border-collapse: collapse;
             border: 1px solid black;
@@ -38,7 +34,6 @@
             width: 60%;
             text-align: left;
         }
-
         #postsTable {
             border-collapse: collapse;
             border: 1px solid black;
@@ -46,9 +41,6 @@
             width: 60%;
             text-align: left;
         }
-
-
-
     </style>
     <script>
         function selectPlaces() {
@@ -64,30 +56,25 @@
         function resetForm() {
             window.location = "http://cs-server.usc.edu:16031/zuoyeliu/search.php";
         }
-
-        function hideElement(target2, target1) {
-            //target1 is the element getting hidden
-                    //posts     //albums
-
-
-
-
-            var x = document.getElementById(target1);//albums
-            var y = document.getElementById(target2);//posts
-            if (x.style.visibility == "hidden" && y.style.visibility == "hidden") {
+        function hideElement(target1, target2) {
+            var x = document.getElementById(target1)
+            var y = document.getElementById(target2)
+            if (x.style.visibility == "hidden")
+            {
                 x.style.visibility = "visible";
                 x.style.height = "auto";
-            } else if (x.style.visibility == "visible" && y.style.visibility == "hidden") {
+                if (y.style.visibility == "visible")
+                {
+                    y.style.visibility = "hidden";
+                    y.style.height = "0px";
+                }
+
+            }
+            else {
                 x.style.visibility = "hidden";
                 x.style.height = "0px";
-            } else if (x.style.visibility == "hidden" && y.style.visibility == "visible") {
-                y.style.visibility = "hidden";
-                y.style.height = "0px";
             }
-
-
         }
-
         function toggle(target) {
             var x = document.getElementById(target);
             if (x.style.visibility == "hidden") {
@@ -98,21 +85,14 @@
                 x.style.height = "0px";
             }
         }
-
-
     </script>
 </head>
-
 <body>
 <div class="mainpage">
 <nav>
-
 </nav>
-
 <header class="main">
-
 </header>
-
 <form id = "request" class="request" method="post" action="http://cs-server.usc.edu:16031/zuoyeliu/search.php">
     <fieldset>
         <legend>Facebook Search</legend>
@@ -162,7 +142,6 @@ HTML;
         </p>
 
     </fieldset>
-
     <div id="searchResult">
         <?php
         require_once __DIR__ . '/php-graph-sdk-5.0.0/src/Facebook/autoload.php';
@@ -178,7 +157,6 @@ HTML;
             'default_graph_version' => 'v2.8',
         ]);
         $fb->setDefaultAccessToken($access_token);
-
         function getResponse($request, $fb) {
             try {
                 $response = $fb->getClient()->sendRequest($request);
@@ -194,7 +172,6 @@ HTML;
             $graphNode = $response->getDecodedBody();
             return $graphNode;
         }
-
         function displayResult($result,$token) {
             if (sizeof($result) == 1 && sizeof($result['data']) == 0) {
                 echo "<p>No  Records  have  been found</p>";
@@ -221,7 +198,6 @@ HTML;
                 echo "</table>";
             }
         }
-
         function findCenter($string){
             $string = str_replace (" ", "+", urlencode($string));
             $details_url = "https://maps.googleapis.com/maps/api/geocode/json?address=".$string."&key=AIzaSyBSZNvwwsgMZf6a8l6-gtFAdLjus34W19I";
@@ -229,35 +205,16 @@ HTML;
             $result = $urlContent['results'][0]['geometry']['location']['lat'].",".$urlContent['results'][0]['geometry']['location']['lng'];
             return $result;
         }
-
-
-
-
-
         if (isset($_GET['userid']) && isset($_GET['keyword'])) {
-            //echo $_GET['userid'];
             $userID =  $_GET['userid'];
-            //echo $_GET['keyword'];
             $detailsURL = "https://graph.facebook.com/v2.8/".$userID."?fields=id,name,picture.width(700).height(700),albums.limit(5){name,photos.limit(2){name,picture}},posts.limit(5)&access_token=".$access_token;
             $urlContent = json_decode(file_get_contents($detailsURL), true);
-            //var_dump($urlContent);
-            //echo "<div id='testArea'>";
-
-
-
-            // commented for clean coding
             $albumsJSON = array();
-            //var_dump($urlContent);
             if (isset($urlContent['albums'])){
-                //echo "<table id='albumsTable'>";
-
-
-                echo "<div id='albumsButton'><a href='#' onclick='hideElement(\"postsTable\",\"albumsTable\")'>Albums</a></div>";
+                echo "<div id='albumsButton'><a href='#' onclick='hideElement(\"albumsTable\",\"postsTable\")'>Albums</a></div>";
                 echo "<div id='albumsTable' style='visibility: hidden; height: 0px;'>";
                 echo "<table id='albumsTable'>";
-                //var_dump($urlContent);
                 foreach ($urlContent['albums'] as $albums) {
-                    //var_dump($albums);
                     for ($i=0; $i!=5; $i++) {
                         if (isset($albums[$i])) {
                             array_push($albumsJSON, $albums[$i]);
@@ -266,7 +223,6 @@ HTML;
                     }
                 }
                 foreach ($albumsJSON as $album) {
-                    //var_dump(sizeof($album['photos']['data']));
                     if (isset($album['name'])) {
                         if (isset($album['photos']['data'])){
                             echo "<tr><td>";
@@ -284,8 +240,6 @@ HTML;
                             echo $album['name']."</br></br>";
                         }
                     }
-                    //var_dump($album);
-                    //echo "</br>";
                 }
                 echo "</table>";
                 echo "</div>";
@@ -294,21 +248,14 @@ HTML;
                 echo "<div id='albums' style='visibility: hidden; height: 0px;'>";
                 echo "</div>";
                 echo "<th><p>No albums were found.</p></th></table>";
-                //var_dump($urlContent);
             }
             echo "</div>";
-
             $postsJSON = array();
             if (isset($urlContent['posts'])){
-                //echo "<table id='postsTable'>";
-
                 echo "<div id='postsButton'><a href='#' onclick='hideElement(\"postsTable\",\"albumsTable\")'>Posts</a></div>";
                 echo "<div id='postsTable' style='visibility: hidden; height: 0px;'>";
                 echo "<table id='postsTable'>";
-                //echo "</div>";
-                //var_dump($urlContent['posts']);
                 foreach ($urlContent['posts'] as $posts) {
-                    //var_dump($posts);
                     for ($i=0; $i!=5; $i++) {
                         if (isset($posts[$i])) {
                             array_push($postsJSON, $posts[$i]);
@@ -320,17 +267,14 @@ HTML;
                         echo "<tr><td>".$post['message']."</td></tr>";
                     }
                 }
-
             } else {
                 echo "<table id='postsTable'>";
                 echo "<div id='posts' style='visibility: hidden; height: 0px;'>";
                 echo "</div>";
                 echo "<th><p>No posts were found.</p></th></table>";
-                //var_dump($urlContent);
             }
 
             echo "</div>";
-            //var_dump($albumsJSON);
         } else {
             //echo "not found";
         }
@@ -354,12 +298,8 @@ HTML;
         ?>
     </div>
 </form>
-
 <footer>
-
 </footer>
-
 </div>
-
 </body>
 </html>
