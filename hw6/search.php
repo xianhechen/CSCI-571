@@ -1,5 +1,6 @@
 <?php
 //session_start();
+//event has no albums
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +55,7 @@
             }
         }
         function resetForm() {
-            window.location = "http://cs-server.usc.edu:16031/zuoyeliu/search.php";
+            window.location = "search.php";
         }
         function hideElement(target1, target2) {
             var x = document.getElementById(target1)
@@ -68,7 +69,6 @@
                     y.style.visibility = "hidden";
                     y.style.height = "0px";
                 }
-
             }
             else {
                 x.style.visibility = "hidden";
@@ -93,7 +93,7 @@
 </nav>
 <header class="main">
 </header>
-<form id = "request" class="request" method="post" action="http://cs-server.usc.edu:16031/zuoyeliu/search.php">
+<form id = "request" class="request" method="post" action="search.php">
     <fieldset>
         <legend>Facebook Search</legend>
         <p>
@@ -172,9 +172,16 @@ HTML;
             $graphNode = $response->getDecodedBody();
             return $graphNode;
         }
-        function displayResult($result,$token) {
-            if (sizeof($result) == 1 && sizeof($result['data']) == 0) {
-                echo "<p>No  Records  have  been found</p>";
+        function displayTableHead() {
+            if ($_POST['type'] == 'event') {
+                $html = <<<HTML
+                <table id='usersTable'>
+                <tr>
+                  <th>Profile Photo</th>
+                  <th>Name</th>
+                  <th>Place</th>
+                </tr>
+HTML;
             } else {
                 $html = <<<HTML
                 <table id='usersTable'>
@@ -184,18 +191,39 @@ HTML;
                   <th>Detail</th>
                 </tr>
 HTML;
-                echo $html;
-                foreach ($result['data'] as $data) {
-                    $pic_url = $data['picture']['data']['url'];
-                    $locationP = '';
-                    $distanceP = '';
-                    if (isset($_POST['location']) && isset($_POST['distance'])) {
-                        $locationP = $_POST['location'];
-                        $distanceP = $_POST['distance'];
+            }
+            echo $html;
+        }
+        function displayResult($result) {
+            if (sizeof($result) == 1 && sizeof($result['data']) == 0) {
+                echo "<p>No  Records  have  been found</p>";
+            } else {
+                if ($_POST['type'] == 'event') {
+                    echo displayTableHead();
+                    foreach ($result['data'] as $data) {
+                        $pic_url = $data['picture']['data']['url'];
+                        if (isset($data['place']['name'])) {
+                            $eventLoc = $data['place']['name'];
+                            echo "<tr><td><a href=".$pic_url." target=\'_blank\'><img src='".$pic_url."' height='30px' width='30px'></a></td><td>".$data['name']."</td><td>".$eventLoc."</td></tr>";
+                        } else {
+                            echo "<tr><td><a href=".$pic_url." target=\'_blank\'><img src='".$pic_url."' height='30px' width='30px'></a></td><td>".$data['name']."</td><td></td></tr>";
+                        }
                     }
-                    echo "<tr><td><a href=".$pic_url." target=\'_blank\'><img src='".$pic_url."' height='30px' width='30px'></a></td><td>".$data['name']."</td><td><a href='http://cs-server.usc.edu:16031/zuoyeliu/search.php?userid=".$data['id']."&keyword=".$_POST['keyword']."&type=".$_POST['type']."&location=".$locationP."&distance=".$distanceP."'> Details </a></td></tr>";
+                    echo "</table>";
+                } else {
+                    echo displayTableHead();
+                    foreach ($result['data'] as $data) {
+                        $pic_url = $data['picture']['data']['url'];
+                        $locationP = '';
+                        $distanceP = '';
+                        if (isset($_POST['location']) && isset($_POST['distance'])) {
+                            $locationP = $_POST['location'];
+                            $distanceP = $_POST['distance'];
+                        }
+                        echo "<tr><td><a href=".$pic_url." target=\'_blank\'><img src='".$pic_url."' height='30px' width='30px'></a></td><td>".$data['name']."</td><td><a href='search.php?userid=".$data['id']."&keyword=".$_POST['keyword']."&type=".$_POST['type']."&location=".$locationP."&distance=".$distanceP."'> Details </a></td></tr>";
+                    }
+                    echo "</table>";
                 }
-                echo "</table>";
             }
         }
         function findCenter($string){
@@ -287,12 +315,17 @@ HTML;
                 $latNlong = findCenter($center);
                 $request = $fb->request('GET', '/search', ['q' => $keyword, 'type' => $type, 'center' => $latNlong, 'distance' => $distance, 'fields'=>'id,name,picture.width(700).height(700)']);
                 $result = getResponse($request, $fb);
-                displayResult($result, $access_token);
+                displayResult($result);
+            }
+            else if ($type == 'event') {
+                $request = $fb->request('GET', '/search', ['q' => $keyword, 'type' => $type, 'fields'=>'id,name,picture.width(700).height(700), place']);
+                $result = getResponse($request, $fb);
+                displayResult($result);
             }
             else {
                 $request = $fb->request('GET', '/search', ['q' => $keyword, 'type' => $type, 'fields'=>'id,name,picture.width(700).height(700)']);
                 $result = getResponse($request, $fb);
-                displayResult($result, $access_token);
+                displayResult($result);
             }
         }
         ?>
