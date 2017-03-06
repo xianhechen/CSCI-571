@@ -1,7 +1,3 @@
-<?php
-//session_start();
-//event has no albums
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,14 +26,12 @@
         }
         #albumsTable {
             border-collapse: collapse;
-            border: 1px solid black;
             margin: 0 auto;
             width: 60%;
             text-align: left;
         }
         #postsTable {
             border-collapse: collapse;
-            border: 1px solid black;
             margin: 0 auto;
             width: 60%;
             text-align: left;
@@ -77,11 +71,11 @@
         }
         function toggle(target) {
             var x = document.getElementById(target);
-            if (x.style.visibility == "hidden") {
-                x.style.visibility = "visible";
-                x.style.height = auto;
+            if (x.style.display == "none") {
+                x.style.display = "inline";
+                x.style.height = "auto";
             } else {
-                x.style.visibility = "hidden";
+                x.style.display = "none";
                 x.style.height = "0px";
             }
         }
@@ -196,7 +190,7 @@ HTML;
         }
         function displayResult($result) {
             if (sizeof($result) == 1 && sizeof($result['data']) == 0) {
-                echo "<p>No  Records  have  been found</p>";
+                echo "<table id='usersTable'><tr><th>No Records have been found</th></tr></table>";
             } else {
                 if ($_POST['type'] == 'event') {
                     echo displayTableHead();
@@ -254,7 +248,9 @@ HTML;
                     if (isset($album['name'])) {
                         if (isset($album['photos']['data'])){
                             echo "<tr><td>";
-                            echo "<a href='#'>".$album['name']."</a></td></tr><tr><td>";
+                            //var_dump($album);
+                            echo "<a href='#' onclick=toggle('".urlencode($album['name'])."')>".$album['name']."</a></td></tr>";
+                            echo "<td id='".urlencode($album['name'])."' style='display: none;'>";
                             foreach ($album['photos']['data'] as $picture) {
                                 if (isset($picture['picture']) && isset($picture['id'])) {
                                     $picID = $picture['id'];
@@ -262,6 +258,7 @@ HTML;
                                     echo "<a href=".$hiResRequest." target='_blank'><img width='80px' height='80px' src=".$picture['picture']."></a>";
                                 }
                             }
+                            echo "</td>";
                             echo "</td></tr>";
                         }
                         else {
