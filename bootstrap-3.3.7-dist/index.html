@@ -10,66 +10,90 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
 
+
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+     <!-- Include all compiled plugins (below), or include individual files as needed -->
+     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+     <script>
+     $(function(){
+     $("#tabs a:first").tab('show');
+       });
+     </script>
+
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
   </head>
   <body>
-      <nav class="navbar navbar-default" role="navigation">
+
+      <div class="navbar navbar-default" role="navigation">
           <div class="row">
-              <div class="col-md-3">
+              <div class="col-lg-3">
                   <div class="navbar-header">
                       <a class="navbar-brand" class="text-primary" href="#"><p class="text-primary">FB Search</p></a>
                   </div>
               </div>
-              <div class="col-md-6">
-                  <form class="navbar-form" role="search">
-                      <div class="input-group"  style="width:100%">
-                          <input type="text" class="form-control" placeholder="Search" name="q">
-                          <div class="input-group-btn">
-                              <button type="submit" id="searchButton" class="btn btn-primary" style="width:100%"><span
-                              class="glyphicon glyphicon-search"></span></button>
-                          </div>
-                          <div class="input-group-btn">
-                              <button class="btn btn-default"><span>Clear</span></button>
-                          </div>
-                      </div>
-                  </form>
-              </div>
+              <form class="navbar-form" role="search">
+                <div class="col-lg-6">
+                  <div class="input-group"  style="width:100%">
+                    <input type="text" class="form-control" placeholder="Search" name="q" required="requred">
+                    <div class="input-group-btn" style="width:17%;">
+                      <button type="submit" id="searchButton" class="btn btn-primary" style="width:80%; background-color: #3B5998;"><span
+                      class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                    <div class="input-group-btn">
+                      <button type="reset" class="btn btn-default"><span>Clear</span></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
           </div>
-      </nav>
+      </div>
+      </div>
+
+      <div class="masthead">
+        <nav>
+          <ul class="nav nav-tabs" id="tabs">
+            <li class="active"><a href="#" id="user" data-toggle="tab">Users</a></li>
+            <li><a href="#" id="page" data-toggle="tab">Pages</a></li>
+            <li><a href="#" id="event" data-toggle="tab">Events</a></li>
+            <li><a href="#" id="place" data-toggle="tab">Places</a></li>
+            <li><a href="#" id="group" data-toggle="tab">Groups</a></li>
+            <li><a href="#" data-toggle="tab">Favorites</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="container">
+        <div class="container-fluid">
+          <div id="result" class="row">
+            <h1>Result Table</h1>
+          </div>
+        </div>
+      </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-
-
-
-
-
-
-
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
   </body>
+
+  <script type="text/javascript">
+
+
+
+  $('#searchButton').on('click', function () {
+    var param = $('#searchForm').serialize();
+				console.log(param);
+      //alert("clicked!");
+      $.ajax({
+
+      });
+    });
+  </script>
 </html>
