@@ -76,9 +76,25 @@
               <tbody>
               </tbody>
             </table>
+            <div class="row">
+              <div  class="text-center">
+                <div class="col-md-4"></div>
+                <div class="col-md-2">
+                <p><button class="btn btn-secondary btn-block" disabled>Previous</button></p>
+                </div>
+                <div class="col-md-2">
+                  <p><button class="btn btn-secondary btn-block">Next</button></p>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
+
+      <div class="container">
+
   </body>
 
   <script type="text/javascript">
@@ -100,6 +116,11 @@
         imgAttr = imgTag(data['data'][i]['picture']['data']['url']);
         $('#resultsTable tbody').append("<tr><td><span class='align-middle'>"+j+"</span></td><td>"+imgAttr+"</td><td>"+data['data'][i]['name']+"</td><td>"+favButton+"</td><td>"+detButton+"</td></tr>");
     }
+
+    var next = data['paging']['next'];
+    //alert(next);
+
+
 
   }
 
