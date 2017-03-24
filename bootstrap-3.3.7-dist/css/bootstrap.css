@@ -2273,7 +2273,7 @@ th {
 .table > tfoot > tr > td {
   padding: 8px;
   line-height: 1.42857143;
-  vertical-align: top;
+  vertical-align: middle;
   border-top: 1px solid #ddd;
 }
 .table > thead > tr > th {
@@ -3179,7 +3179,16 @@ fieldset[disabled] .btn-primary.focus {
   color: #fff;
   background-color: #5cb85c;
   border-color: #4cae4c;
+
 }
+
+.btn-secondary {
+  background-color: white;
+  border-color: grey;
+  color: black;
+  border-radius: 3px;
+}
+
 .btn-success:focus,
 .btn-success.focus {
   color: #fff;

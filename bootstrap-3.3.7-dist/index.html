@@ -10,19 +10,16 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
 
-
      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
      <!-- Include all compiled plugins (below), or include individual files as needed -->
      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
      <script>
      $(function(){
      $("#tabs a:first").tab('show');
+     $('#result').hide();
        });
      </script>
-
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -32,7 +29,6 @@
 
   </head>
   <body>
-
       <div class="navbar navbar-default" role="navigation">
           <div class="row">
               <div class="col-lg-3">
@@ -40,12 +36,12 @@
                       <a class="navbar-brand" class="text-primary" href="#"><p class="text-primary">FB Search</p></a>
                   </div>
               </div>
-              <form class="navbar-form" role="search">
+              <form class="navbar-form" role="search" id="searchForm">
                 <div class="col-lg-6">
                   <div class="input-group"  style="width:100%">
-                    <input type="text" class="form-control" placeholder="Search" name="q" required="requred">
+                    <input type="text" id="keyword" class="form-control" placeholder="Search" name="keyword" required="requred">
                     <div class="input-group-btn" style="width:17%;">
-                      <button type="submit" id="searchButton" class="btn btn-primary" style="width:80%; background-color: #3B5998;"><span
+                      <button id="searchButton" class="btn btn-primary" style="width:80%; background-color: #3B5998;"><span
                       class="glyphicon glyphicon-search"></span></button>
                     </div>
                     <div class="input-group-btn">
@@ -74,25 +70,57 @@
       <div class="container">
         <div class="container-fluid">
           <div id="result" class="row">
-            <h1>Result Table</h1>
+            <table class="table table-hover" id="resultsTable">
+              <thead>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-
-
-
   </body>
 
   <script type="text/javascript">
+  function imgTag(url) {
+    tag = "<img src='"+url+"' class='img-circle' alt='"+url+"' width='30px' height='30px'>";
+    return tag;
+  }
+
+  function printResult(data) {
+    $('#result').show();
+    $('#resultsTable thead').empty();
+    $('#resultsTable tbody').empty();
+    $('#resultsTable thead').append("<tr><th>#</th><th>Profile photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr>");
+    var i;
+    var favButton = '<button type="button" class="btn btn-secondary"><span class="glyphicon glyphicon-star-empty"></span></button>';
+    var detButton = '<button type="button" class="btn btn-secondary"><span class="glyphicon glyphicon-chevron-right"></span></button>';
+    for (i = 0; i < data['data'].length; ++i) {
+        j = i+1;
+        imgAttr = imgTag(data['data'][i]['picture']['data']['url']);
+        $('#resultsTable tbody').append("<tr><td><span class='align-middle'>"+j+"</span></td><td>"+imgAttr+"</td><td>"+data['data'][i]['name']+"</td><td>"+favButton+"</td><td>"+detButton+"</td></tr>");
+    }
+
+  }
 
 
+  $("#searchForm").submit(function(e) {
+    e.preventDefault();
+  });
 
   $('#searchButton').on('click', function () {
-    var param = $('#searchForm').serialize();
-				console.log(param);
-      //alert("clicked!");
+    var param = $('#keyword').val() + "&type=" + $("ul#tabs li.active a").attr("id");
       $.ajax({
-
+        url: 'search.php?keyword='+param,
+        dataType: 'json',
+        type: 'GET',
+        success: function (data) {
+          //alert(data['data'][0]['picture']['data']['url']);
+          printResult(data);
+        },
+        error: function(xhr, status, error) {
+          alert(error);
+        }
       });
     });
   </script>
