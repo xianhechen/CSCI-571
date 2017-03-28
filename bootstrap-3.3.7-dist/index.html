@@ -1,56 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-<<<<<<< Updated upstream
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-     <!-- Include all compiled plugins (below), or include individual files as needed -->
-     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-     <script>
-     $(function(){
-     $("#tabs a:first").tab('show');
-     $('#result').hide();
-       });
-     </script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-  </head>
-  <body>
-      <div class="navbar navbar-default" role="navigation">
-          <div class="row">
-              <div class="col-lg-3">
-                  <div class="navbar-header">
-                      <a class="navbar-brand" class="text-primary" href="#"><p class="text-primary">FB Search</p></a>
-                  </div>
-              </div>
-              <form class="navbar-form" role="search" id="searchForm">
-                <div class="col-lg-6">
-                  <div class="input-group"  style="width:100%">
-                    <input type="text" id="keyword" class="form-control" placeholder="Search" name="keyword" required="requred">
-                    <div class="input-group-btn" style="width:17%;">
-                      <button id="searchButton" class="btn btn-primary" style="width:80%; background-color: #3B5998;"><span
-                      class="glyphicon glyphicon-search"></span></button>
-                    </div>
-                    <div class="input-group-btn">
-                      <button type="reset" class="btn btn-default"><span>Clear</span></button>
-=======
     <style type="text/css">
+.col-md-12 {
+  transition: .3s linear all;
+  overflow: hidden;
+}
+
+.col-md-12.ng-hide {
+    transform: translateX(300%);
+}
 
     </style>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -66,6 +29,17 @@
      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
      <!-- AngularJS -->
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+     <script src="https://code.angularjs.org/1.6.3/angular-animate.min.js"></script>
+     <script src="http://connect.facebook.net/en_US/all.js"></script>
+     <script>
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) return;
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/es_LA/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
      <script>
 
      $(function(){
@@ -82,12 +56,12 @@
     <![endif]-->
 
   </head>
-  <body ng-app="app" ng-controller="bodyController">
+  <body ng-app="app" ng-controller="bodyController" ng-cloak>
       <div class="navbar navbar-default" role="navigation">
           <div class="row">
               <div class="col-lg-3">
                   <div class="navbar-header">
-                      <a class="navbar-brand" class="text-primary" href="#"><p class="text-primary">FB Search</p></a>
+                      <a class="navbar-brand" class="text-primary"><p class="text-primary">FB Search</p></a>
                   </div>
               </div>
               <form class="navbar-form" role="search" id="searchForm">
@@ -106,30 +80,27 @@
               </form>
           </div>
       </div>
-      </div>
 
       <div class="masthead">
-        <nav>
+
           <ul class="nav nav-tabs" id="tabs">
-            <li class="active"><a href="#" id="user" data-toggle="tab">Users</a></li>
-            <li><a href="#" id="page" data-toggle="tab">Pages</a></li>
-            <li><a href="#" id="event" data-toggle="tab">Events</a></li>
-            <li><a href="#" id="place" data-toggle="tab">Places</a></li>
-            <li><a href="#" id="group" data-toggle="tab">Groups</a></li>
-            <li><a href="#" data-toggle="tab">Favorites</a></li>
+            <li><a id="user" data-toggle="tab">Users</a></li>
+            <li><a id="page" data-toggle="tab">Pages</a></li>
+            <li><a id="event" data-toggle="tab">Events</a></li>
+            <li><a id="place" data-toggle="tab">Places</a></li>
+            <li><a id="group" data-toggle="tab">Groups</a></li>
+            <li><a id="fav" data-toggle="tab">Favorites</a></li>
           </ul>
-        </nav>
       </div>
 
       <div>
       <div class="container">
-       <div class="row" >
+       <div class="row">
 
-        <div class="col-md-12" ng-show="showTable">
-
+         <loading></loading>
+        <div class="col-md-12" id="theTable" ng-show="showTable">
           <div class="container">
             <div class="container-fluid">
-              <loading></loading>
 
               <div id="result" class="row" ng-show="showPages">
                 <table class="table table-hover" id="resultsTable">
@@ -137,7 +108,7 @@
                     <tr><th>#</th><th>Profile photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr>
                   </thead>
                   <tbody  ng-repeat="record in jsonRecords track by $index">
-                    <tr><td>{{$index+1}}</td><td><img ng-src="{{record.picture.data.url}}" class='img-circle' alt="{{record.picture.data.url}}" width='30px' height='30px'></td><td>{{record.name}}</td><td><button type="button" class="btn btn-secondary"><span class="glyphicon glyphicon-star-empty"></span></button></td><td><button type="button" class="btn btn-secondary" ng-click="toggle2(record.id)" id="{{record.id}}"><span class="glyphicon glyphicon-chevron-right"></span></button></td></tr>
+                    <tr><td>{{$index+1}}</td><td><img ng-src="{{record.picture.data.url}}" class='img-circle' alt="{{record.picture.data.url}}" width='30px' height='30px'></td><td>{{record.name}}</td><td><button type="button" class="btn btn-secondary"><span class="glyphicon glyphicon-star-empty"></span></button></td><td><button type="button" class="btn btn-secondary" ng-click="toggle2(record.id, record.picture.data.url, record.name)" id="{{record.id}}"><span class="glyphicon glyphicon-chevron-right"></span></button></td></tr>
                   </tbody>
                 </table>
 
@@ -157,6 +128,7 @@
               </div>
             </div>
           </div>
+
         </div>
 
 
@@ -167,23 +139,16 @@
               <br>
               <div class="row">
                 <div class="col-lg-4">
-                  <button type="button" class="btn btn-secondary" id="back" class="pull-left" ng-click="toggle()"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                  <p><button type="button" class="btn btn-secondary" id="back" class="pull-left" ng-click="toggle()"><span class="glyphicon glyphicon-chevron-left"></span> Back</button></p>
                 </div>
                   <div class="col-lg-8">
                     <div class="text-right">
                       <button type="button" class="btn btn-secondary"><span class="glyphicon glyphicon-star-empty"></span></button>
-                      <button type="button" class="btn btn-secondary"><span class="glyphicon glyphicon-star-empty"></span></button>
+                      <button type="button" class="btn btn-secondary" ng-click="shareFB(userPicHiRes, userName)"><span class="glyphicon glyphicon-star-empty"></span></button>
                     </div>
                   </div>
               </div>
               <br>
-
-
-
-
-
-
-
 
 
 
@@ -194,16 +159,17 @@
                       <h3 class="panel-title">Albums</h3>
                     </div>
                     <div class="panel-body">
-                      <div class="panel-group" id="accordion">
+                      <detprogress></detprogress>
+                      <div class="panel-group" id="accordion" ng-show="showAlbums">
                         <div class="panel panel-default" ng-repeat="album in jsonAlbums track by $index">
                           <div class="panel-heading">
                             <h4 class="panel-title">
                               <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$index+1}}">{{album.name}}</a>
                             </h4>
                           </div>
-                          <div id="collapse{{$index+1}}" class="panel-collapse collapse">
+                          <div id="collapse{{$index+1}}" class="panel-collapse collapse {{isFirstAlbum($index+1)}}">
                             <div class="panel-body">
-                              <img ng-repeat="photo in album.photos.data" ng-src="{{photo.picture}}" class='' alt="{{record.picture.data.url}}">
+                              <img ng-repeat="photo in album.photos.data" ng-src="https://graph.facebook.com/v2.8/{{photo.id}}/picture?access_token=EAACxu1kZBnhMBADkNL93SOToHuupSjtmdFZBOWtrghZAWu6P2lGZCiaOfQnAQVOyQQnQfHpBnz9ei4tEOEs7652Rl4xR0D4MB0oimyC8sjivlEZAmoXVTPOSBBnh8XI6ZAdjXjSwr6UeixeIBs10uUxAMZCJ218nCUZD" class='img-responsive img-rounded' alt="{{record.picture.data.url}}" style="margin-bottom:15px;">
                             </div>
                           </div>
                         </div>
@@ -221,8 +187,20 @@
                       <h3 class="panel-title">Posts</h3>
                     </div>
                     <div class="panel-body">
-                      <div class="panel panel-default" ng-repeat="post in jsonPosts track by $index">
+                      <detprogress></detprogress>
+                      <div class="panel panel-default" ng-repeat="post in jsonPosts track by $index" ng-show="showPosts">
                         <div class="panel-body">
+                          <div class="media">
+                            <div class="media-left">
+                              <a href="#">
+                                <img ng-src="{{profile}}" width="40px" height="40px">
+                              </a>
+                            </div>
+                            <div class="media-body">
+                              <div class="media-heading"><b>{{name}}</b></div>
+                              <p>{{post.created_time | date:'MM/dd/yyyy HH:mm:ss'}}</p>
+                            </div>
+                          </div>
                           <p>
                             {{post.message}}
                           </p>
@@ -232,56 +210,8 @@
                   </div>
                 </div>
 
-
-
-
-
-<!--
-                <div class="table-responsive col-md-6">
-                  <div class="panel-group" id="accordion">
-                    <div class="panel panel-default" ng-repeat="album in jsonAlbums track by $index">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">{{album.name}}</a>
-                        </h4>
-                      </div>
-                      <div id="collapse1" class="panel-collapse collapse in">
-                        <div class="panel-body"> pictures here </div>
-                      </div>
->>>>>>> Stashed changes
-                    </div>
-                  </div>
-              </div>
-            -->
               </div>
 
-
-
-<<<<<<< Updated upstream
-      <div class="container">
-        <div class="container-fluid">
-          <div id="result" class="row">
-            <table class="table table-hover" id="resultsTable">
-              <thead>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-            <div class="row">
-              <div  class="text-center">
-                <div class="col-md-4"></div>
-                <div class="col-md-2">
-                <p><button class="btn btn-secondary btn-block" disabled>Previous</button></p>
-                </div>
-                <div class="col-md-2">
-                  <p><button class="btn btn-secondary btn-block">Next</button></p>
-                </div>
-                <div class="col-md-4"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-=======
             </div>
           </div>
         </div>
@@ -292,14 +222,11 @@
 
 
       </div>
->>>>>>> Stashed changes
 
-      </div>
 
-      <div class="container">
 
       <script>
-       angular.module('app', [])
+       angular.module('app', ['ngAnimate'])
 
        .directive('loading', function () {
           return {
@@ -317,28 +244,53 @@
           }
       })
 
+      .directive('detprogress', function () {
+         return {
+           restrict: 'E',
+           replace:true,
+           template: '<div class="progress" id="loading-indicator" style="margin-left: 10px; margin-right: 10px;"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 70%"><span class="sr-only" id="percentComplete">70% Complete</span></div></div>',
+           link: function (scope, element, attr) {
+                 scope.$watch('detProgress', function (val) {
+                     if (val)
+                         $(element).show();
+                     else
+                         $(element).hide();
+                 });
+           }
+         }
+     })
+
+
 
        .controller('bodyController', ['$scope','$http', function($scope, $http){
-         $scope.showTable = false;
+         $scope.showTable = true;
          $scope.showProgress = false;
          $scope.showPages = false;
          $scope.showPrev = false;
          $scope.showNext = false;
+         $scope.detProgress = true;
+         $scope.showPages = false;
+         $scope.showPosts = false;
+         $scope.showAlbums = false;
+         $scope.profile = "";
+         $scope.name = "";
          $scope.prev = "";
          $scope.next = "";
+         $scope.userPicHiRes = "";
+         $scope.userName = "";
          $scope.toggle = function () {
           $scope.showTable = true;
           $scope.showProgress = false;
          }
 
-         $scope.toggle2 = function (id) {
+         $scope.toggle2 = function (id, url, name) {
           $scope.showTable = false;
           $scope.showProgress = true;
-          $scope.detailPressed(id);
+          $scope.detailPressed(id, url, name);
          }
 
           $scope.printResult = function (response) {
-            //console.log(response);
+
             //alert(response['data']['data'][0]['name']);
             $scope.jsonRecords = response['data']['data'];
             //console.log($scope.jsonRecords);
@@ -359,11 +311,20 @@
           }
 
 
-          $scope.printDetails = function (response) {
+          $scope.printDetails = function (response, profile, name) {
+
             $scope.jsonAlbums = response['data']['albums']['data'];
             $scope.jsonPosts = response['data']['posts']['data'];
-
+            $scope.profile = profile;
+            $scope.name = name;
+            $scope.showPosts = true;
+            $scope.showAlbums = true;
           }
+
+          $scope.test = function() {
+            console.log($("ul#tabs li.active a").attr("id"));
+          }
+
 
           $scope.search = function () {
            $scope.loading = true;
@@ -375,6 +336,7 @@
               method: 'GET',
               url: 'search.php?keyword='+param,
             }).then(function successCallback(response) {
+
               $scope.printResult(response);
               $scope.loading = false;
               $scope.showPages = true;
@@ -409,28 +371,21 @@
          }
 
 
-         $scope.detailPressed = function (id) {
+         $scope.detailPressed = function (id, profile, name) {
+           $scope.detProgress = true;
+           $scope.showAlbums = false;
+           $scope.showPosts = false;
+           $scope.userPicHiRes = profile;
+           $scope.userName = name;
            var param = id + "&type=" + $("ul#tabs li.active a").attr("id");
-           //alert(param);
+           //alert(profile);
            $http({
              method: 'GET',
              url: 'search.php?userid='+param,
            }).then(function successCallback(response) {
-             //console.log(response);
-             $scope.printDetails(response);
-             //console.log('search.php?userid='+param);
-             //$scope.printResult(response);
-           }, function errorCallback(response) {
-
-           });
-         }
-
-         $scope.highResPicture = function (picID) {
-           $http({
-             method: 'GET',
-             url: 'search.php?picid='+picID,
-           }).then(function successCallback(response) {
              console.log(response);
+             $scope.printDetails(response, profile, name);
+             $scope.detProgress = false;
              //console.log('search.php?userid='+param);
              //$scope.printResult(response);
            }, function errorCallback(response) {
@@ -438,7 +393,45 @@
            });
          }
 
+         $scope.isFirstAlbum = function (index) {
+           if (index == 1) {
+             return "in";
+           } else {
+             return "";
+           }
+         }
 
+         $scope.shareFB = function (picURL, name) {
+
+           console.log(picURL);
+           console.log(name);
+
+           FB.init({
+            appId: '195418214276627',
+            status: true,
+            cookie: true,
+            xfbml: true,
+            version: 'v2.4'
+          });
+
+
+           FB.ui({
+              app_id:'195418214276627',
+              method:'share',
+              href:window.location.href,
+              picture:picURL,
+              name:name,
+              caption: 'FB SEARCH FROM USC CSCI571',
+            }, function(response){
+              if (response && ! response.error_message) {
+                alert("Posted Successfully");
+              }
+              else {
+                alert("Not Posted");
+              }
+            });
+
+          }
 
 
        }])
@@ -503,62 +496,34 @@
     e.preventDefault();
   });
 
+  var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+function success(pos) {
+  var crd = pos.coords;
+  console.log('Your current position is:');
+  console.log(`Latitude : ${crd.latitude}`);
+  console.log(`Longitude: ${crd.longitude}`);
+  console.log(`More or less ${crd.accuracy} meters.`);
+};
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+};
+
+
+
+  function getLocation() {
+navigator.geolocation.getCurrentPosition(success, error, options);
+  }
 
 
 
   </script>
 
-<<<<<<< Updated upstream
-  <script type="text/javascript">
-  function imgTag(url) {
-    tag = "<img src='"+url+"' class='img-circle' alt='"+url+"' width='30px' height='30px'>";
-    return tag;
-  }
-
-  function printResult(data) {
-    $('#result').show();
-    $('#resultsTable thead').empty();
-    $('#resultsTable tbody').empty();
-    $('#resultsTable thead').append("<tr><th>#</th><th>Profile photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr>");
-    var i;
-    var favButton = '<button type="button" class="btn btn-secondary"><span class="glyphicon glyphicon-star-empty"></span></button>';
-    var detButton = '<button type="button" class="btn btn-secondary"><span class="glyphicon glyphicon-chevron-right"></span></button>';
-    for (i = 0; i < data['data'].length; ++i) {
-        j = i+1;
-        imgAttr = imgTag(data['data'][i]['picture']['data']['url']);
-        $('#resultsTable tbody').append("<tr><td><span class='align-middle'>"+j+"</span></td><td>"+imgAttr+"</td><td>"+data['data'][i]['name']+"</td><td>"+favButton+"</td><td>"+detButton+"</td></tr>");
-    }
-
-    var next = data['paging']['next'];
-    //alert(next);
-
-
-
-  }
-
-
-  $("#searchForm").submit(function(e) {
-    e.preventDefault();
-  });
-
-  $('#searchButton').on('click', function () {
-    var param = $('#keyword').val() + "&type=" + $("ul#tabs li.active a").attr("id");
-      $.ajax({
-        url: 'search.php?keyword='+param,
-        dataType: 'json',
-        type: 'GET',
-        success: function (data) {
-          //alert(data['data'][0]['picture']['data']['url']);
-          printResult(data);
-        },
-        error: function(xhr, status, error) {
-          alert(error);
-        }
-      });
-    });
-  </script>
-</html>
-=======
 
 
 
@@ -566,4 +531,3 @@
 
 
 </html>
->>>>>>> Stashed changes
