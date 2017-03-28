@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+<<<<<<< Updated upstream
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,6 +47,59 @@
                     </div>
                     <div class="input-group-btn">
                       <button type="reset" class="btn btn-default"><span>Clear</span></button>
+=======
+    <style type="text/css">
+
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>CSCI 571 HW 8</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+     <!-- Include all compiled plugins (below), or include individual files as needed -->
+     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+     <!-- AngularJS -->
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+     <script>
+
+     $(function(){
+     $("#tabs a:first").tab('show');
+     //$('#result').hide();
+       });
+
+     </script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+  <body ng-app="app" ng-controller="bodyController">
+      <div class="navbar navbar-default" role="navigation">
+          <div class="row">
+              <div class="col-lg-3">
+                  <div class="navbar-header">
+                      <a class="navbar-brand" class="text-primary" href="#"><p class="text-primary">FB Search</p></a>
+                  </div>
+              </div>
+              <form class="navbar-form" role="search" id="searchForm">
+                <div class="col-lg-6">
+                  <div class="input-group"  style="width:100%">
+                    <input type="text" id="keyword" class="form-control" placeholder="Search" name="keyword" required="requred">
+                    <div class="input-group-btn" style="width:17%;">
+                      <button ng-click="search()" id="searchButton" class="btn btn-primary" style="width:80%; background-color: #3B5998;" ><span
+                      class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                    <div class="input-group-btn">
+                      <button type="reset" class="btn btn-default"><span>Clear</span></button>
                     </div>
                   </div>
                 </div>
@@ -67,6 +121,143 @@
         </nav>
       </div>
 
+      <div>
+      <div class="container">
+       <div class="row" >
+
+        <div class="col-md-12" ng-show="showTable">
+
+          <div class="container">
+            <div class="container-fluid">
+              <loading></loading>
+
+              <div id="result" class="row" ng-show="showPages">
+                <table class="table table-hover" id="resultsTable">
+                  <thead>
+                    <tr><th>#</th><th>Profile photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr>
+                  </thead>
+                  <tbody  ng-repeat="record in jsonRecords track by $index">
+                    <tr><td>{{$index+1}}</td><td><img ng-src="{{record.picture.data.url}}" class='img-circle' alt="{{record.picture.data.url}}" width='30px' height='30px'></td><td>{{record.name}}</td><td><button type="button" class="btn btn-secondary"><span class="glyphicon glyphicon-star-empty"></span></button></td><td><button type="button" class="btn btn-secondary" ng-click="toggle2(record.id)" id="{{record.id}}"><span class="glyphicon glyphicon-chevron-right"></span></button></td></tr>
+                  </tbody>
+                </table>
+
+                <div class="row" ng-show="showPages">
+                  <div  class="text-center" id="resultPagination">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2" ng-show="showPrev">
+                    <p><button class="btn btn-secondary btn-block" id="prevPage" ng-click="prevPage()">Previous</button></p>
+                    </div>
+                    <div class="col-md-2" ng-show="showNext">
+                      <p><button class="btn btn-secondary btn-block" id="nextPage" ng-click="nextPage()">Next</button></p>
+                    </div>
+                    <div class="col-md-4"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="col-md-12" ng-show="showProgress">
+          <div class="container">
+            <div class="container-fluid">
+              <br>
+              <div class="row">
+                <div class="col-lg-4">
+                  <button type="button" class="btn btn-secondary" id="back" class="pull-left" ng-click="toggle()"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                </div>
+                  <div class="col-lg-8">
+                    <div class="text-right">
+                      <button type="button" class="btn btn-secondary"><span class="glyphicon glyphicon-star-empty"></span></button>
+                      <button type="button" class="btn btn-secondary"><span class="glyphicon glyphicon-star-empty"></span></button>
+                    </div>
+                  </div>
+              </div>
+              <br>
+
+
+
+
+
+
+
+
+
+
+              <div class="row">
+                <div class="table-responsive col-md-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Albums</h3>
+                    </div>
+                    <div class="panel-body">
+                      <div class="panel-group" id="accordion">
+                        <div class="panel panel-default" ng-repeat="album in jsonAlbums track by $index">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$index+1}}">{{album.name}}</a>
+                            </h4>
+                          </div>
+                          <div id="collapse{{$index+1}}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                              <img ng-repeat="photo in album.photos.data" ng-src="{{photo.picture}}" class='' alt="{{record.picture.data.url}}">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+                <div class="table-responsive col-md-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Posts</h3>
+                    </div>
+                    <div class="panel-body">
+                      <div class="panel panel-default" ng-repeat="post in jsonPosts track by $index">
+                        <div class="panel-body">
+                          <p>
+                            {{post.message}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+<!--
+                <div class="table-responsive col-md-6">
+                  <div class="panel-group" id="accordion">
+                    <div class="panel panel-default" ng-repeat="album in jsonAlbums track by $index">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">{{album.name}}</a>
+                        </h4>
+                      </div>
+                      <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body"> pictures here </div>
+                      </div>
+>>>>>>> Stashed changes
+                    </div>
+                  </div>
+              </div>
+            -->
+              </div>
+
+
+
+<<<<<<< Updated upstream
       <div class="container">
         <div class="container-fluid">
           <div id="result" class="row">
@@ -90,13 +281,234 @@
             </div>
           </div>
         </div>
+=======
+            </div>
+          </div>
+        </div>
+
+
+       </div>
+
+
+
+      </div>
+>>>>>>> Stashed changes
 
       </div>
 
       <div class="container">
 
+      <script>
+       angular.module('app', [])
+
+       .directive('loading', function () {
+          return {
+            restrict: 'E',
+            replace:true,
+            template: '<div class="progress" id="loading-indicator" style="margin-top: 20%; margin-left: 100px; margin-right: 100px;"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 70%"><span class="sr-only" id="percentComplete">70% Complete</span></div></div>',
+            link: function (scope, element, attr) {
+                  scope.$watch('loading', function (val) {
+                      if (val)
+                          $(element).show();
+                      else
+                          $(element).hide();
+                  });
+            }
+          }
+      })
+
+
+       .controller('bodyController', ['$scope','$http', function($scope, $http){
+         $scope.showTable = false;
+         $scope.showProgress = false;
+         $scope.showPages = false;
+         $scope.showPrev = false;
+         $scope.showNext = false;
+         $scope.prev = "";
+         $scope.next = "";
+         $scope.toggle = function () {
+          $scope.showTable = true;
+          $scope.showProgress = false;
+         }
+
+         $scope.toggle2 = function (id) {
+          $scope.showTable = false;
+          $scope.showProgress = true;
+          $scope.detailPressed(id);
+         }
+
+          $scope.printResult = function (response) {
+            //console.log(response);
+            //alert(response['data']['data'][0]['name']);
+            $scope.jsonRecords = response['data']['data'];
+            //console.log($scope.jsonRecords);
+            $scope.prev = response.data.paging.previous;
+            if ($scope.prev === undefined) {
+              $scope.showPrev = false;
+            } else {
+              $scope.showPrev = true;
+            }
+            $scope.next = response.data.paging.next;
+            if ($scope.next === undefined) {
+              $scope.showNext = false;
+            } else {
+              $scope.showNext = true;
+            }
+
+            //console.log($scope.prev);
+          }
+
+
+          $scope.printDetails = function (response) {
+            $scope.jsonAlbums = response['data']['albums']['data'];
+            $scope.jsonPosts = response['data']['posts']['data'];
+
+          }
+
+          $scope.search = function () {
+           $scope.loading = true;
+           $scope.showTable = true;
+           $scope.showPages = false;
+           var param = $('#keyword').val() + "&type=" + $("ul#tabs li.active a").attr("id");
+           //alert(param);
+            $http({
+              method: 'GET',
+              url: 'search.php?keyword='+param,
+            }).then(function successCallback(response) {
+              $scope.printResult(response);
+              $scope.loading = false;
+              $scope.showPages = true;
+            }, function errorCallback(response) {
+
+            });
+         }
+
+         $scope.nextPage = function () {
+            $http({
+              method: 'GET',
+              url: $scope.next,
+            }).then(function successCallback(response) {
+              //console.log($scope.next);
+              $scope.printResult(response);
+            }, function errorCallback(response) {
+
+            });
+         }
+
+
+         $scope.prevPage = function () {
+            $http({
+              method: 'GET',
+              url: $scope.prev,
+            }).then(function successCallback(response) {
+              //console.log($scope.next);
+              $scope.printResult(response);
+            }, function errorCallback(response) {
+
+            });
+         }
+
+
+         $scope.detailPressed = function (id) {
+           var param = id + "&type=" + $("ul#tabs li.active a").attr("id");
+           //alert(param);
+           $http({
+             method: 'GET',
+             url: 'search.php?userid='+param,
+           }).then(function successCallback(response) {
+             //console.log(response);
+             $scope.printDetails(response);
+             //console.log('search.php?userid='+param);
+             //$scope.printResult(response);
+           }, function errorCallback(response) {
+
+           });
+         }
+
+         $scope.highResPicture = function (picID) {
+           $http({
+             method: 'GET',
+             url: 'search.php?picid='+picID,
+           }).then(function successCallback(response) {
+             console.log(response);
+             //console.log('search.php?userid='+param);
+             //$scope.printResult(response);
+           }, function errorCallback(response) {
+
+           });
+         }
+
+
+
+
+       }])
+      </script>
+    </div>
+
+
   </body>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+  /*
+  $(document).ajaxSend(function(event, request, settings) {
+      $('#loading-indicator').show();
+      $('#resultsTable thead').hide();
+      $('#resultsTable tbody').hide();
+      $("#nextPage").hide();
+      $("#prevPage").hide();
+  });
+
+  $(document).ajaxComplete(function(event, request, settings) {
+      $('#loading-indicator').hide();
+      $('#resultsTable thead').show();
+      $('#resultsTable tbody').show();
+  });
+*/
+  $("#searchForm").submit(function(e) {
+    e.preventDefault();
+  });
+
+
+
+
+  </script>
+
+<<<<<<< Updated upstream
   <script type="text/javascript">
   function imgTag(url) {
     tag = "<img src='"+url+"' class='img-circle' alt='"+url+"' width='30px' height='30px'>";
@@ -146,3 +558,12 @@
     });
   </script>
 </html>
+=======
+
+
+
+
+
+
+</html>
+>>>>>>> Stashed changes
