@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>FB Search</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheet.css" >
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+     <!-- Include all compiled plugins (below), or include individual files as needed -->
+     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+     <!-- AngularJS -->
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+     <script src="https://code.angularjs.org/1.6.3/angular-animate.min.js"></script>
+     <script src="scripts.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body ng-app="app" ng-controller="bodyController" ng-cloak>
+      <div class="navbar navbar-default" role="navigation">
+          <div class="row">
+              <div class="col-lg-3">
+                  <div class="navbar-header">
+                      <a class="navbar-brand" class="text-primary"><p class="text-primary">FB Search</p></a>
+                  </div>
+              </div>
+              <form class="navbar-form" role="search" id="searchForm">
+                <div class="col-lg-6">
+                  <div id="searchbox"class="input-group"  style="width:100%">
+                    <input type="text" id="keyword" class="form-control" placeholder="type something..." name="keyword" data-toggle="tooltip" data-placement="bottom" title="Please type a keyword">
+                    <div class="input-group-btn" style="width:17%;">
+                      <button ng-click="search()" id="searchButton" class="btn btn-primary" style="width:80%; background-color: #3B5998;" ><span
+                      class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                    <div class="input-group-btn">
+                      <button type="reset" class="btn btn-default" ng-click="clear()"><span>Clear</span></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+          </div>
+      </div>
+      <div class="container">
+        <ul class="nav nav-tabs" id="tabs">
+          <li class="col-md-2 col-xs-12" style="padding: 0px;"><a id="user" data-toggle="tab" ng-click="showUsersTabFunc()">Users</a></li>
+          <li class="col-md-2 col-xs-12" style="padding: 0px;"><a id="page" data-toggle="tab" ng-click="showPagesTabFunc()">Pages</a></li>
+          <li class="col-md-2 col-xs-12" style="padding: 0px;"><a id="event" data-toggle="tab" ng-click="showEventsTabFunc()">Events</a></li>
+          <li class="col-md-2 col-xs-12" style="padding: 0px;"><a id="place" data-toggle="tab" ng-click="showPlacesTabFunc()">Places</a></li>
+          <li class="col-md-2 col-xs-12" style="padding: 0px;"><a id="group" data-toggle="tab" ng-click="showGroupsTabFunc()">Groups</a></li>
+          <li class="col-md-2 col-xs-12" style="padding: 0px;"><a id="fav" data-toggle="tab" ng-click="showFavoritesTab()">Favorites</a></li>
+        </ul>
+      </div>
+    </br>
+      <div class="container">
+        <div class="container-fluid">
+       <div class="row">
+      <div class="hide-this" ng-show="hideThis">
+        <div class="result-table col-lg-12 col-md-12 col-sm-12 col-xs-12" id="theTable" ng-show="showTable">
+          <div>
+            <div>
+              <loading></loading>
+              <div id="result" class="row" ng-show="showTable2">
+                <table class="table table-hover" id="resultsTable">
+                  <thead>
+                    <tr><th>#</th><th>Profile photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr>
+                  </thead>
+                  <tbody  ng-repeat="record in jsonRecordsUser track by $index">
+                    <tr><td>{{$index+1}}</td><td><img ng-src="{{record.picture.data.url}}" class='img-circle' alt="{{record.picture.data.url}}" width='35px' height='35px'></td><td>{{record.name}}</td><td><button type="button" class="btn btn-secondary" ng-click="storeLocal(record.picture.data.url, record.name, record.id)"><span class="{{isStored(record.id)}}"></span></button></td><td><button type="button" class="btn btn-secondary" ng-click="toggle2(record.id, record.picture.data.url, record.name)" id="{{record.id}}"><span class="glyphicon glyphicon-chevron-right"></span></button></td></tr>
+                  </tbody>
+                </table>
+                  <div id="resultPagination" ng-show="showTable2">
+                    <button ng-show="showPrev" class="btn btn-secondary btn-block" id="prevPage" ng-click="prevPage()">Previous</button>
+                    <button ng-show="showNext" class="btn btn-secondary btn-block" id="nextPage" ng-click="nextPage()">Next</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="result-table col-lg-12 col-md-12 col-sm-12 col-xs-12" id="theTable" ng-show="showPagesTab">
+          <div>
+            <div>
+              <loading></loading>
+              <div id="result" class="row" ng-show="showPagesTab2">
+                <table class="table table-hover" id="resultsTable">
+                  <thead>
+                    <tr><th>#</th><th>Profile photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr>
+                  </thead>
+                  <tbody  ng-repeat="record in jsonRecordsPage track by $index">
+                    <tr><td>{{$index+1}}</td><td><img ng-src="{{record.picture.data.url}}" class='img-circle' alt="{{record.picture.data.url}}" width='35px' height='35px'></td><td>{{record.name}}</td><td><button type="button" class="btn btn-secondary" ng-click="storeLocal(record.picture.data.url, record.name, record.id)"><span class="{{isStored(record.id)}}"></button></td><td><button type="button" class="btn btn-secondary" ng-click="toggle2(record.id, record.picture.data.url, record.name)" id="{{record.id}}"><span class="glyphicon glyphicon-chevron-right"></span></button></td></tr>
+                  </tbody>
+                </table>
+                <div id="resultPagination" ng-show="showTable2">
+                  <button ng-show="showPrev" class="btn btn-secondary btn-block" id="prevPage" ng-click="prevPagePage()">Previous</button>
+                  <button ng-show="showNext" class="btn btn-secondary btn-block" id="nextPage" ng-click="nextPagePage()">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="result-table col-lg-12 col-md-12 col-sm-12 col-xs-12" id="theTable" ng-show="showEventsTab">
+          <div>
+            <div>
+              <loading></loading>
+              <div id="result" class="row" ng-show="showEventsTab2">
+                <table class="table table-hover" id="resultsTable">
+                  <thead>
+                    <tr><th>#</th><th>Profile photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr>
+                  </thead>
+                  <tbody  ng-repeat="record in jsonRecordsEvent track by $index">
+                    <tr><td>{{$index+1}}</td><td><img ng-src="{{record.picture.data.url}}" class='img-circle' alt="{{record.picture.data.url}}" width='35px' height='35px'></td><td>{{record.name}}</td><td><button type="button" class="btn btn-secondary" ng-click="storeLocal(record.picture.data.url, record.name, record.id)"><span class="{{isStored(record.id)}}"></button></td><td><button type="button" class="btn btn-secondary" ng-click="toggle2(record.id, record.picture.data.url, record.name)" id="{{record.id}}"><span class="glyphicon glyphicon-chevron-right"></span></button></td></tr>
+                  </tbody>
+                </table>
+                <div id="resultPagination" ng-show="showTable2">
+                  <button ng-show="showPrev" class="btn btn-secondary btn-block" id="prevPage" ng-click="prevEventPage()">Previous</button>
+                  <button ng-show="showNext" class="btn btn-secondary btn-block" id="nextPage" ng-click="nextEventPage()">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="result-table col-lg-12 col-md-12 col-sm-12 col-xs-12" id="theTable" ng-show="showPlacesTab">
+          <div>
+            <div>
+              <loading></loading>
+              <div id="result" class="row" ng-show="showPlacesTab2">
+                <table class="table table-hover" id="resultsTable">
+                  <thead>
+                    <tr><th>#</th><th>Profile photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr>
+                  </thead>
+                  <tbody  ng-repeat="record in jsonRecordsPlace track by $index">
+                    <tr><td>{{$index+1}}</td><td><img ng-src="{{record.picture.data.url}}" class='img-circle' alt="{{record.picture.data.url}}" width='35px' height='35px'></td><td>{{record.name}}</td><td><button type="button" class="btn btn-secondary" ng-click="storeLocal(record.picture.data.url, record.name, record.id)"><span class="{{isStored(record.id)}}"></span></button></td><td><button type="button" class="btn btn-secondary" ng-click="toggle2(record.id, record.picture.data.url, record.name)" id="{{record.id}}"><span class="glyphicon glyphicon-chevron-right"></span></button></td></tr>
+                  </tbody>
+                </table>
+                <div id="resultPagination" ng-show="showTable2">
+                  <button ng-show="showPrev" class="btn btn-secondary btn-block" id="prevPage" ng-click="prevPlacePage()">Previous</button>
+                  <button ng-show="showNext" class="btn btn-secondary btn-block" id="nextPage" ng-click="nextPlacePage()">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="result-table col-lg-12 col-md-12 col-sm-12 col-xs-12" id="theTable" ng-show="showGroupsTab">
+          <div>
+            <div>
+              <loading></loading>
+              <div id="result" class="row" ng-show="showGroupsTab2">
+                <table class="table table-hover" id="resultsTable">
+                  <thead>
+                    <tr><th>#</th><th>Profile photo</th><th>Name</th><th>Favorite</th><th>Details</th></tr>
+                  </thead>
+                  <tbody  ng-repeat="record in jsonRecordsGroup track by $index">
+                    <tr><td>{{$index+1}}</td><td><img ng-src="{{record.picture.data.url}}" class='img-circle' alt="{{record.picture.data.url}}" width='35px' height='35px'></td><td>{{record.name}}</td><td><button type="button" class="btn btn-secondary" ng-click="storeLocal(record.picture.data.url, record.name, record.id)"><span class="{{isStored(record.id)}}"></span></button></td><td><button type="button" class="btn btn-secondary" ng-click="toggle2(record.id, record.picture.data.url, record.name)" id="{{record.id}}"><span class="glyphicon glyphicon-chevron-right"></span></button></td></tr>
+                  </tbody>
+                </table>
+                <div id="resultPagination" ng-show="showTable2">
+                  <button ng-show="showPrev" class="btn btn-secondary btn-block" id="prevPage" ng-click="prevGroupPage()">Previous</button>
+                  <button ng-show="showNext" class="btn btn-secondary btn-block" id="nextPage" ng-click="nextGroupPage()">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="result-table col-lg-12 col-md-12 col-sm-12 col-xs-12" id="theTable" ng-show="showFav">
+          <div>
+            <div>
+              <div id="result" class="row" ng-show="showFav">
+                <table class="table table-hover" id="favTable">
+                  <thead>
+                    <tr><th>#</th><th>Profile photo</th><th>Name</th><th>Type</th><th>Favorite</th><th>Details</th></tr>
+                  </thead>
+                  <tbody  ng-repeat="record in allFavs track by $index">
+                    <tr><td>{{$index+1}}</td><td><img ng-src="{{record.pic}}" class='img-circle' alt="{{record.pic}}" width='35px' height='35px'></td><td>{{record.name}}</td><td>{{record.type}}</td><td><button type="button" class="btn btn-secondary" ng-click="removeLocal(record.id)"><span class="glyphicon glyphicon-trash"></span></button></td><td><button type="button" class="btn btn-secondary" ng-click="toggle2(record.id, record.pic, record.name)" id="{{record.id}}"><span class="glyphicon glyphicon-chevron-right"></span></button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="details col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-show="showDetails">
+          <div>
+            <div>
+              <br>
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                  <p><button type="button" class="btn btn-secondary" id="back" class="pull-left" ng-click="toggle4()"><span class="glyphicon glyphicon-chevron-left"></span> Back</button></p>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                  <div class="text-right">
+                    <button type="button" class="btn btn-secondary" ng-click="storeLocal(currUserPic, currUserName, currUserId)"><span class="{{isStored(currUserId)}}"></button>
+                    <button type="button" class="btn btn-secondary" ng-click="shareFB(userPicHiRes, userName)"><img src="http://cs-server.usc.edu:45678/hw/hw8/images/facebook.png" width="20px" height="20px"></button>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="table-responsive col-md-6" id="albumsTable">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Albums</h3>
+                    </div>
+                    <div class="panel-body">
+                      <detprogress></detprogress>
+                      <div class="alert alert-warning" role="alert" ng-show="showNoAlbum"><p>No data found.</p></div>
+                      <div class="panel-group" id="accordion" ng-show="showAlbums">
+                        <div class="panel panel-default" ng-repeat="album in jsonAlbums track by $index">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a id="albumTitle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$index+1}}">{{album.name}}</a>
+                            </h4>
+                          </div>
+                          <div id="collapse{{$index+1}}" class="panel-collapse collapse {{isFirstAlbum($index+1)}}">
+                            <div class="panel-body">
+                              <img ng-repeat="photo in album.photos.data" ng-src="https://graph.facebook.com/v2.8/{{photo.id}}/picture?access_token=EAACxu1kZBnhMBADkNL93SOToHuupSjtmdFZBOWtrghZAWu6P2lGZCiaOfQnAQVOyQQnQfHpBnz9ei4tEOEs7652Rl4xR0D4MB0oimyC8sjivlEZAmoXVTPOSBBnh8XI6ZAdjXjSwr6UeixeIBs10uUxAMZCJ218nCUZD" class='img-responsive img-rounded' alt="{{record.picture.data.url}}" style="margin-bottom:15px;">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-responsive col-md-6" id="postsTable">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Posts</h3>
+                    </div>
+                    <div class="panel-body">
+                      <detprogress></detprogress>
+                      <div class="alert alert-warning" role="alert" ng-show="showNoPost"><p>No data found.</p></div>
+                      <div class="panel panel-default" ng-repeat="post in jsonPosts track by $index" ng-show="showPosts">
+                        <div class="panel-body">
+                          <div class="media">
+                            <div class="media-left">
+                              <a href="#">
+                                <img ng-src="{{profile}}" width="40px" height="40px">
+                              </a>
+                            </div>
+                            <div class="media-body">
+                              <div class="media-heading"><b>{{name}}</b></div>
+                              <p>{{post.created_time | date:'MM/dd/yyyy HH:mm:ss'}}</p>
+                            </div>
+                          </div>
+                          <p>
+                            {{message(post)}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       </div>
+     </div>
+      </div>
+    </div>
+  </body>
+</html>
