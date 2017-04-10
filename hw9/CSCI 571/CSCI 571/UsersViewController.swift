@@ -16,18 +16,21 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var TableView: UITableView!
     
+    @IBOutlet weak var PrevPage: UIButton!
     
+    @IBOutlet weak var NextPage: UIButton!
     var searchKeyword = String()
     
     var nameArray = [String]()
     var picArray = [String]()
     
-    
-    
+    var PrevLink = String()
+    var NextLink = String()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        PrevPage.isEnabled = true
         // Do any additional setup after loading the view.
         
         searchKeyword = KeywordManager.sharedInstance.keywrod
@@ -43,7 +46,11 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             if let value = response.result.value {
                 let json = JSON(value)
+                // print(json["user"]["paging"])
                 // print(json["user"]["data"].arrayValue)
+                self.PrevLink = json["user"]["paging"]["prev"].stringValue
+                self.NextLink = json["user"]["paging"]["next"].stringValue
+                //print(self.NextLink)
                 for (key, subJson) in json["user"]["data"] {
                     // print(subJson["name"].stringValue)
                     self.nameArray.append(subJson["name"].stringValue)
@@ -55,11 +62,6 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             SwiftSpinner.hide()
             //print (self.nameArray)
         }
-        
-        
-        
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,7 +72,6 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print (nameArray.count)
-        
         return nameArray.count
     }
     
@@ -79,14 +80,10 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserTableViewCell") as! UserTableViewCell
         //cell.imgIcon.image = iconImage[indexPath.row]
         cell.UserName.text = nameArray[indexPath.row]
-        
-        
-        
         let imgURL = NSURL(string: picArray[indexPath.row])
         let data = NSData(contentsOf: (imgURL as? URL)!)
-        
         cell.UserProfile.image = UIImage(data: data as! Data)
-        print (picArray[indexPath.row])
+        //print (picArray[indexPath.row])
         return cell
         
     }
@@ -101,4 +98,72 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     */
 
+    
+    @IBAction func PrevPagePressed(_ sender: Any) {
+        
+        Alamofire.request(self.PrevLink).responseJSON { response in
+            // print(response.request)  // original URL request
+            // print(response.response) // HTTP URL response
+            // print(response.data)     // server data
+            // print(response.result)   // result of response serialization
+            
+            if let value = response.result.value {
+                self.nameArray.removeAll()
+                self.picArray.removeAll()
+                let json = JSON(value)
+                self.PrevLink = json["paging"]["previous"].stringValue
+                self.NextLink = json["paging"]["next"].stringValue
+                //print(self.NextLink)
+                for (key, subJson) in json["data"] {
+                    // print(subJson["name"].stringValue)
+                    self.nameArray.append(subJson["name"].stringValue)
+                    self.picArray.append(subJson["picture"]["data"]["url"].stringValue)
+                }
+            }
+            
+            self.TableView.reloadData()
+            //SwiftSpinner.hide()
+        }
+
+
+        
+    }
+    
+    @IBAction func NextPagePressed(_ sender: Any) {
+        //searchKeyword = KeywordManager.sharedInstance.keywrod
+        // print(searchKeyword)
+        //SwiftSpinner.show("Loading...")
+        
+        //print(self.NextLink)
+        
+        Alamofire.request(self.NextLink).responseJSON { response in
+            // print(response.request)  // original URL request
+            // print(response.response) // HTTP URL response
+            // print(response.data)     // server data
+            // print(response.result)   // result of response serialization
+            
+            if let value = response.result.value {
+                self.nameArray.removeAll()
+                self.picArray.removeAll()
+                let json = JSON(value)
+                self.PrevLink = json["paging"]["previous"].stringValue
+                self.NextLink = json["paging"]["next"].stringValue
+                print(json["paging"])
+                for (key, subJson) in json["data"] {
+                    // print(subJson["name"].stringValue)
+                    self.nameArray.append(subJson["name"].stringValue)
+                    self.picArray.append(subJson["picture"]["data"]["url"].stringValue)
+                }
+            }
+            
+            self.TableView.reloadData()
+            //SwiftSpinner.hide()
+        }
+
+    }
+    
+    
+    
+    
+    
 }
