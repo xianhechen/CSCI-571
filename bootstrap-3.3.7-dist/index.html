@@ -403,17 +403,16 @@
 
          $scope.shareFB = function (picURL, name) {
            FB.init({
-            appId: '195418214276627',
-            status: true,
-            cookie: true,
-            xfbml: true,
-            version: 'v2.4'
-          });
-
+             appId: '195418214276627',
+             status: true,
+             cookie: true,
+             xfbml: true,
+             version: 'v2.8'
+           });
            FB.ui({
               app_id:'195418214276627',
-              method:'share',
-              href:window.location.href,
+              method:'feed',
+              link:window.location.href,
               picture:picURL,
               name:name,
               caption: 'FB SEARCH FROM USC CSCI571',
@@ -426,9 +425,6 @@
               }
             });
           }
-
-
-
 
 
        }])

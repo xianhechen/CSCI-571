@@ -1,0 +1,6 @@
+framework module Pods_CSCI_571 {
+  umbrella header "Pods-CSCI 571-umbrella.h"
+
+  export *
+  module * { export * }
+}
