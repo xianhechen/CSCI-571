@@ -45,10 +45,31 @@ class Details2ViewController: UIViewController, UITableViewDelegate, UITableView
             }
             
             print (self.PostContentArray)
+            
+            self.Table.estimatedRowHeight = 100
+            self.Table.rowHeight = UITableViewAutomaticDimension
+            
+            
+            
+            
+            
+            
+            
+            
             self.Table.reloadData()
+            
+            
+            
+            
+            
             
             SwiftSpinner.hide()
         }
+        
+        
+        
+        
+        
         
     }
 
@@ -78,6 +99,23 @@ class Details2ViewController: UIViewController, UITableViewDelegate, UITableView
         cell.PostProfile.image = UIImage(data: data as! Data)
         
         cell.PostContent.text = PostContentArray[indexPath.row][0]
+      
+        //print(PostContentArray[indexPath.row][1])
+        
+        let dateFormatter = DateFormatter()
+        let inputDate = PostContentArray[indexPath.row][1]
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ" //iso 8601
+        
+        let outputDate = dateFormatter.date(from: inputDate)
+        //print(outputDate!)
+        
+        dateFormatter.dateFormat = "dd MMM yyyy HH:mm:ss" //iso 8601
+        let resultString = dateFormatter.string(from: outputDate!)
+        //print(outputDate!) //optional implicitly
+        //print(resultString)
+    
+        cell.PostTime.text = resultString
+        
         
         return cell
     }

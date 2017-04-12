@@ -317,16 +317,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostsTableViewCell" rowHeight="80" id="QSi-dY-h7B" customClass="PostsTableViewCell" customModule="CSCI_571" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostsTableViewCell" rowHeight="100" id="QSi-dY-h7B" customClass="PostsTableViewCell" customModule="CSCI_571" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QSi-dY-h7B" id="9q8-kq-hdv">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUp-vi-33t">
-                                                    <rect key="frame" x="81" y="8" width="325" height="65"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUp-vi-33t">
+                                                    <rect key="frame" x="81" y="8" width="325" height="58.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -338,17 +337,31 @@
                                                         <constraint firstAttribute="height" constant="65" id="kQ2-eT-rB4"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDG-fO-swQ">
+                                                    <rect key="frame" x="81" y="66.666666666666671" width="325" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="HDG-fO-swQ" firstAttribute="top" secondItem="EUp-vi-33t" secondAttribute="bottom" id="4mP-xU-Dsg"/>
                                                 <constraint firstItem="iLq-EE-SI9" firstAttribute="top" secondItem="9q8-kq-hdv" secondAttribute="top" constant="8" id="CcE-wQ-sM5"/>
                                                 <constraint firstItem="iLq-EE-SI9" firstAttribute="leading" secondItem="9q8-kq-hdv" secondAttribute="leading" constant="8" id="LTu-2X-j6N"/>
+                                                <constraint firstItem="EUp-vi-33t" firstAttribute="trailing" secondItem="9q8-kq-hdv" secondAttribute="trailingMargin" id="OG9-zr-KZt"/>
                                                 <constraint firstItem="iLq-EE-SI9" firstAttribute="top" secondItem="9q8-kq-hdv" secondAttribute="top" constant="8" id="a7F-qf-R8l"/>
+                                                <constraint firstItem="EUp-vi-33t" firstAttribute="leading" secondItem="iLq-EE-SI9" secondAttribute="trailing" constant="8" id="aSo-m4-xUI"/>
+                                                <constraint firstItem="EUp-vi-33t" firstAttribute="top" secondItem="9q8-kq-hdv" secondAttribute="topMargin" id="aXZ-wL-aH6"/>
+                                                <constraint firstItem="HDG-fO-swQ" firstAttribute="trailing" secondItem="9q8-kq-hdv" secondAttribute="trailingMargin" id="bT6-nw-pur"/>
+                                                <constraint firstItem="HDG-fO-swQ" firstAttribute="leading" secondItem="iLq-EE-SI9" secondAttribute="trailing" constant="8" id="gws-uC-DSi"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="EUp-vi-33t" secondAttribute="bottom" constant="25" id="shB-uO-MjQ"/>
                                                 <constraint firstItem="iLq-EE-SI9" firstAttribute="leading" secondItem="9q8-kq-hdv" secondAttribute="leading" constant="8" id="wjZ-UZ-bcf"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="PostContent" destination="EUp-vi-33t" id="78B-92-uBp"/>
                                             <outlet property="PostProfile" destination="iLq-EE-SI9" id="qcs-KP-AGl"/>
+                                            <outlet property="PostTime" destination="HDG-fO-swQ" id="CwD-Ym-4Kt"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
