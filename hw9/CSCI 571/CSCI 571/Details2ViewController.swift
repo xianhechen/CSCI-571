@@ -1,0 +1,100 @@
+//
+//  Details2ViewController.swift
+//  CSCI 571
+//
+//  Created by Xianhe Chen on 4/10/17.
+//  Copyright © 2017 Xianhe Chen. All rights reserved.
+//
+
+import UIKit
+import Alamofire
+import SwiftSpinner
+import SwiftyJSON
+import EasyToast
+
+class Details2ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    var PostContentArray = [[String]]()
+    var TempArray = [String]()
+    
+    
+    
+    @IBOutlet weak var Table: UITableView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        
+        //UserName.text = UserDetailsManager.sharedInstance.userName
+        
+        SwiftSpinner.show("Loading...")
+        
+        Alamofire.request("http://cs-server.usc.edu:16031/hw9/search.php?userid=\(UserDetailsManager.sharedInstance.userid)&type=user").responseJSON { response in
+            if let value = response.result.value {
+                let json = JSON(value)
+
+                //print(json)
+                //print(self.NextLink)
+                for (key, subJson) in json["posts"]["data"] {
+                    //print(subJson)
+                    self.TempArray.append(subJson["message"].stringValue)
+                    self.TempArray.append(subJson["created_time"].stringValue)
+                    self.PostContentArray.append(self.TempArray)
+                    self.TempArray = []
+                }
+            }
+            
+            print (self.PostContentArray)
+            self.Table.reloadData()
+            
+            SwiftSpinner.hide()
+        }
+        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //print (AlbumNameArray.count)
+        return PostContentArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostsTableViewCell") as! PostsTableViewCell
+        //cell.imgIcon.image = iconImage[indexPath.row]
+        //cell.AlbumTitle.text = AlbumNameArray[indexPath.row]//AlbumNameArray[indexPath.row]
+        
+        let imgURL = NSURL(string: UserDetailsManager.sharedInstance.userProfileURL)
+        let data = NSData(contentsOf: (imgURL as? URL)!)
+        //cell.UserProfile.image = UIImage(data: data as! Data)
+        cell.PostProfile.image = UIImage(data: data as! Data)
+        
+        cell.PostContent.text = PostContentArray[indexPath.row][0]
+        
+        return cell
+    }
+    
+    
+    
+    
+
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

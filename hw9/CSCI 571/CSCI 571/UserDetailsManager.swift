@@ -19,5 +19,7 @@ final class UserDetailsManager {
     
     //MARK: Local Variable
     
-    
+    var userid = String()
+    var userName = String()
+    var userProfileURL = String()
 }

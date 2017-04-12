@@ -23,14 +23,15 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var nameArray = [String]()
     var picArray = [String]()
+    var idArray = [String]()
     
     var PrevLink = String()
     var NextLink = String()
 
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        PrevPage.isEnabled = true
         // Do any additional setup after loading the view.
         
         searchKeyword = KeywordManager.sharedInstance.keywrod
@@ -55,7 +56,19 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     // print(subJson["name"].stringValue)
                     self.nameArray.append(subJson["name"].stringValue)
                     self.picArray.append(subJson["picture"]["data"]["url"].stringValue)
+                    self.idArray.append(subJson["id"].stringValue)
                 }
+            }
+            
+            if self.PrevLink.isEmpty {
+                self.PrevPage.isEnabled =  false;
+            } else {
+                self.PrevPage.isEnabled = true;
+            }
+            if self.NextLink.isEmpty {
+                self.NextPage.isEnabled =  false;
+            } else {
+                self.NextPage.isEnabled = true;
             }
             
             self.TableView.reloadData()
@@ -85,8 +98,22 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.UserProfile.image = UIImage(data: data as! Data)
         //print (picArray[indexPath.row])
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell:UserTableViewCell = tableView.cellForRow(at: indexPath) as! UserTableViewCell
+        
+        UserDetailsManager.sharedInstance.userid = idArray[indexPath.row]
+        UserDetailsManager.sharedInstance.userName = nameArray[indexPath.row]
         
     }
+    
+    
+    
+    
+    
 
     /*
     // MARK: - Navigation
@@ -110,6 +137,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if let value = response.result.value {
                 self.nameArray.removeAll()
                 self.picArray.removeAll()
+                self.idArray.removeAll()
                 let json = JSON(value)
                 self.PrevLink = json["paging"]["previous"].stringValue
                 self.NextLink = json["paging"]["next"].stringValue
@@ -118,12 +146,24 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     // print(subJson["name"].stringValue)
                     self.nameArray.append(subJson["name"].stringValue)
                     self.picArray.append(subJson["picture"]["data"]["url"].stringValue)
+                    self.idArray.append(subJson["id"].stringValue)
                 }
             }
             
+            if self.PrevLink.isEmpty {
+                self.PrevPage.isEnabled =  false;
+            } else {
+                self.PrevPage.isEnabled = true;
+            }
+            if self.NextLink.isEmpty {
+                self.NextPage.isEnabled =  false;
+            } else {
+                self.NextPage.isEnabled = true;
+            }
             self.TableView.reloadData()
             //SwiftSpinner.hide()
         }
+
 
 
         
@@ -134,7 +174,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // print(searchKeyword)
         //SwiftSpinner.show("Loading...")
         
-        //print(self.NextLink)
+        // print(self.NextLink)
         
         Alamofire.request(self.NextLink).responseJSON { response in
             // print(response.request)  // original URL request
@@ -145,18 +185,31 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if let value = response.result.value {
                 self.nameArray.removeAll()
                 self.picArray.removeAll()
+                self.idArray.removeAll()
                 let json = JSON(value)
                 self.PrevLink = json["paging"]["previous"].stringValue
                 self.NextLink = json["paging"]["next"].stringValue
-                print(json["paging"])
+                // print(json["paging"])
                 for (key, subJson) in json["data"] {
                     // print(subJson["name"].stringValue)
                     self.nameArray.append(subJson["name"].stringValue)
                     self.picArray.append(subJson["picture"]["data"]["url"].stringValue)
+                    self.idArray.append(subJson["id"].stringValue)
                 }
             }
-            
+            if self.PrevLink.isEmpty {
+                self.PrevPage.isEnabled =  false;
+            } else {
+                self.PrevPage.isEnabled = true;
+            }
+            if self.NextLink.isEmpty {
+                self.NextPage.isEnabled =  false;
+            } else {
+                self.NextPage.isEnabled = true;
+            }
             self.TableView.reloadData()
+            
+            
             //SwiftSpinner.hide()
         }
 
