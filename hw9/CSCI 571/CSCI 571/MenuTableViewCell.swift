@@ -15,9 +15,6 @@ class MenuTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    
-    
-    
     @IBOutlet var imgIcon: UIImageView!
     @IBOutlet var lblMenuName: UILabel!
 

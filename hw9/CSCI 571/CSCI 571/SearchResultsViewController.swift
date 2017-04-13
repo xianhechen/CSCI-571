@@ -21,8 +21,6 @@ class SearchResultsViewController: UITabBarController {
         } else {
             Search.title = "Favorites"
         }
-        
-        
         // Do any additional setup after loading the view.
     }
 
@@ -32,7 +30,6 @@ class SearchResultsViewController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -42,5 +39,4 @@ class SearchResultsViewController: UITabBarController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

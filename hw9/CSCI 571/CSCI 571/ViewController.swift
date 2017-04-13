@@ -23,7 +23,6 @@ class ViewController: UIViewController {
     
     @IBAction func ClearPressed(_ sender: Any) {
         InputField.text = ""
-        
     }
     
     @IBAction func SearchPressed(_ sender: Any) {
@@ -39,10 +38,6 @@ class ViewController: UIViewController {
             let newFrontViewController = UINavigationController.init(rootViewController:desController)
             revealViewController.pushFrontViewController(newFrontViewController, animated: true)
         }
-        
-        
-        
-        
     }
     @IBOutlet weak var Open: UIBarButtonItem!
     override func viewDidLoad() {
@@ -56,7 +51,5 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

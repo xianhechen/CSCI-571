@@ -21,20 +21,22 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var NextPage: UIButton!
     
     var searchKeyword = String()
-    
     var nameArray = [String]()
     var picArray = [String]()
     var idArray = [String]()
-    
     var PrevLink = String()
     var NextLink = String()
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated) // No need for semicolon
+        super.viewWillAppear(animated) // No need for semicolon        SharingManager.sharedInstance.InEvents = false
+        SharingManager.sharedInstance.InPages = false
+        SharingManager.sharedInstance.InGroups = false
+        SharingManager.sharedInstance.InEvents = false
+        SharingManager.sharedInstance.InUsers = true
+        SharingManager.sharedInstance.InPlaces = false
         TableView.reloadData()
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("loaded")
@@ -52,7 +54,6 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         self.idArray.append(subJson["id"].stringValue)
                     }
                 }
-                
                 if self.PrevLink.isEmpty {
                     self.PrevPage.isEnabled =  false;
                 } else {
@@ -63,16 +64,10 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 } else {
                     self.NextPage.isEnabled = true;
                 }
-                
                 self.TableView.reloadData()
                 SwiftSpinner.hide()
             }
         } else {
-            // favs here
-            self.title = "Favorites"
-            print(SharingManager.sharedInstance.FavoriteClicked)
-            self.TableView.reloadData()
-            
             PrevPage.isHidden = true;
             NextPage.isHidden = true;
         }
@@ -92,10 +87,8 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserTableViewCell") as! UserTableViewCell
-        //print(SharingManager.sharedInstance.FavoriteClicked)
         if (SharingManager.sharedInstance.FavoriteClicked == false) {
             cell.UserName.text = nameArray[indexPath.row]
             let imgURL = NSURL(string: picArray[indexPath.row])
@@ -111,64 +104,29 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             } else {
                 cell.star.setImage(UIImage(named:"empty")!, for: UIControlState.normal)
             }
-                
-
-            
-            
-            //cell.star.addTarget(self, action: #selector(logAction(sender:)), for: UIControlEvents.touchUpInside)
-
         } else {
-            //print(SharingManager.sharedInstance.FavUsers)
-            
-            
             cell.UserName.text = SharingManager.sharedInstance.FavUsers[indexPath.row][1]
             let imgURL = NSURL(string: SharingManager.sharedInstance.FavUsers[indexPath.row][2])
             let data = NSData(contentsOf: (imgURL as? URL)!)
             cell.UserProfile.image = UIImage(data: data as! Data)
             cell.star.setImage(UIImage(named:"filled")!, for: UIControlState.normal)
-            //cell.star.tag = indexPath.row
-            //cell.star.addTarget(self, action: #selector(logAction(sender:)), for: UIControlEvents.touchUpInside)
-            
         }
-
         return cell
     }
-    
-    /*
-    func logAction(sender: UIButton!){
-        //print(sender.tag)
-        //print("test")
-        var temp_array = [String]()
-
-        //id, name, pic
-        temp_array.append(idArray[sender.tag])
-        temp_array.append(nameArray[sender.tag])
-        temp_array.append(picArray[sender.tag])
-        
-        
-        SharingManager.sharedInstance.FavUsers.append(temp_array)
-        //print(SharingManager.sharedInstance.FavUsers)
-    }
-    */
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell:UserTableViewCell = tableView.cellForRow(at: indexPath) as! UserTableViewCell
         if (SharingManager.sharedInstance.FavoriteClicked == false) {
-            
             UserDetailsManager.sharedInstance.userid = idArray[indexPath.row]
             UserDetailsManager.sharedInstance.userName = nameArray[indexPath.row]
             UserDetailsManager.sharedInstance.userProfileURL = picArray[indexPath.row]
-            
         } else {
             UserDetailsManager.sharedInstance.userid = SharingManager.sharedInstance.FavUsers[indexPath.row][0]
             UserDetailsManager.sharedInstance.userName = SharingManager.sharedInstance.FavUsers[indexPath.row][1]
             UserDetailsManager.sharedInstance.userProfileURL = SharingManager.sharedInstance.FavUsers[indexPath.row][2]
         }
-        
-        
     }
 
-    
     @IBAction func PrevPagePressed(_ sender: Any) {
         Alamofire.request(self.PrevLink).responseJSON { response in
             if let value = response.result.value {
@@ -184,7 +142,6 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     self.idArray.append(subJson["id"].stringValue)
                 }
             }
-            
             if self.PrevLink.isEmpty {
                 self.PrevPage.isEnabled =  false;
             } else {
@@ -226,8 +183,5 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             self.TableView.reloadData()
         }
-
     }
-    
-    
 }

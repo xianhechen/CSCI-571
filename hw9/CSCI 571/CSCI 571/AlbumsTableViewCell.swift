@@ -42,7 +42,6 @@ class AlbumsTableViewCell: UITableViewCell {
             addObserver(self, forKeyPath: "frame", options: .new, context: nil )
             frameAdded = true
         }
-        
         checkHeight()
     }
     
@@ -66,7 +65,6 @@ class AlbumsTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 

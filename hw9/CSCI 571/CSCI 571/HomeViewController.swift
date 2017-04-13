@@ -25,7 +25,6 @@ class HomeViewController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
@@ -36,5 +35,4 @@ class HomeViewController: UITabBarController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

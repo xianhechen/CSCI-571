@@ -448,6 +448,7 @@
                                         <connections>
                                             <outlet property="PageName" destination="2b3-0u-8dH" id="KCq-g8-L5Y"/>
                                             <outlet property="PageProfile" destination="Fiz-or-kde" id="dxo-jP-R0l"/>
+                                            <outlet property="Star" destination="e0d-1B-nG5" id="4cu-9j-myM"/>
                                             <segue destination="BPU-I8-D6m" kind="show" id="rFf-D8-NWy"/>
                                         </connections>
                                     </tableViewCell>
@@ -534,6 +535,7 @@
                                         <connections>
                                             <outlet property="EventName" destination="bo0-yq-TZZ" id="7uE-cS-P3i"/>
                                             <outlet property="EventProfile" destination="ae4-T7-U4g" id="nXa-nI-Vl1"/>
+                                            <outlet property="Star" destination="hkh-Pq-p8G" id="3MO-vS-b0k"/>
                                             <segue destination="BPU-I8-D6m" kind="show" id="jhN-cw-lct"/>
                                         </connections>
                                     </tableViewCell>
@@ -672,6 +674,7 @@
                                         <connections>
                                             <outlet property="PlaceName" destination="qRi-XA-MhE" id="jde-5C-2FH"/>
                                             <outlet property="PlaceProfile" destination="roC-kE-Q8B" id="mL6-05-fLW"/>
+                                            <outlet property="Star" destination="h2n-SX-1rF" id="vuG-wd-vm9"/>
                                             <segue destination="BPU-I8-D6m" kind="show" id="Qlx-FQ-t9i"/>
                                         </connections>
                                     </tableViewCell>
@@ -758,6 +761,7 @@
                                         <connections>
                                             <outlet property="GroupName" destination="UUP-7H-b60" id="TB1-i9-9VD"/>
                                             <outlet property="GroupProfile" destination="vFj-M7-UQx" id="k6E-Dg-rcP"/>
+                                            <outlet property="Star" destination="Tgb-jA-hOR" id="tjf-uF-kPL"/>
                                             <segue destination="BPU-I8-D6m" kind="show" id="c7I-kO-Fzg"/>
                                         </connections>
                                     </tableViewCell>
@@ -885,6 +889,6 @@
         <image name="users" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bjX-f4-eSi"/>
+        <segue reference="Qlx-FQ-t9i"/>
     </inferredMetricsTieBreakers>
 </document>

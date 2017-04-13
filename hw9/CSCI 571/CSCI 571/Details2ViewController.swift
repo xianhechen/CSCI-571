@@ -17,24 +17,14 @@ class Details2ViewController: UIViewController, UITableViewDelegate, UITableView
     var PostContentArray = [[String]]()
     var TempArray = [String]()
     
-    
-    
     @IBOutlet weak var Table: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        
-        //UserName.text = UserDetailsManager.sharedInstance.userName
-        
         SwiftSpinner.show("Loading...")
-        
         Alamofire.request("http://cs-server.usc.edu:16031/hw9/search.php?userid=\(UserDetailsManager.sharedInstance.userid)&type=user").responseJSON { response in
             if let value = response.result.value {
                 let json = JSON(value)
-
-                //print(json)
-                //print(self.NextLink)
                 for (key, subJson) in json["posts"]["data"] {
                     //print(subJson)
                     self.TempArray.append(subJson["message"].stringValue)
@@ -43,34 +33,11 @@ class Details2ViewController: UIViewController, UITableViewDelegate, UITableView
                     self.TempArray = []
                 }
             }
-            
-            print (self.PostContentArray)
-            
             self.Table.estimatedRowHeight = 100
             self.Table.rowHeight = UITableViewAutomaticDimension
-            
-            
-            
-            
-            
-            
-            
-            
             self.Table.reloadData()
-            
-            
-            
-            
-            
-            
             SwiftSpinner.hide()
         }
-        
-        
-        
-        
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,41 +57,20 @@ class Details2ViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostsTableViewCell") as! PostsTableViewCell
-        //cell.imgIcon.image = iconImage[indexPath.row]
-        //cell.AlbumTitle.text = AlbumNameArray[indexPath.row]//AlbumNameArray[indexPath.row]
-        
         let imgURL = NSURL(string: UserDetailsManager.sharedInstance.userProfileURL)
         let data = NSData(contentsOf: (imgURL as? URL)!)
-        //cell.UserProfile.image = UIImage(data: data as! Data)
         cell.PostProfile.image = UIImage(data: data as! Data)
-        
         cell.PostContent.text = PostContentArray[indexPath.row][0]
-      
-        //print(PostContentArray[indexPath.row][1])
-        
         let dateFormatter = DateFormatter()
         let inputDate = PostContentArray[indexPath.row][1]
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ" //iso 8601
-        
         let outputDate = dateFormatter.date(from: inputDate)
-        //print(outputDate!)
-        
         dateFormatter.dateFormat = "dd MMM yyyy HH:mm:ss" //iso 8601
         let resultString = dateFormatter.string(from: outputDate!)
-        //print(outputDate!) //optional implicitly
-        //print(resultString)
-    
         cell.PostTime.text = resultString
-        
-        
         return cell
     }
     
-    
-    
-    
-
-
     /*
     // MARK: - Navigation
 
@@ -134,5 +80,4 @@ class Details2ViewController: UIViewController, UITableViewDelegate, UITableView
         // Pass the selected object to the new view controller.
     }
     */
-
 }

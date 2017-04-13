@@ -21,7 +21,16 @@ final class SharingManager {
     
     var FavoriteClicked = false
     
-    var FavUsers = [[String]]()
+    var InUsers = false
+    var InPages = false
+    var InPlaces = false
+    var InEvents = false
+    var InGroups = false
     
+    var FavUsers = [[String]]()
+    var FavPages = [[String]]()
+    var FavPlaces = [[String]]()
+    var FavEvents = [[String]]()
+    var FavGroups = [[String]]()
     
 }

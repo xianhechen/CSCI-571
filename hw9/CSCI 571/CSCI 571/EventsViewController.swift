@@ -14,68 +14,46 @@ import EasyToast
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    
-    
     @IBOutlet weak var Table: UITableView!
     
     var searchKeyword = String()
-    
     var nameArray = [String]()
     var picArray = [String]()
     var idArray = [String]()
-    
     var PrevLink = String()
     var NextLink = String()
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated) // No need for semicolon
+        SharingManager.sharedInstance.InEvents = true
+        SharingManager.sharedInstance.InPages = false
+        SharingManager.sharedInstance.InGroups = false
+        SharingManager.sharedInstance.InUsers = false
+        SharingManager.sharedInstance.InPlaces = false
+        Table.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
         // Do any additional setup after loading the view.
-        
         searchKeyword = KeywordManager.sharedInstance.keywrod
-        
-        
         if (SharingManager.sharedInstance.FavoriteClicked == false) {
-            
             SwiftSpinner.show("Loading...")
             Alamofire.request("http://cs-server.usc.edu:16031/hw9/search.php?keyword=\(searchKeyword)&type=event").responseJSON { response in
-                // print(response.request)  // original URL request
-                // print(response.response) // HTTP URL response
-                // print(response.data)     // server data
-                // print(response.result)   // result of response serialization
-                
                 if let value = response.result.value {
                     let json = JSON(value)
-                    // print(json["page"])
-                    // print(json["user"]["paging"])
-                    // print(json["user"]["data"].arrayValue)
                     self.PrevLink = json["event"]["paging"]["prev"].stringValue
                     self.NextLink = json["event"]["paging"]["next"].stringValue
-                    //print(self.NextLink)
                     for (key, subJson) in json["event"]["data"] {
-                        // print(subJson["name"].stringValue)
                         self.nameArray.append(subJson["name"].stringValue)
                         self.picArray.append(subJson["picture"]["data"]["url"].stringValue)
                         self.idArray.append(subJson["id"].stringValue)
                     }
                 }
-                
-                
                 self.Table.reloadData()
                 SwiftSpinner.hide()
-                // print (self.nameArray)
             }
-
-        } else {
-            
         }
-        // print(searchKeyword)
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,37 +61,55 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //print (nameArray.count)
-        return nameArray.count
+        if (SharingManager.sharedInstance.FavoriteClicked == false) {
+            return nameArray.count
+        } else {
+            return SharingManager.sharedInstance.FavEvents.count
+        }
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventTableViewCell") as! EventTableViewCell
-        //cell.imgIcon.image = iconImage[indexPath.row]
-        cell.EventName.text = nameArray[indexPath.row]
-        let imgURL = NSURL(string: picArray[indexPath.row])
-        let data = NSData(contentsOf: (imgURL as? URL)!)
-        cell.EventProfile.image = UIImage(data: data as! Data)
-        //print (picArray[indexPath.row])
+        if (SharingManager.sharedInstance.FavoriteClicked == false) {
+            cell.EventName.text = nameArray[indexPath.row]
+            let imgURL = NSURL(string: picArray[indexPath.row])
+            let data = NSData(contentsOf: (imgURL as? URL)!)
+            cell.EventProfile.image = UIImage(data: data as! Data)
+            var find_array = [String]();
+            find_array.append(idArray[indexPath.row])
+            find_array.append(nameArray[indexPath.row])
+            find_array.append(picArray[indexPath.row])
+            if let find = SharingManager.sharedInstance.FavEvents.index(where: {$0 == find_array}) {
+                cell.Star.setImage(UIImage(named:"filled")!, for: UIControlState.normal)
+            } else {
+                cell.Star.setImage(UIImage(named:"empty")!, for: UIControlState.normal)
+            }
+        } else {
+            cell.EventName.text = SharingManager.sharedInstance.FavEvents[indexPath.row][1]
+            let imgURL = NSURL(string: SharingManager.sharedInstance.FavEvents[indexPath.row][2])
+            let data = NSData(contentsOf: (imgURL as? URL)!)
+            cell.EventProfile.image = UIImage(data: data as! Data)
+            cell.Star.setImage(UIImage(named:"filled")!, for: UIControlState.normal)
+        }
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let cell:EventTableViewCell = tableView.cellForRow(at: indexPath) as! EventTableViewCell
-        
-        UserDetailsManager.sharedInstance.userid = idArray[indexPath.row]
-        UserDetailsManager.sharedInstance.userName = nameArray[indexPath.row]
-        UserDetailsManager.sharedInstance.userProfileURL = picArray[indexPath.row]
+        if (SharingManager.sharedInstance.FavoriteClicked == false) {
+            UserDetailsManager.sharedInstance.userid = idArray[indexPath.row]
+            UserDetailsManager.sharedInstance.userName = nameArray[indexPath.row]
+            UserDetailsManager.sharedInstance.userProfileURL = picArray[indexPath.row]
+        } else {
+            UserDetailsManager.sharedInstance.userid = SharingManager.sharedInstance.FavEvents[indexPath.row][0]
+            UserDetailsManager.sharedInstance.userName = SharingManager.sharedInstance.FavEvents[indexPath.row][1]
+            UserDetailsManager.sharedInstance.userProfileURL = SharingManager.sharedInstance.FavEvents[indexPath.row][2]
+        }
     }
     
-    
-    
-
     /*
     // MARK: - Navigation
 

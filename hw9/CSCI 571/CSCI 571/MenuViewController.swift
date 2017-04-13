@@ -10,10 +10,8 @@ import UIKit
 
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    
     var menuNameArr:Array = [String]()
     var iconImage:Array = [UIImage]()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +38,9 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let revealViewController:SWRevealViewController = self.revealViewController()
-        
         let cell:MenuTableViewCell = tableView.cellForRow(at: indexPath) as! MenuTableViewCell
-        
-        
         if cell.lblMenuName.text! == "Home" {
             let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let desController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
@@ -54,7 +48,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             revealViewController.pushFrontViewController(newFrontViewController, animated: true)
             
         }
-        
         if cell.lblMenuName.text! == "About Me" {
             let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let desController = mainStoryboard.instantiateViewController(withIdentifier: "AboutViewController") as! AboutViewController
@@ -62,23 +55,14 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             revealViewController.pushFrontViewController(newFrontViewController, animated: true)
             
         }
-        
         if cell.lblMenuName.text! == "Favorites" {
             let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let desController = mainStoryboard.instantiateViewController(withIdentifier: "SearchResultsViewController") as! SearchResultsViewController
             let newFrontViewController = UINavigationController.init(rootViewController:desController)
             SharingManager.sharedInstance.FavoriteClicked = true
             revealViewController.pushFrontViewController(newFrontViewController, animated: true)
-
-            
         }
-        
-        
     }
-    
-    
-    
-    
 
     /*
     // MARK: - Navigation

@@ -14,6 +14,7 @@ class PageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var PageProfile: UIImageView!
     
+    @IBOutlet weak var Star: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,7 +22,6 @@ class PageTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
