@@ -63,6 +63,15 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }
         
+        if cell.lblMenuName.text! == "Favorites" {
+            let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let desController = mainStoryboard.instantiateViewController(withIdentifier: "SearchResultsViewController") as! SearchResultsViewController
+            let newFrontViewController = UINavigationController.init(rootViewController:desController)
+            SharingManager.sharedInstance.FavoriteClicked = true
+            revealViewController.pushFrontViewController(newFrontViewController, animated: true)
+
+            
+        }
         
         
     }

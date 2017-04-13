@@ -22,6 +22,13 @@
 		F5988AEB1E9C095200CC101B /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5988AEA1E9C095200CC101B /* UserTableViewCell.swift */; };
 		F5988AED1E9C3C0700CC101B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5988AEC1E9C3C0700CC101B /* DetailsViewController.swift */; };
 		F5988AEF1E9C4A4E00CC101B /* UserDetailsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5988AEE1E9C4A4E00CC101B /* UserDetailsManager.swift */; };
+		F59A678B1E9EB6920020DD8F /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A678A1E9EB6920020DD8F /* EventsViewController.swift */; };
+		F59A678D1E9EB6A80020DD8F /* PlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A678C1E9EB6A80020DD8F /* PlacesViewController.swift */; };
+		F59A678F1E9EB6B80020DD8F /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A678E1E9EB6B80020DD8F /* GroupsViewController.swift */; };
+		F59A67911E9EB6E00020DD8F /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A67901E9EB6E00020DD8F /* GroupTableViewCell.swift */; };
+		F59A67931E9EB6F00020DD8F /* PlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A67921E9EB6F00020DD8F /* PlaceTableViewCell.swift */; };
+		F59A67951E9EB6FC0020DD8F /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A67941E9EB6FC0020DD8F /* EventTableViewCell.swift */; };
+		F59A67971E9ED9760020DD8F /* SharingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A67961E9ED9760020DD8F /* SharingManager.swift */; };
 		F5B7E4781E9C5B40001C249A /* Details2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B7E4771E9C5B40001C249A /* Details2ViewController.swift */; };
 		F5B7E47A1E9D48EA001C249A /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B7E4791E9D48EA001C249A /* PagesViewController.swift */; };
 		F5B7E47C1E9D490C001C249A /* PageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B7E47B1E9D490C001C249A /* PageTableViewCell.swift */; };
@@ -67,6 +74,13 @@
 		F5988AEA1E9C095200CC101B /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		F5988AEC1E9C3C0700CC101B /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		F5988AEE1E9C4A4E00CC101B /* UserDetailsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsManager.swift; sourceTree = "<group>"; };
+		F59A678A1E9EB6920020DD8F /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		F59A678C1E9EB6A80020DD8F /* PlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesViewController.swift; sourceTree = "<group>"; };
+		F59A678E1E9EB6B80020DD8F /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
+		F59A67901E9EB6E00020DD8F /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		F59A67921E9EB6F00020DD8F /* PlaceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceTableViewCell.swift; sourceTree = "<group>"; };
+		F59A67941E9EB6FC0020DD8F /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		F59A67961E9ED9760020DD8F /* SharingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingManager.swift; sourceTree = "<group>"; };
 		F5B7E4771E9C5B40001C249A /* Details2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Details2ViewController.swift; sourceTree = "<group>"; };
 		F5B7E4791E9D48EA001C249A /* PagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		F5B7E47B1E9D490C001C249A /* PageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageTableViewCell.swift; sourceTree = "<group>"; };
@@ -182,6 +196,13 @@
 				F5E82F421E9823CC00C282FA /* CSCI 571-Bridging-Header.h */,
 				F5988AE81E9C00A300CC101B /* KeywordManager.swift */,
 				F5988AEE1E9C4A4E00CC101B /* UserDetailsManager.swift */,
+				F59A678A1E9EB6920020DD8F /* EventsViewController.swift */,
+				F59A678C1E9EB6A80020DD8F /* PlacesViewController.swift */,
+				F59A678E1E9EB6B80020DD8F /* GroupsViewController.swift */,
+				F59A67961E9ED9760020DD8F /* SharingManager.swift */,
+				F59A67901E9EB6E00020DD8F /* GroupTableViewCell.swift */,
+				F59A67921E9EB6F00020DD8F /* PlaceTableViewCell.swift */,
+				F59A67941E9EB6FC0020DD8F /* EventTableViewCell.swift */,
 			);
 			path = "CSCI 571";
 			sourceTree = "<group>";
@@ -352,12 +373,19 @@
 				F5E82F451E9823CD00C282FA /* SWRevealViewController.m in Sources */,
 				F5B7E4781E9C5B40001C249A /* Details2ViewController.swift in Sources */,
 				F584DAB11E98A42100C990EF /* MenuViewController.swift in Sources */,
+				F59A67971E9ED9760020DD8F /* SharingManager.swift in Sources */,
+				F59A67951E9EB6FC0020DD8F /* EventTableViewCell.swift in Sources */,
 				F5988AEF1E9C4A4E00CC101B /* UserDetailsManager.swift in Sources */,
+				F59A678B1E9EB6920020DD8F /* EventsViewController.swift in Sources */,
+				F59A67911E9EB6E00020DD8F /* GroupTableViewCell.swift in Sources */,
+				F59A67931E9EB6F00020DD8F /* PlaceTableViewCell.swift in Sources */,
 				F584DAB31E98A47300C990EF /* MenuTableViewCell.swift in Sources */,
 				F5988AD91E9B062D00CC101B /* SearchResultsViewController.swift in Sources */,
 				F5988ADB1E9B0D7100CC101B /* AboutViewController.swift in Sources */,
 				F5988AE51E9BEEAA00CC101B /* UsersViewController.swift in Sources */,
 				F5988AD71E99FD9700CC101B /* HomeViewController.swift in Sources */,
+				F59A678D1E9EB6A80020DD8F /* PlacesViewController.swift in Sources */,
+				F59A678F1E9EB6B80020DD8F /* GroupsViewController.swift in Sources */,
 				F5B7E47A1E9D48EA001C249A /* PagesViewController.swift in Sources */,
 				F5B7E4821E9D9E4B001C249A /* DetailTabsViewController.swift in Sources */,
 				F5B7E4841E9DD731001C249A /* PostsTableViewCell.swift in Sources */,

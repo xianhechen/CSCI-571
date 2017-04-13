@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftSpinner
+import SwiftyJSON
+import EasyToast
 
 class DetailTabsViewController: UITabBarController {
 
@@ -26,20 +30,57 @@ class DetailTabsViewController: UITabBarController {
         
         let alertController = UIAlertController(title: nil, message: "Menu", preferredStyle: .actionSheet)
         
+        
+        
+        
         let addButton = UIAlertAction(title: "Add to favorites", style: .default, handler: { (action) -> Void in
             print("Ok button tapped")
+            self.view.showToast("Added to favorites!", position: .bottom, popTime: 2, dismissOnTap: false)
+            var temp_arr = [String]()
+            temp_arr.append(UserDetailsManager.sharedInstance.userid)
+            temp_arr.append(UserDetailsManager.sharedInstance.userName)
+            temp_arr.append(UserDetailsManager.sharedInstance.userProfileURL)
+            SharingManager.sharedInstance.FavUsers.append(temp_arr)
         })
         
+        
+        let removeButton = UIAlertAction(title: "Remove favorites", style: .default, handler: { (action) -> Void in
+            self.view.showToast("Removed from favorites!", position: .bottom, popTime: 2, dismissOnTap: false)
+            var temp_arr = [String]()
+            temp_arr.append(UserDetailsManager.sharedInstance.userid)
+            temp_arr.append(UserDetailsManager.sharedInstance.userName)
+            temp_arr.append(UserDetailsManager.sharedInstance.userProfileURL)
+            
+            
+            var findIndex = SharingManager.sharedInstance.FavUsers.index(where: {$0 == temp_arr})
+            
+            
+            SharingManager.sharedInstance.FavUsers.remove(at: findIndex!)
+        })
+        
+        
         let  shareButton = UIAlertAction(title: "Share", style: .default, handler: { (action) -> Void in
-            print("Delete button tapped")
+            print("Share button tapped")
         })
         
         let cancelButton = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in
             print("Cancel button tapped")
         })
         
+        var find_array = [String]();
         
-        alertController.addAction(addButton)
+        find_array.append(UserDetailsManager.sharedInstance.userid)
+        find_array.append(UserDetailsManager.sharedInstance.userName)
+        find_array.append(UserDetailsManager.sharedInstance.userProfileURL)
+        
+        if let find = SharingManager.sharedInstance.FavUsers.index(where: {$0 == find_array}) {
+            alertController.addAction(removeButton)
+        } else {
+            alertController.addAction(addButton)
+        }
+
+        
+        
         alertController.addAction(shareButton)
         alertController.addAction(cancelButton)
         

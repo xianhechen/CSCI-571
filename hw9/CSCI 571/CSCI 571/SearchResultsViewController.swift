@@ -11,10 +11,16 @@ import UIKit
 class SearchResultsViewController: UITabBarController {
 
     @IBOutlet weak var Search: UINavigationItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Open.target = revealViewController()
         Open.action = #selector(SWRevealViewController.revealToggle(_:))
+        if (SharingManager.sharedInstance.FavoriteClicked == false) {
+            Search.title = "Search Results"
+        } else {
+            Search.title = "Favorites"
+        }
         
         
         // Do any additional setup after loading the view.

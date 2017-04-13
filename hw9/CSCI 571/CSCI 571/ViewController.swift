@@ -27,12 +27,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func SearchPressed(_ sender: Any) {
-        
+        SharingManager.sharedInstance.FavoriteClicked = false
         if (InputField.text! == ""){
             self.view.showToast("Enter a valid query!", position: .bottom, popTime: 2, dismissOnTap: false)
         } else {
-            
-            KeywordManager.sharedInstance.keywrod = InputField.text!
+            let keyword = InputField.text!
+            KeywordManager.sharedInstance.keywrod = keyword.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
             let revealViewController:SWRevealViewController = self.revealViewController()
             let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let desController = mainStoryboard.instantiateViewController(withIdentifier: "SearchResultsViewController") as! SearchResultsViewController
