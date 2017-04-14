@@ -17,6 +17,11 @@ class PagesViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var Table: UITableView!
     
+    @IBOutlet weak var PrevPage: UIButton!
+    
+    @IBOutlet weak var NextPage: UIButton!
+    
+    
     var searchKeyword = String()
     var nameArray = [String]()
     var picArray = [String]()
@@ -51,10 +56,24 @@ class PagesViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         self.idArray.append(subJson["id"].stringValue)
                     }
                 }
+                if self.PrevLink.isEmpty {
+                    self.PrevPage.isEnabled =  false
+                } else {
+                    self.PrevPage.isEnabled = true
+                }
+                if self.NextLink.isEmpty {
+                    self.NextPage.isEnabled =  false
+                } else {
+                    self.NextPage.isEnabled = true
+                }
                 self.Table.reloadData()
                 SwiftSpinner.hide()
             }
+        }  else  {
+            PrevPage.isEnabled = false;
+            NextPage.isEnabled = false;
         }
+        Table.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -109,6 +128,68 @@ class PagesViewController: UIViewController, UITableViewDelegate, UITableViewDat
             UserDetailsManager.sharedInstance.userProfileURL = SharingManager.sharedInstance.FavPages[indexPath.row][2]
         }
     }
+    
+    
+    @IBAction func PrevPagePressed(_ sender: Any) {
+        Alamofire.request(self.PrevLink).responseJSON { response in
+            if let value = response.result.value {
+                self.nameArray.removeAll()
+                self.picArray.removeAll()
+                self.idArray.removeAll()
+                let json = JSON(value)
+                self.PrevLink = json["paging"]["previous"].stringValue
+                self.NextLink = json["paging"]["next"].stringValue
+                for (key, subJson) in json["data"] {
+                    self.nameArray.append(subJson["name"].stringValue)
+                    self.picArray.append(subJson["picture"]["data"]["url"].stringValue)
+                    self.idArray.append(subJson["id"].stringValue)
+                }
+            }
+            if self.PrevLink.isEmpty {
+                self.PrevPage.isEnabled =  false
+            } else {
+                self.PrevPage.isEnabled = true
+            }
+            if self.NextLink.isEmpty {
+                self.NextPage.isEnabled =  false
+            } else {
+                self.NextPage.isEnabled = true
+            }
+            self.Table.reloadData()
+        }
+    }
+    
+    
+    @IBAction func NextPagePressed(_ sender: Any) {
+        Alamofire.request(self.NextLink).responseJSON { response in
+            if let value = response.result.value {
+                self.nameArray.removeAll()
+                self.picArray.removeAll()
+                self.idArray.removeAll()
+                let json = JSON(value)
+                self.PrevLink = json["paging"]["previous"].stringValue
+                self.NextLink = json["paging"]["next"].stringValue
+                for (key, subJson) in json["data"] {
+                    self.nameArray.append(subJson["name"].stringValue)
+                    self.picArray.append(subJson["picture"]["data"]["url"].stringValue)
+                    self.idArray.append(subJson["id"].stringValue)
+                }
+            }
+            if self.PrevLink.isEmpty {
+                self.PrevPage.isEnabled =  false
+            } else {
+                self.PrevPage.isEnabled = true
+            }
+            if self.NextLink.isEmpty {
+                self.NextPage.isEnabled =  false
+            } else {
+                self.NextPage.isEnabled = true
+            }
+            self.Table.reloadData()
+        }
+    }
+    
+    
 
     /*
     // MARK: - Navigation

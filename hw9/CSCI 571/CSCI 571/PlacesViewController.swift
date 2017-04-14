@@ -16,6 +16,12 @@ import EasyToast
 class PlacesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 
     @IBOutlet weak var Table: UITableView!
+    
+    @IBOutlet weak var PrevPage: UIButton!
+    
+    
+    @IBOutlet weak var NextPage: UIButton!
+    
     var searchKeyword = String()
     var nameArray = [String]()
     var picArray = [String]()
@@ -42,7 +48,6 @@ class PlacesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             Alamofire.request("http://cs-server.usc.edu:16031/hw9/search.php?keyword=\(searchKeyword)&type=place").responseJSON { response in
                 if let value = response.result.value {
                     let json = JSON(value)
-                    self.PrevLink = json["place"]["paging"]["prev"].stringValue
                     self.NextLink = json["place"]["paging"]["next"].stringValue
                     for (key, subJson) in json["place"]["data"] {
                         self.nameArray.append(subJson["name"].stringValue)
@@ -50,11 +55,20 @@ class PlacesViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         self.idArray.append(subJson["id"].stringValue)
                     }
                 }
-                
+                self.PrevPage.isEnabled = false
+                if self.NextLink.isEmpty {
+                    self.NextPage.isEnabled =  false
+                } else {
+                    self.NextPage.isEnabled = true
+                }
                 self.Table.reloadData()
                 SwiftSpinner.hide()
             }
+        } else {
+            PrevPage.isEnabled = false;
+            NextPage.isEnabled = false;
         }
+        Table.tableFooterView = UIView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -110,7 +124,32 @@ class PlacesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
+    @IBAction func PrevPagePressed(_ sender: Any) {
 
+    }
+
+    @IBAction func NextPagePressed(_ sender: Any) {
+        Alamofire.request(self.NextLink).responseJSON { response in
+            if let value = response.result.value {
+                self.nameArray.removeAll()
+                self.picArray.removeAll()
+                self.idArray.removeAll()
+                let json = JSON(value)
+                self.NextLink = json["paging"]["next"].stringValue
+                for (key, subJson) in json["data"] {
+                    self.nameArray.append(subJson["name"].stringValue)
+                    self.picArray.append(subJson["picture"]["data"]["url"].stringValue)
+                    self.idArray.append(subJson["id"].stringValue)
+                }
+            }
+            if self.NextLink.isEmpty {
+                self.NextPage.isEnabled =  false
+            } else {
+                self.NextPage.isEnabled = true
+            }
+            self.Table.reloadData()
+        }
+    }
     /*
     // MARK: - Navigation
 

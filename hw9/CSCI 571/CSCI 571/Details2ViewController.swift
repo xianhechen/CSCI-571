@@ -38,6 +38,7 @@ class Details2ViewController: UIViewController, UITableViewDelegate, UITableView
             self.Table.reloadData()
             SwiftSpinner.hide()
         }
+        Table.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {

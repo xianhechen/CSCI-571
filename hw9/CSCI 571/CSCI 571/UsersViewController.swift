@@ -68,9 +68,10 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 SwiftSpinner.hide()
             }
         } else {
-            PrevPage.isHidden = true;
-            NextPage.isHidden = true;
+            PrevPage.isEnabled = false;
+            NextPage.isEnabled = false;
         }
+        TableView.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {

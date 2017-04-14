@@ -83,6 +83,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="Table" destination="JOP-9I-9st" id="Ww8-El-sE2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v2n-JK-tdT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -205,7 +208,7 @@
                                     <outlet property="delegate" destination="WHe-XO-Dua" id="NMB-6Z-8nY"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hB0-Ap-Rff">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hB0-Ap-Rff">
                                 <rect key="frame" x="69" y="634" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Previous"/>
@@ -339,14 +342,14 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDG-fO-swQ">
-                                                    <rect key="frame" x="81" y="66.666666666666671" width="325" height="21"/>
+                                                    <rect key="frame" x="81" y="71.666666666666671" width="325" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="HDG-fO-swQ" firstAttribute="top" secondItem="EUp-vi-33t" secondAttribute="bottom" id="4mP-xU-Dsg"/>
+                                                <constraint firstItem="HDG-fO-swQ" firstAttribute="top" secondItem="EUp-vi-33t" secondAttribute="bottom" constant="5" id="84o-MX-JOJ"/>
                                                 <constraint firstItem="iLq-EE-SI9" firstAttribute="top" secondItem="9q8-kq-hdv" secondAttribute="top" constant="8" id="CcE-wQ-sM5"/>
                                                 <constraint firstItem="iLq-EE-SI9" firstAttribute="leading" secondItem="9q8-kq-hdv" secondAttribute="leading" constant="8" id="LTu-2X-j6N"/>
                                                 <constraint firstItem="EUp-vi-33t" firstAttribute="trailing" secondItem="9q8-kq-hdv" secondAttribute="trailingMargin" id="OG9-zr-KZt"/>
@@ -395,20 +398,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wdt-Qh-b7P">
-                                <rect key="frame" x="71" y="632" width="59" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wdt-Qh-b7P">
+                                <rect key="frame" x="69" y="634" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Previous"/>
                                 <connections>
-                                    <action selector="PrevPagePressed:" destination="WHe-XO-Dua" eventType="touchUpInside" id="ulc-1b-98w"/>
+                                    <action selector="PrevPagePressed:" destination="fB1-ui-uNt" eventType="touchUpInside" id="ae6-pp-ta5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zpy-8v-7Ki">
-                                <rect key="frame" x="312" y="632" width="32" height="30"/>
+                                <rect key="frame" x="310" y="634" width="32" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
-                                    <action selector="NextPagePressed:" destination="WHe-XO-Dua" eventType="touchUpInside" id="pzp-SR-hFb"/>
+                                    <action selector="NextPagePressed:" destination="fB1-ui-uNt" eventType="touchUpInside" id="4xJ-y5-dqD"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ewt-Ie-2Us">
@@ -463,6 +466,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Pages" image="page" id="KXs-GR-UbH"/>
                     <connections>
+                        <outlet property="NextPage" destination="Zpy-8v-7Ki" id="tlL-Rd-JRv"/>
+                        <outlet property="PrevPage" destination="Wdt-Qh-b7P" id="TOy-tj-kQv"/>
                         <outlet property="Table" destination="Ewt-Ie-2Us" id="9rd-0F-mzb"/>
                     </connections>
                 </viewController>
@@ -482,24 +487,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kdv-Vd-bJ8">
-                                <rect key="frame" x="71" y="637" width="59" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kdv-Vd-bJ8">
+                                <rect key="frame" x="69" y="634" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Previous"/>
                                 <connections>
-                                    <action selector="PrevPagePressed:" destination="WHe-XO-Dua" eventType="touchUpInside" id="1WW-o3-Ovt"/>
+                                    <action selector="PrevPagePressed:" destination="vFQ-Qr-t14" eventType="touchUpInside" id="VVq-2e-tZi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wOI-yB-6xp">
-                                <rect key="frame" x="312" y="637" width="32" height="30"/>
+                                <rect key="frame" x="310" y="634" width="32" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
-                                    <action selector="NextPagePressed:" destination="WHe-XO-Dua" eventType="touchUpInside" id="p7i-oH-4Uc"/>
+                                    <action selector="NextPagePressed:" destination="vFQ-Qr-t14" eventType="touchUpInside" id="BTZ-Yw-Xay"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wmj-Wo-zTd">
-                                <rect key="frame" x="0.0" y="69" width="414" height="551"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="551"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -550,6 +555,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Events" image="event" id="S7v-KR-gGr"/>
                     <connections>
+                        <outlet property="NextPage" destination="wOI-yB-6xp" id="ZdG-LF-JpO"/>
+                        <outlet property="PrevPage" destination="Kdv-Vd-bJ8" id="ypu-nW-rJE"/>
                         <outlet property="Table" destination="Wmj-Wo-zTd" id="X4r-b8-H0P"/>
                     </connections>
                 </viewController>
@@ -621,24 +628,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwC-RE-0Tq">
-                                <rect key="frame" x="71" y="637" width="59" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwC-RE-0Tq">
+                                <rect key="frame" x="69" y="634" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Previous"/>
                                 <connections>
-                                    <action selector="PrevPagePressed:" destination="WHe-XO-Dua" eventType="touchUpInside" id="Erf-GW-woa"/>
+                                    <action selector="PrevPagePressed:" destination="Tu7-RV-yQc" eventType="touchUpInside" id="RLM-dT-hu9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQt-4b-sU9">
-                                <rect key="frame" x="312" y="637" width="32" height="30"/>
+                                <rect key="frame" x="310" y="634" width="32" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
-                                    <action selector="NextPagePressed:" destination="WHe-XO-Dua" eventType="touchUpInside" id="Scb-gt-lT6"/>
+                                    <action selector="NextPagePressed:" destination="Tu7-RV-yQc" eventType="touchUpInside" id="Yq4-CT-d2A"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dqN-3J-N94">
-                                <rect key="frame" x="0.0" y="69" width="414" height="551"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="551"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -689,6 +696,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Places" image="place" id="KR7-RH-ZgJ"/>
                     <connections>
+                        <outlet property="NextPage" destination="fQt-4b-sU9" id="Kki-Iq-fZh"/>
+                        <outlet property="PrevPage" destination="lwC-RE-0Tq" id="P0V-Ix-bTM"/>
                         <outlet property="Table" destination="dqN-3J-N94" id="a6E-ap-rL5"/>
                     </connections>
                 </viewController>
@@ -708,24 +717,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rz1-Qh-nF8">
-                                <rect key="frame" x="71" y="637" width="59" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rz1-Qh-nF8">
+                                <rect key="frame" x="69" y="634" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Previous"/>
                                 <connections>
-                                    <action selector="PrevPagePressed:" destination="WHe-XO-Dua" eventType="touchUpInside" id="uVN-tK-1jC"/>
+                                    <action selector="PrevPagePressed:" destination="E5x-SW-BYs" eventType="touchUpInside" id="Wab-p3-IrZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIg-Qn-QOs">
-                                <rect key="frame" x="312" y="637" width="32" height="30"/>
+                                <rect key="frame" x="310" y="634" width="32" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
-                                    <action selector="NextPagePressed:" destination="WHe-XO-Dua" eventType="touchUpInside" id="aPg-JB-0uc"/>
+                                    <action selector="NextPagePressed:" destination="E5x-SW-BYs" eventType="touchUpInside" id="cE0-vP-CRh"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="x8R-5k-okB">
-                                <rect key="frame" x="0.0" y="69" width="414" height="551"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="551"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -776,6 +785,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Groups" image="groups" id="BPl-e8-L1d"/>
                     <connections>
+                        <outlet property="NextPage" destination="YIg-Qn-QOs" id="h8l-91-9KH"/>
+                        <outlet property="PrevPage" destination="Rz1-Qh-nF8" id="FMy-2d-2uv"/>
                         <outlet property="Table" destination="x8R-5k-okB" id="1KP-PQ-Hfc"/>
                     </connections>
                 </viewController>
@@ -889,6 +900,6 @@
         <image name="users" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qlx-FQ-t9i"/>
+        <segue reference="jhN-cw-lct"/>
     </inferredMetricsTieBreakers>
 </document>

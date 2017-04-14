@@ -52,6 +52,7 @@ class DetailsViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             SwiftSpinner.hide()
         }
+        Table.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {

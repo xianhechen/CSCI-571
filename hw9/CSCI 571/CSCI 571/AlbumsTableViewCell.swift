@@ -20,7 +20,7 @@ class AlbumsTableViewCell: UITableViewCell {
     @IBOutlet weak var Image2: UIImageView!
     class var expandedHeight: CGFloat {
         get {
-            return 800
+            return 670
         }
     }
     

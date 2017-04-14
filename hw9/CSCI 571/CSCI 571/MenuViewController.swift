@@ -10,6 +10,7 @@ import UIKit
 
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var Table: UITableView!
     var menuNameArr:Array = [String]()
     var iconImage:Array = [UIImage]()
     
@@ -17,6 +18,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         menuNameArr = ["FB Search", "Home", "Favorites", "About Me"]
         iconImage = [UIImage(named:"fb")!, UIImage(named:"home")!, UIImage(named:"filled")!, UIImage(named:"filled")!]
+        Table.tableFooterView = UIView()
         // Do any additional setup after loading the view.
     }
 

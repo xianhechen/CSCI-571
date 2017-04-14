@@ -18,6 +18,7 @@ class DetailTabsViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
     }
 
     @IBAction func OptionsPressed(_ sender: Any) {
