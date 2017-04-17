@@ -26,7 +26,7 @@ class DetailsViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         SwiftSpinner.show("Loading...")
-        Alamofire.request("http://cs-server.usc.edu:16031/hw9/search.php?userid=\(UserDetailsManager.sharedInstance.userid)&type=user").responseJSON { response in
+        Alamofire.request("http://sample-env.rgv3prmeyk.us-west-2.elasticbeanstalk.com/search.php?userid=\(UserDetailsManager.sharedInstance.userid)&type=user").responseJSON { response in
             if let value = response.result.value {
                 let json = JSON(value)
                 for (_, subJson) in json["albums"]["data"] {
@@ -65,7 +65,20 @@ class DetailsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AlbumNameArray.count
+        var numOfRows: Int = 0
+        let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: Table.bounds.size.width, height: Table.bounds.size.height))
+        noDataLabel.text          = "No data found."
+        noDataLabel.textColor     = UIColor.black
+        noDataLabel.textAlignment = .center
+        Table.backgroundView  = noDataLabel
+        Table.separatorStyle  = .none
+        if AlbumNameArray.count > 0{
+            numOfRows = AlbumNameArray.count
+            noDataLabel.isHidden = true
+        }else{
+            noDataLabel.isHidden = false
+        }
+        return numOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

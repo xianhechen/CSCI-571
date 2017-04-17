@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		53E9B0C79FC1CBC5F3420694 /* Pods_CSCI_571.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F4167B40C45760FCEA9AE9 /* Pods_CSCI_571.framework */; };
+		F5408FE81EA1CF1D00544CE8 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5408FE41EA1CF1D00544CE8 /* Bolts.framework */; };
+		F5408FE91EA1CF1D00544CE8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5408FE51EA1CF1D00544CE8 /* FBSDKCoreKit.framework */; };
+		F5408FEA1EA1CF1D00544CE8 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5408FE61EA1CF1D00544CE8 /* FBSDKLoginKit.framework */; };
+		F5408FEB1EA1CF1D00544CE8 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5408FE71EA1CF1D00544CE8 /* FBSDKShareKit.framework */; };
 		F584DAB11E98A42100C990EF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F584DAB01E98A42100C990EF /* MenuViewController.swift */; };
 		F584DAB31E98A47300C990EF /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F584DAB21E98A47300C990EF /* MenuTableViewCell.swift */; };
 		F5988AD71E99FD9700CC101B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5988AD61E99FD9700CC101B /* HomeViewController.swift */; };
@@ -41,25 +45,17 @@
 		F5E82F381E98233F00C282FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F371E98233F00C282FA /* Assets.xcassets */; };
 		F5E82F3B1E98233F00C282FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F391E98233F00C282FA /* LaunchScreen.storyboard */; };
 		F5E82F451E9823CD00C282FA /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E82F441E9823CD00C282FA /* SWRevealViewController.m */; };
-		F5E82F541E9832C900C282FA /* album.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F471E9832C900C282FA /* album.png */; };
-		F5E82F551E9832C900C282FA /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F481E9832C900C282FA /* empty.png */; };
-		F5E82F561E9832C900C282FA /* event.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F491E9832C900C282FA /* event.png */; };
-		F5E82F571E9832C900C282FA /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F4A1E9832C900C282FA /* fb.png */; };
-		F5E82F581E9832C900C282FA /* filled.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F4B1E9832C900C282FA /* filled.png */; };
-		F5E82F591E9832C900C282FA /* groups.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F4C1E9832C900C282FA /* groups.png */; };
-		F5E82F5A1E9832C900C282FA /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F4D1E9832C900C282FA /* home.png */; };
-		F5E82F5B1E9832C900C282FA /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F4E1E9832C900C282FA /* menu.png */; };
-		F5E82F5C1E9832C900C282FA /* options.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F4F1E9832C900C282FA /* options.png */; };
-		F5E82F5D1E9832C900C282FA /* page.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F501E9832C900C282FA /* page.png */; };
-		F5E82F5E1E9832C900C282FA /* place.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F511E9832C900C282FA /* place.png */; };
-		F5E82F5F1E9832C900C282FA /* posts.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F521E9832C900C282FA /* posts.png */; };
-		F5E82F601E9832C900C282FA /* users.png in Resources */ = {isa = PBXBuildFile; fileRef = F5E82F531E9832C900C282FA /* users.png */; };
+		F5EA53101EA145760016C64C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5EA530F1EA145760016C64C /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A01C78FAFFE2945C6630E5AA /* Pods-CSCI 571.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSCI 571.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CSCI 571/Pods-CSCI 571.debug.xcconfig"; sourceTree = "<group>"; };
 		BC9F701A02F62563E5E97D1F /* Pods-CSCI 571.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSCI 571.release.xcconfig"; path = "Pods/Target Support Files/Pods-CSCI 571/Pods-CSCI 571.release.xcconfig"; sourceTree = "<group>"; };
 		D1F4167B40C45760FCEA9AE9 /* Pods_CSCI_571.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CSCI_571.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5408FE41EA1CF1D00544CE8 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "FacebookSDKs-iOS-4/Bolts.framework"; sourceTree = "<group>"; };
+		F5408FE51EA1CF1D00544CE8 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-4/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		F5408FE61EA1CF1D00544CE8 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-4/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		F5408FE71EA1CF1D00544CE8 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-4/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		F584DAB01E98A42100C990EF /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		F584DAB21E98A47300C990EF /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		F5988AD61E99FD9700CC101B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -97,19 +93,7 @@
 		F5E82F421E9823CC00C282FA /* CSCI 571-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CSCI 571-Bridging-Header.h"; sourceTree = "<group>"; };
 		F5E82F431E9823CD00C282FA /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		F5E82F441E9823CD00C282FA /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		F5E82F471E9832C900C282FA /* album.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = album.png; sourceTree = "<group>"; };
-		F5E82F481E9832C900C282FA /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
-		F5E82F491E9832C900C282FA /* event.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = event.png; sourceTree = "<group>"; };
-		F5E82F4A1E9832C900C282FA /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
-		F5E82F4B1E9832C900C282FA /* filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filled.png; sourceTree = "<group>"; };
-		F5E82F4C1E9832C900C282FA /* groups.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = groups.png; sourceTree = "<group>"; };
-		F5E82F4D1E9832C900C282FA /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
-		F5E82F4E1E9832C900C282FA /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
-		F5E82F4F1E9832C900C282FA /* options.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options.png; sourceTree = "<group>"; };
-		F5E82F501E9832C900C282FA /* page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page.png; sourceTree = "<group>"; };
-		F5E82F511E9832C900C282FA /* place.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = place.png; sourceTree = "<group>"; };
-		F5E82F521E9832C900C282FA /* posts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = posts.png; sourceTree = "<group>"; };
-		F5E82F531E9832C900C282FA /* users.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = users.png; sourceTree = "<group>"; };
+		F5EA530F1EA145760016C64C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,11 +101,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5EA53101EA145760016C64C /* CoreLocation.framework in Frameworks */,
 				F5988AE11E9B3F9800CC101B /* EasyToast.framework in Frameworks */,
+				F5408FEB1EA1CF1D00544CE8 /* FBSDKShareKit.framework in Frameworks */,
+				F5408FEA1EA1CF1D00544CE8 /* FBSDKLoginKit.framework in Frameworks */,
 				F5988AE21E9B3F9800CC101B /* SwiftSpinner.framework in Frameworks */,
 				F5988AE31E9B3F9800CC101B /* SwiftyJSON.framework in Frameworks */,
 				F5988ADD1E9B3F9100CC101B /* Alamofire.framework in Frameworks */,
+				F5408FE91EA1CF1D00544CE8 /* FBSDKCoreKit.framework in Frameworks */,
 				53E9B0C79FC1CBC5F3420694 /* Pods_CSCI_571.framework in Frameworks */,
+				F5408FE81EA1CF1D00544CE8 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +129,11 @@
 		67E1358435DE8A70C7BD7AC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F5408FE41EA1CF1D00544CE8 /* Bolts.framework */,
+				F5408FE51EA1CF1D00544CE8 /* FBSDKCoreKit.framework */,
+				F5408FE61EA1CF1D00544CE8 /* FBSDKLoginKit.framework */,
+				F5408FE71EA1CF1D00544CE8 /* FBSDKShareKit.framework */,
+				F5EA530F1EA145760016C64C /* CoreLocation.framework */,
 				F5988ADE1E9B3F9800CC101B /* EasyToast.framework */,
 				F5988ADF1E9B3F9800CC101B /* SwiftSpinner.framework */,
 				F5988AE01E9B3F9800CC101B /* SwiftyJSON.framework */,
@@ -187,7 +181,6 @@
 				F584DAB21E98A47300C990EF /* MenuTableViewCell.swift */,
 				F5988AD61E99FD9700CC101B /* HomeViewController.swift */,
 				F584DAB01E98A42100C990EF /* MenuViewController.swift */,
-				F5E82F461E9832C900C282FA /* Assets */,
 				F5E82F371E98233F00C282FA /* Assets.xcassets */,
 				F5E82F391E98233F00C282FA /* LaunchScreen.storyboard */,
 				F5E82F431E9823CD00C282FA /* SWRevealViewController.h */,
@@ -205,26 +198,6 @@
 				F59A67941E9EB6FC0020DD8F /* EventTableViewCell.swift */,
 			);
 			path = "CSCI 571";
-			sourceTree = "<group>";
-		};
-		F5E82F461E9832C900C282FA /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				F5E82F471E9832C900C282FA /* album.png */,
-				F5E82F481E9832C900C282FA /* empty.png */,
-				F5E82F491E9832C900C282FA /* event.png */,
-				F5E82F4A1E9832C900C282FA /* fb.png */,
-				F5E82F4B1E9832C900C282FA /* filled.png */,
-				F5E82F4C1E9832C900C282FA /* groups.png */,
-				F5E82F4D1E9832C900C282FA /* home.png */,
-				F5E82F4E1E9832C900C282FA /* menu.png */,
-				F5E82F4F1E9832C900C282FA /* options.png */,
-				F5E82F501E9832C900C282FA /* page.png */,
-				F5E82F511E9832C900C282FA /* place.png */,
-				F5E82F521E9832C900C282FA /* posts.png */,
-				F5E82F531E9832C900C282FA /* users.png */,
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,21 +265,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5E82F3B1E98233F00C282FA /* LaunchScreen.storyboard in Resources */,
-				F5E82F5E1E9832C900C282FA /* place.png in Resources */,
-				F5E82F571E9832C900C282FA /* fb.png in Resources */,
-				F5E82F5D1E9832C900C282FA /* page.png in Resources */,
-				F5E82F5C1E9832C900C282FA /* options.png in Resources */,
-				F5E82F541E9832C900C282FA /* album.png in Resources */,
-				F5E82F551E9832C900C282FA /* empty.png in Resources */,
 				F5E82F381E98233F00C282FA /* Assets.xcassets in Resources */,
-				F5E82F581E9832C900C282FA /* filled.png in Resources */,
-				F5E82F5A1E9832C900C282FA /* home.png in Resources */,
-				F5E82F561E9832C900C282FA /* event.png in Resources */,
 				F5B7E47E1E9D5480001C249A /* Main.storyboard in Resources */,
-				F5E82F5B1E9832C900C282FA /* menu.png in Resources */,
-				F5E82F591E9832C900C282FA /* groups.png in Resources */,
-				F5E82F601E9832C900C282FA /* users.png in Resources */,
-				F5E82F5F1E9832C900C282FA /* posts.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +468,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 9KDQVF7858;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
+				);
 				INFOPLIST_FILE = "CSCI 571/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xianhechen.CSCI-571";
@@ -515,6 +480,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "CSCI 571/CSCI 571-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -525,12 +491,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 9KDQVF7858;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
+				);
 				INFOPLIST_FILE = "CSCI 571/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xianhechen.CSCI-571";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CSCI 571/CSCI 571-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

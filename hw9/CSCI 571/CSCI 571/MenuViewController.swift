@@ -8,17 +8,15 @@
 
 import UIKit
 
-class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MenuViewController: UITableViewController {
 
-    @IBOutlet weak var Table: UITableView!
     var menuNameArr:Array = [String]()
     var iconImage:Array = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        menuNameArr = ["FB Search", "Home", "Favorites", "About Me"]
-        iconImage = [UIImage(named:"fb")!, UIImage(named:"home")!, UIImage(named:"filled")!, UIImage(named:"filled")!]
-        Table.tableFooterView = UIView()
+        //menuNameArr = ["FB Search", "Home", "Favorites", "About Me"]
+        //iconImage = [UIImage(named:"fb")!, UIImage(named:"home")!, UIImage(named:"filled")!, UIImage(named:"filled")!]
         // Do any additional setup after loading the view.
     }
 
@@ -27,11 +25,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return menuNameArr.count
-    }
     
+    /*
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell") as! MenuTableViewCell
         cell.imgIcon.image = iconImage[indexPath.row]
@@ -39,8 +34,9 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
         
     }
+     */
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let revealViewController:SWRevealViewController = self.revealViewController()
         let cell:MenuTableViewCell = tableView.cellForRow(at: indexPath) as! MenuTableViewCell
         if cell.lblMenuName.text! == "Home" {
@@ -50,7 +46,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             revealViewController.pushFrontViewController(newFrontViewController, animated: true)
             
         }
-        if cell.lblMenuName.text! == "About Me" {
+        if cell.lblMenuName.text! == "About me" {
             let mainStoryboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let desController = mainStoryboard.instantiateViewController(withIdentifier: "AboutViewController") as! AboutViewController
             let newFrontViewController = UINavigationController.init(rootViewController:desController)
@@ -65,6 +61,9 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             revealViewController.pushFrontViewController(newFrontViewController, animated: true)
         }
     }
+    
+    
+ 
 
     /*
     // MARK: - Navigation

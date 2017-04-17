@@ -25,14 +25,26 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var PrevLink = String()
     var NextLink = String()
     
+    var FavEvents = [[String]]()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated) // No need for semicolon
+        if UserDefaults.standard.array(forKey: "favEvents") != nil {
+            FavEvents = UserDefaults.standard.array(forKey: "favEvents") as! [[String]]
+        }
         SharingManager.sharedInstance.InEvents = true
         SharingManager.sharedInstance.InPages = false
         SharingManager.sharedInstance.InGroups = false
         SharingManager.sharedInstance.InUsers = false
         SharingManager.sharedInstance.InPlaces = false
-        Table.reloadData()
+        if(SharingManager.sharedInstance.FavoriteClicked == false) {
+            let index = Table.indexPathForSelectedRow
+            if (index != nil){
+                self.Table.reloadRows(at: [index!], with: UITableViewRowAnimation.automatic)
+            }
+        } else {
+            Table.reloadData()
+        }
     }
     
     override func viewDidLoad() {
@@ -41,7 +53,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchKeyword = KeywordManager.sharedInstance.keywrod
         if (SharingManager.sharedInstance.FavoriteClicked == false) {
             SwiftSpinner.show("Loading...")
-            Alamofire.request("http://cs-server.usc.edu:16031/hw9/search.php?keyword=\(searchKeyword)&type=event").responseJSON { response in
+            Alamofire.request("http://sample-env.rgv3prmeyk.us-west-2.elasticbeanstalk.com/search.php?keyword=\(searchKeyword)&type=event").responseJSON { response in
                 if let value = response.result.value {
                     let json = JSON(value)
                     self.PrevLink = json["event"]["paging"]["prev"].stringValue
@@ -81,7 +93,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if (SharingManager.sharedInstance.FavoriteClicked == false) {
             return nameArray.count
         } else {
-            return SharingManager.sharedInstance.FavEvents.count
+            return FavEvents.count
         }
     }
     
@@ -97,14 +109,14 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             find_array.append(idArray[indexPath.row])
             find_array.append(nameArray[indexPath.row])
             find_array.append(picArray[indexPath.row])
-            if let find = SharingManager.sharedInstance.FavEvents.index(where: {$0 == find_array}) {
+            if let find = FavEvents.index(where: {$0 == find_array}) {
                 cell.Star.setImage(UIImage(named:"filled")!, for: UIControlState.normal)
             } else {
                 cell.Star.setImage(UIImage(named:"empty")!, for: UIControlState.normal)
             }
         } else {
-            cell.EventName.text = SharingManager.sharedInstance.FavEvents[indexPath.row][1]
-            let imgURL = NSURL(string: SharingManager.sharedInstance.FavEvents[indexPath.row][2])
+            cell.EventName.text = FavEvents[indexPath.row][1]
+            let imgURL = NSURL(string: FavEvents[indexPath.row][2])
             let data = NSData(contentsOf: (imgURL as? URL)!)
             cell.EventProfile.image = UIImage(data: data as! Data)
             cell.Star.setImage(UIImage(named:"filled")!, for: UIControlState.normal)
@@ -120,9 +132,9 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             UserDetailsManager.sharedInstance.userName = nameArray[indexPath.row]
             UserDetailsManager.sharedInstance.userProfileURL = picArray[indexPath.row]
         } else {
-            UserDetailsManager.sharedInstance.userid = SharingManager.sharedInstance.FavEvents[indexPath.row][0]
-            UserDetailsManager.sharedInstance.userName = SharingManager.sharedInstance.FavEvents[indexPath.row][1]
-            UserDetailsManager.sharedInstance.userProfileURL = SharingManager.sharedInstance.FavEvents[indexPath.row][2]
+            UserDetailsManager.sharedInstance.userid = FavEvents[indexPath.row][0]
+            UserDetailsManager.sharedInstance.userName = FavEvents[indexPath.row][1]
+            UserDetailsManager.sharedInstance.userProfileURL = FavEvents[indexPath.row][2]
         }
     }
     

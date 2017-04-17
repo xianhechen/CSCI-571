@@ -22,4 +22,8 @@ final class UserDetailsManager {
     var userid = String()
     var userName = String()
     var userProfileURL = String()
+    
+    
+    var currentLat = String()
+    var currentLon = String()
 }

@@ -13,12 +13,11 @@ import SwiftyJSON
 import EasyToast
 
 
-class PlacesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class PlacesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var Table: UITableView!
     
     @IBOutlet weak var PrevPage: UIButton!
-    
     
     @IBOutlet weak var NextPage: UIButton!
     
@@ -28,15 +27,27 @@ class PlacesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var idArray = [String]()
     var PrevLink = String()
     var NextLink = String()
-    
+    var lat = String()
+    var lon = String()
+    var FavPlaces = [[String]]()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated) // No need for semicolon
+        if UserDefaults.standard.array(forKey: "favPlaces") != nil {
+            FavPlaces = UserDefaults.standard.array(forKey: "favPlaces") as! [[String]]
+        }
         SharingManager.sharedInstance.InEvents = false
         SharingManager.sharedInstance.InPages = false
         SharingManager.sharedInstance.InGroups = false
         SharingManager.sharedInstance.InUsers = false
         SharingManager.sharedInstance.InPlaces = true
-        Table.reloadData()
+        if(SharingManager.sharedInstance.FavoriteClicked == false) {
+            let index = Table.indexPathForSelectedRow
+            if (index != nil){
+                self.Table.reloadRows(at: [index!], with: UITableViewRowAnimation.automatic)
+            }
+        } else {
+            Table.reloadData()
+        }
     }
     
     override func viewDidLoad() {
@@ -45,7 +56,12 @@ class PlacesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchKeyword = KeywordManager.sharedInstance.keywrod
         if (SharingManager.sharedInstance.FavoriteClicked == false) {
             SwiftSpinner.show("Loading...")
-            Alamofire.request("http://cs-server.usc.edu:16031/hw9/search.php?keyword=\(searchKeyword)&type=place").responseJSON { response in
+            self.lat = UserDetailsManager.sharedInstance.currentLat
+            self.lon = UserDetailsManager.sharedInstance.currentLon
+            print(self.lat)
+            print(self.lon)
+            Alamofire.request("http://sample-env.rgv3prmeyk.us-west-2.elasticbeanstalk.com/search.php?keyword=\(searchKeyword)&lat=\(self.lat)&lon=\(self.lon)&type=place").responseJSON { response in
+
                 if let value = response.result.value {
                     let json = JSON(value)
                     self.NextLink = json["place"]["paging"]["next"].stringValue
@@ -70,7 +86,7 @@ class PlacesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         Table.tableFooterView = UIView()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -80,7 +96,7 @@ class PlacesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if (SharingManager.sharedInstance.FavoriteClicked == false) {
             return nameArray.count
         } else {
-            return SharingManager.sharedInstance.FavPlaces.count
+            return FavPlaces.count
         }
     }
     
@@ -95,14 +111,15 @@ class PlacesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             find_array.append(idArray[indexPath.row])
             find_array.append(nameArray[indexPath.row])
             find_array.append(picArray[indexPath.row])
-            if let find = SharingManager.sharedInstance.FavPlaces.index(where: {$0 == find_array}) {
+            if let find = FavPlaces.index(where: {$0 == find_array}) {
                 cell.Star.setImage(UIImage(named:"filled")!, for: UIControlState.normal)
             } else {
                 cell.Star.setImage(UIImage(named:"empty")!, for: UIControlState.normal)
             }
         } else {
-            cell.PlaceName.text = SharingManager.sharedInstance.FavPlaces[indexPath.row][1]
-            let imgURL = NSURL(string: SharingManager.sharedInstance.FavPlaces[indexPath.row][2])
+            
+            cell.PlaceName.text = FavPlaces[indexPath.row][1]
+            let imgURL = NSURL(string: FavPlaces[indexPath.row][2])
             let data = NSData(contentsOf: (imgURL as? URL)!)
             cell.PlaceProfile.image = UIImage(data: data as! Data)
             cell.Star.setImage(UIImage(named:"filled")!, for: UIControlState.normal)
@@ -117,9 +134,9 @@ class PlacesViewController: UIViewController, UITableViewDelegate, UITableViewDa
             UserDetailsManager.sharedInstance.userName = nameArray[indexPath.row]
             UserDetailsManager.sharedInstance.userProfileURL = picArray[indexPath.row]
         } else {
-            UserDetailsManager.sharedInstance.userid = SharingManager.sharedInstance.FavPlaces[indexPath.row][0]
-            UserDetailsManager.sharedInstance.userName = SharingManager.sharedInstance.FavPlaces[indexPath.row][1]
-            UserDetailsManager.sharedInstance.userProfileURL = SharingManager.sharedInstance.FavPlaces[indexPath.row][2]
+            UserDetailsManager.sharedInstance.userid = FavPlaces[indexPath.row][0]
+            UserDetailsManager.sharedInstance.userName = FavPlaces[indexPath.row][1]
+            UserDetailsManager.sharedInstance.userProfileURL = FavPlaces[indexPath.row][2]
         }
     }
     

@@ -22,12 +22,20 @@ class Details2ViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         SwiftSpinner.show("Loading...")
-        Alamofire.request("http://cs-server.usc.edu:16031/hw9/search.php?userid=\(UserDetailsManager.sharedInstance.userid)&type=user").responseJSON { response in
+        Alamofire.request("http://sample-env.rgv3prmeyk.us-west-2.elasticbeanstalk.com/search.php?userid=\(UserDetailsManager.sharedInstance.userid)&type=user").responseJSON { response in
             if let value = response.result.value {
                 let json = JSON(value)
                 for (key, subJson) in json["posts"]["data"] {
                     //print(subJson)
-                    self.TempArray.append(subJson["message"].stringValue)
+                    
+                    //deal with story and message here
+                    if subJson["message"] == nil {
+                        self.TempArray.append(subJson["story"].stringValue)
+                    } else {
+                        self.TempArray.append(subJson["message"].stringValue)
+                    }
+                    
+                    
                     self.TempArray.append(subJson["created_time"].stringValue)
                     self.PostContentArray.append(self.TempArray)
                     self.TempArray = []
@@ -53,7 +61,20 @@ class Details2ViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print (AlbumNameArray.count)
-        return PostContentArray.count
+        var numOfRows: Int = 0
+        let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: Table.bounds.size.width, height: Table.bounds.size.height))
+        noDataLabel.text          = "No data found."
+        noDataLabel.textColor     = UIColor.black
+        noDataLabel.textAlignment = .center
+        Table.backgroundView  = noDataLabel
+        Table.separatorStyle  = .none
+        if PostContentArray.count > 0{
+            numOfRows = PostContentArray.count
+            noDataLabel.isHidden = true
+        }else{
+            noDataLabel.isHidden = false
+        }
+        return numOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

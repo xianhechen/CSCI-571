@@ -21,18 +21,30 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var PrevLink = String()
     var NextLink = String()
     
+    var FavGroups = [[String]]()
+    
     @IBOutlet weak var NextPage: UIButton!
     @IBOutlet weak var PrevPage: UIButton!
     @IBOutlet weak var Table: UITableView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated) // No need for semicolon
+        if UserDefaults.standard.array(forKey: "favGroups") != nil {
+            FavGroups = UserDefaults.standard.array(forKey: "favGroups") as! [[String]]
+        }
         SharingManager.sharedInstance.InEvents = false
         SharingManager.sharedInstance.InPages = false
         SharingManager.sharedInstance.InGroups = true
         SharingManager.sharedInstance.InUsers = false
         SharingManager.sharedInstance.InPlaces = false
-        Table.reloadData()
+        if(SharingManager.sharedInstance.FavoriteClicked == false) {
+            let index = Table.indexPathForSelectedRow
+            if (index != nil){
+                self.Table.reloadRows(at: [index!], with: UITableViewRowAnimation.automatic)
+            }
+        } else {
+            Table.reloadData()
+        }
     }
     
     override func viewDidLoad() {
@@ -42,7 +54,7 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if (SharingManager.sharedInstance.FavoriteClicked == false) {
             SwiftSpinner.show("Loading...")
-            Alamofire.request("http://cs-server.usc.edu:16031/hw9/search.php?keyword=\(searchKeyword)&type=group").responseJSON { response in
+            Alamofire.request("http://sample-env.rgv3prmeyk.us-west-2.elasticbeanstalk.com/search.php?keyword=\(searchKeyword)&type=group").responseJSON { response in
                 if let value = response.result.value {
                     let json = JSON(value)
                     self.PrevLink = json["group"]["paging"]["prev"].stringValue
@@ -82,7 +94,7 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if (SharingManager.sharedInstance.FavoriteClicked == false) {
             return nameArray.count
         } else {
-            return SharingManager.sharedInstance.FavGroups.count
+            return FavGroups.count
         }
     }
     
@@ -98,14 +110,14 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             find_array.append(idArray[indexPath.row])
             find_array.append(nameArray[indexPath.row])
             find_array.append(picArray[indexPath.row])
-            if let find = SharingManager.sharedInstance.FavGroups.index(where: {$0 == find_array}) {
+            if let find = FavGroups.index(where: {$0 == find_array}) {
                 cell.Star.setImage(UIImage(named:"filled")!, for: UIControlState.normal)
             } else {
                 cell.Star.setImage(UIImage(named:"empty")!, for: UIControlState.normal)
             }
         } else {
-            cell.GroupName.text = SharingManager.sharedInstance.FavGroups[indexPath.row][1]
-            let imgURL = NSURL(string: SharingManager.sharedInstance.FavGroups[indexPath.row][2])
+            cell.GroupName.text = FavGroups[indexPath.row][1]
+            let imgURL = NSURL(string: FavGroups[indexPath.row][2])
             let data = NSData(contentsOf: (imgURL as? URL)!)
             cell.GroupProfile.image = UIImage(data: data as! Data)
             cell.Star.setImage(UIImage(named:"filled")!, for: UIControlState.normal)
@@ -121,9 +133,9 @@ class GroupsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             UserDetailsManager.sharedInstance.userName = nameArray[indexPath.row]
             UserDetailsManager.sharedInstance.userProfileURL = picArray[indexPath.row]
         } else {
-            UserDetailsManager.sharedInstance.userid = SharingManager.sharedInstance.FavGroups[indexPath.row][0]
-            UserDetailsManager.sharedInstance.userName = SharingManager.sharedInstance.FavGroups[indexPath.row][1]
-            UserDetailsManager.sharedInstance.userProfileURL = SharingManager.sharedInstance.FavGroups[indexPath.row][2]
+            UserDetailsManager.sharedInstance.userid = FavGroups[indexPath.row][0]
+            UserDetailsManager.sharedInstance.userName = FavGroups[indexPath.row][1]
+            UserDetailsManager.sharedInstance.userProfileURL = FavGroups[indexPath.row][2]
         }
     }
     

@@ -27,23 +27,37 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var PrevLink = String()
     var NextLink = String()
     
+    
+    var FavUsers = [[String]]()
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated) // No need for semicolon        SharingManager.sharedInstance.InEvents = false
+        if UserDefaults.standard.array(forKey: "favUsers") != nil {
+            FavUsers = UserDefaults.standard.array(forKey: "favUsers") as! [[String]]
+        }
+        
         SharingManager.sharedInstance.InPages = false
         SharingManager.sharedInstance.InGroups = false
         SharingManager.sharedInstance.InEvents = false
         SharingManager.sharedInstance.InUsers = true
         SharingManager.sharedInstance.InPlaces = false
-        TableView.reloadData()
+        if(SharingManager.sharedInstance.FavoriteClicked == false) {
+            let index = TableView.indexPathForSelectedRow
+            if (index != nil){
+                self.TableView.reloadRows(at: [index!], with: UITableViewRowAnimation.automatic)
+            }
+        } else {
+            TableView.reloadData()
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("loaded")
         searchKeyword = KeywordManager.sharedInstance.keywrod
         if (SharingManager.sharedInstance.FavoriteClicked == false) {
             SwiftSpinner.show("Loading...")
-            Alamofire.request("http://cs-server.usc.edu:16031/hw9/search.php?keyword=\(searchKeyword)&type=user").responseJSON { response in
+            Alamofire.request("http://sample-env.rgv3prmeyk.us-west-2.elasticbeanstalk.com/search.php?keyword=\(searchKeyword)&type=user").responseJSON { response in
                 if let value = response.result.value {
                     let json = JSON(value)
                     self.PrevLink = json["user"]["paging"]["prev"].stringValue
@@ -83,7 +97,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if (SharingManager.sharedInstance.FavoriteClicked == false) {
             return nameArray.count
         } else {
-            return SharingManager.sharedInstance.FavUsers.count
+            return FavUsers.count
         }
         
     }
@@ -100,14 +114,14 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             find_array.append(idArray[indexPath.row])
             find_array.append(nameArray[indexPath.row])
             find_array.append(picArray[indexPath.row])
-            if let find = SharingManager.sharedInstance.FavUsers.index(where: {$0 == find_array}) {
+            if let find = FavUsers.index(where: {$0 == find_array}) {
                 cell.star.setImage(UIImage(named:"filled")!, for: UIControlState.normal)
             } else {
                 cell.star.setImage(UIImage(named:"empty")!, for: UIControlState.normal)
             }
         } else {
-            cell.UserName.text = SharingManager.sharedInstance.FavUsers[indexPath.row][1]
-            let imgURL = NSURL(string: SharingManager.sharedInstance.FavUsers[indexPath.row][2])
+            cell.UserName.text = FavUsers[indexPath.row][1]
+            let imgURL = NSURL(string: FavUsers[indexPath.row][2])
             let data = NSData(contentsOf: (imgURL as? URL)!)
             cell.UserProfile.image = UIImage(data: data as! Data)
             cell.star.setImage(UIImage(named:"filled")!, for: UIControlState.normal)
@@ -122,9 +136,9 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             UserDetailsManager.sharedInstance.userName = nameArray[indexPath.row]
             UserDetailsManager.sharedInstance.userProfileURL = picArray[indexPath.row]
         } else {
-            UserDetailsManager.sharedInstance.userid = SharingManager.sharedInstance.FavUsers[indexPath.row][0]
-            UserDetailsManager.sharedInstance.userName = SharingManager.sharedInstance.FavUsers[indexPath.row][1]
-            UserDetailsManager.sharedInstance.userProfileURL = SharingManager.sharedInstance.FavUsers[indexPath.row][2]
+            UserDetailsManager.sharedInstance.userid = FavUsers[indexPath.row][0]
+            UserDetailsManager.sharedInstance.userName = FavUsers[indexPath.row][1]
+            UserDetailsManager.sharedInstance.userProfileURL = FavUsers[indexPath.row][2]
         }
     }
 
